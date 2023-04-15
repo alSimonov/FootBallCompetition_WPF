@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net7.0-windows10.0.22621.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Images\calendar.png" />
+    <None Remove="Images\delete.png" />
+    <None Remove="Images\group.png" />
+    <None Remove="Images\pen %281%29.png" />
+    <None Remove="Images\pitch.png" />
+    <None Remove="Images\plus.png" />
+    <None Remove="Images\shoot.png" />
+    <None Remove="Images\stadium.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\calendar.png" />
+    <Resource Include="Images\delete.png" />
+    <Resource Include="Images\group.png" />
+    <Resource Include="Images\pen (1).png" />
+    <Resource Include="Images\pitch.png" />
+    <Resource Include="Images\plus.png" />
+    <Resource Include="Images\shoot.png" />
+    <Resource Include="Images\stadium.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="HandyControl" Version="3.4.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.3" />
+  </ItemGroup>
+
+</Project>
