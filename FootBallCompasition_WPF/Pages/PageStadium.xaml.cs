@@ -23,7 +23,7 @@ namespace FootBallCompasition_WPF
     /// <summary>
     /// Логика взаимодействия для StadiumPage.xaml
     /// </summary>
-    public partial class StadiumPage : Page
+    public partial class PageStadium : Page
     {
 
 
@@ -33,7 +33,7 @@ namespace FootBallCompasition_WPF
         List<StadiumShort> stadiumList = new List<StadiumShort>();
 
 
-        public StadiumPage()
+        public PageStadium()
         {
 
             dbConfiguration.ConfigureServices();

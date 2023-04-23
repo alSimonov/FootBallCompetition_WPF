@@ -8,99 +8,182 @@
         xmlns:hc="https://handyorg.github.io/handycontrol"
         x:Class="FootBallCompasition_WPF.MainWindow"
         mc:Ignorable="d"
-        Title="MainWindow" Height="720" Width="1080"  WindowStartupLocation="CenterScreen" WindowStyle="None" AllowsTransparency="True" Background="Transparent">
 
-    <!--<Window.Resources>
-        <ResourceDictionary Source="/FootBallCompasition_WPF;component/Dictionary1.xaml" />
-    </Window.Resources>-->
+        Title="MainWindow" Height="720" Width="1080" WindowStartupLocation="CenterScreen" WindowStyle="None" AllowsTransparency="True" Background="Transparent">
 
-    <Border Background="#eff2f7" CornerRadius="30" MouseDown="Border_MouseDown" MouseLeftButtonDown="Border_MouseLeftButtonDown">
-        
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+    </Window.Resources>
+
+    <!--MouseLeftButtonDown="Border_MouseLeftButtonDown"-->
+    <Border Background="#eff2f7" CornerRadius="30" MouseDown="Border_MouseDown"     >
         <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="7*"/>
-                <RowDefinition Height="*"/>
-
-            </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition  Width="200"></ColumnDefinition>
-                <ColumnDefinition  Width="*"></ColumnDefinition>
-                <ColumnDefinition  Width="0.1*"></ColumnDefinition>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
+            <!--Left Menu-->
+            <Grid Width="65" Style="{StaticResource GridMenuPanel}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
 
-            <Button Grid.Column="0" Grid.Row="0" Margin="20 28 0 35" Style="{StaticResource topButton}">
-                <Icon:PackIconMaterial Kind="Menu"  Width="15" Height="15"/>    
-            </Button>
-            
-            
-            <Viewbox Grid.Column="2" Grid.Row="2"  >
-            
-                <hc:FlipClock x:Name="flipClock" Margin="2" HorizontalAlignment="Center" />
-            
-            </Viewbox>
-
-
-            <hc:SideMenu x:Name="SideMenu"  BorderThickness="1" Width="200" Height="300" Margin="0"  Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top" Background="{x:Null}">
-                <hc:Interaction.Triggers>
-                    <hc:EventTrigger EventName="SelectionChanged">
-                        <hc:EventToCommand Command="{Binding SwitchItemCmd}"   PassEventArgsToCommand="True" />
-                    </hc:EventTrigger>
-                </hc:Interaction.Triggers>
-                <hc:SideMenuItem x:Name="smTeam" Header="Команды">
-                    <hc:SideMenuItem.Icon>
-                        <Image Source="Images\group.png" Width="24" Height="24"/>
-                    </hc:SideMenuItem.Icon>
-              
-                </hc:SideMenuItem>
-                <hc:SideMenuItem x:Name="smMatch" Header="Матчи" >
-                    <hc:SideMenuItem.Icon>
-                        <Image Source="Images\pitch.png" Width="24" Height="24"/>
-                    </hc:SideMenuItem.Icon>
-                </hc:SideMenuItem>
-                <hc:SideMenuItem x:Name="smStadium" Header="Стадионы">
-                    <hc:SideMenuItem.Icon>
-                        <Image Source="Images\stadium.png" Width="24" Height="24"/>
-                    </hc:SideMenuItem.Icon>
-                </hc:SideMenuItem>
-                <hc:SideMenuItem Header="Участники">
-                    <hc:SideMenuItem.Icon>
-                        <Image Source="Images\shoot.png" Width="24" Height="24"/>
-                    </hc:SideMenuItem.Icon>
-
-                    <hc:SideMenuItem x:Name="smPlayers" Header="Игроки" >
-                        <hc:SideMenuItem.Icon>
-                            <TextBlock Text="&#xf2cb;" />
-                        </hc:SideMenuItem.Icon>
-                    </hc:SideMenuItem>
+                <!--Menu Icon-->
+                <Button Margin="20 28 0 35" Style="{StaticResource topButton}" >
+                    <Icon:PackIconMaterial Kind="Menu" Width="15" Height="15" />
+                </Button>
 
 
-                    <hc:SideMenuItem x:Name="smReferee" Header="Судьи" >
-                        <hc:SideMenuItem.Icon>
-                            <TextBlock Text="&#xf2cb;" />
-                        </hc:SideMenuItem.Icon>
-                    </hc:SideMenuItem>
+                <Border Grid.Row="1" Background="#623ed0" CornerRadius="0 50 0 30">
+                    <DockPanel>
+
+                        <!--Menu separator-->
+
+                        <Separator Margin="25" DockPanel.Dock="Top" Height="0.8" Background="#7e5fdc"/>
+
+                        <!--Menu buttons-->
 
 
-                </hc:SideMenuItem>
-            
-            </hc:SideMenu>
+                        <StackPanel DockPanel.Dock="Top">
 
-            <hc:OutlineText Grid.Column="1" Grid.Row="0"  Margin="0,10,0,0" FontSize="30" Fill="{DynamicResource SuccessBrush}" />
-
-            <Frame x:Name="frame" Grid.Column="1" Grid.Row="1" Content="Frame" />
-
-
-
-            <Button x:Name="btnClockDispose" Grid.Column="2" Grid.Row="1" Background="{x:Null}" Style="{StaticResource ButtonIcon}" HorizontalAlignment="Stretch" hc:IconElement.Geometry="{StaticResource DownloadGeometry}" />
+                            <Button Style="{StaticResource menuButton}" x:Name="btnFrameTeam">
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="Images\group.png" Width="24" Height="24" Margin="0 0 20 0"/>
+                                    <TextBlock Text="Команды"/>
+                                </StackPanel>
+                            </Button>
 
 
+                            <Button Style="{StaticResource menuButton}">
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="Images\pitch.png" Width="24" Height="24" Margin="0 0 20 0"/>
+                                    <TextBlock Text="Матчи" />
+                                </StackPanel>
+                            </Button>
+
+                            <Button Style="{StaticResource menuButton}" >
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="Images\stadium.png" Width="24" Height="24" Margin="0 0 20 0"/>
+                                    <TextBlock Text="Стадионы"/>
+                                </StackPanel>
+                            </Button>
+
+                            <Button Style="{StaticResource menuButton}">
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="Images\shoot.png" Width="24" Height="24" Margin="0 0 20 0"/>
+                                    <TextBlock Text="Участники"/>
+                                </StackPanel>
+                            </Button>
+
+                        </StackPanel>
+
+
+                        <Button Style="{StaticResource menuButton}" VerticalAlignment="Bottom" DockPanel.Dock="Bottom" Margin="15 0 15 20">
+                            <StackPanel Orientation="Horizontal">
+                                <Icon:PackIconMaterial Kind="Logout" Style="{StaticResource menuButtonIcon}"/>
+                                <TextBlock Text="Logout"/>
+                            </StackPanel>
+                        </Button>
+
+
+                    </DockPanel>
+                </Border>
+
+            </Grid>
+
+
+            <!--Main section-->
+
+            <Grid Grid.Column="1" Margin="30 5 20 20">
+                <Grid.RowDefinitions >
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+
+
+                </Grid.RowDefinitions>
+
+                <!--buttons Hide/Show close-->
+
+                <Button Grid.Row="0" Style="{StaticResource  topButton}" x:Name="btnWindowClose" Margin="0 0 0 0"  HorizontalAlignment="Right">
+                    <Icon:PackIconMaterial Kind="Power"/>
+                </Button>
+
+
+                <!--<ToggleButton Grid.Row="0" x:Name="tglbtnWindowScreen" Style="{StaticResource  topToggleButton}" Margin="0 0 40 0"  HorizontalAlignment="Right">
+                    <Icon:PackIconMaterial Kind="AspectRatio"/>
+                    -->
+                <!--AspectRatio-->
+                <!--Fullscreen-->
+                <!--SquareOutline-->
+                <!--
+
+                    <ToggleButton.Triggers>
+                        <EventTrigger RoutedEvent="ToggleButton.Unchecked">
+                            <BeginStoryboard>
+                                <Storyboard >
+
+                                    <DoubleAnimation Storyboard.TargetName="MainWindow" Storyboard.TargetProperty="Width" BeginTime="0:0:0" From="1080" To="1920" Duration="0:0:0.2" />
+                                    <DoubleAnimation Storyboard.TargetName="MainWindow" Storyboard.TargetProperty="Height" BeginTime="0:0:0" From="720" To="1080" Duration="0:0:0.2" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+
+                        <EventTrigger RoutedEvent="ToggleButton.Checked">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation Storyboard.TargetName="MainWindow" Storyboard.TargetProperty="Width" BeginTime="0:0:0" From="1920" To="1080" Duration="0:0:0.2" />
+                                    <DoubleAnimation Storyboard.TargetName="MainWindow" Storyboard.TargetProperty="Height" BeginTime="0:0:0" From="1080" To="720" Duration="0:0:0.2" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+
+                    </ToggleButton.Triggers>
+                    
+                </ToggleButton>-->
+
+                <Button Grid.Row="0" x:Name="btnWindowHide" Style="{StaticResource  topButton}" Margin="0 0 30 0" HorizontalAlignment="Right">
+                    <Icon:PackIconMaterial Kind="MinusBoxOutline"/>
+                </Button>
+
+
+
+                <!--Search textbox-->
+
+                <Grid Grid.Row="1"  Width="300" HorizontalAlignment="Left">
+                    <TextBlock Margin="20 0" VerticalAlignment="Center" Foreground="#b0b9c6" IsHitTestVisible="False" Panel.ZIndex="1" Text="Search here ..."
+                               Visibility="{Binding ElementName=txtSearch, Path=Text.IsEmpty, Converter={StaticResource BoolToVis}}"/>
+
+                    <TextBox x:Name="txtSearch" Style="{StaticResource textboxSearch}"/>
+
+                    <Icon:PackIconMaterial Kind="Magnify" Width="15" Height="15" VerticalAlignment="Center"
+                                           Margin="0 0 15 0" Foreground="#b0b9c6" HorizontalAlignment="Right" />
+                </Grid>
+
+                <!--Top Buttons-->
+
+                <Button Grid.Row="1"  Style="{StaticResource  topButton}" Margin="0 0 20 0" Background="#dcdcdc" HorizontalAlignment="Right">
+                    <Icon:PackIconMaterial Kind="Cog"/>
+                </Button>
+
+
+                <Button Grid.Row="1"  Style="{StaticResource  topButton}" Margin="0 0 55 0" HorizontalAlignment="Right">
+                    <Icon:PackIconMaterial Kind="Bell"/>
+                </Button>
+
+                <Frame Grid.Row="2" x:Name="frame" >
+
+
+
+
+
+                </Frame>
+
+
+            </Grid>
 
         </Grid>
     </Border>
-
-
-
-
 </Window>

@@ -19,42 +19,47 @@ using System.Windows.Shapes;
 namespace FootBallCompasition_WPF.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для TeamPage.xaml
+    /// Логика взаимодействия для MatchPage.xaml
     /// </summary>
-    public partial class TeamPage : Page
+    public partial class PageMatch : Page
     {
 
         public MainDBContext? _db;
 
-        List<TeamShort> teamList = new List<TeamShort>();
+        List<MatchShort> matchList = new List<MatchShort>();
 
-
-        public TeamPage()
+        public PageMatch()
         {
             InitializeComponent();
+
             dbConfiguration.ConfigureServices();
             _db = dbConfiguration.Services.GetService<MainDBContext>();
-            loadTeam();
+
+            loadMatch();
 
         }
 
 
-        public void loadTeam()
+        private void loadMatch()
         {
 
-            teamList = _db.Teams.Select(s =>
-                new TeamShort()
+            matchList = _db.Matches.Select(s =>
+                new MatchShort()
                 {
                     //Id = s.Id,
-                    TeamName = s.Name,
-                    CityName = s.City.Name
+                    Season = s.Season.Name,
+                    Team1Name = s.Team1.Name,
+                    Team2Name = s.Team2.Name,
+                    Date = s.Date,
+                    StadiumName = s.Stadium.Name,
+                    CityName = s.Stadium.City.Name,
+                    TypeOfMatch = s.TypeOfMatch.Name
                 }).ToList();
 
-            GridTeam.ItemsSource = teamList;
+            GridMatch.ItemsSource = matchList;
 
 
         }
-
 
 
 

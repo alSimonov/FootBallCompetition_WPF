@@ -22,7 +22,7 @@ namespace FootBallCompasition_WPF
     /// <summary>
     /// Логика взаимодействия для ParticipantPage.xaml
     /// </summary>
-    public partial class ParticipantPage : Page
+    public partial class PageParticipant : Page
     {
         public MainDBContext? _db;
 
@@ -31,7 +31,7 @@ namespace FootBallCompasition_WPF
         List<ParticipantShort> partList = new List<ParticipantShort>();
 
 
-        public ParticipantPage(string whereStr)
+        public PageParticipant(string whereStr)
         {
             InitializeComponent();
 
@@ -41,7 +41,7 @@ namespace FootBallCompasition_WPF
 
 
             loadPart(whereStr);
-            pagPart.MaxPageCount = (int) Math.Ceiling(partList.Count / 10.0);
+            //pagPart.MaxPageCount = (int) Math.Ceiling(partList.Count / 10.0);
         
             
         
@@ -73,7 +73,7 @@ namespace FootBallCompasition_WPF
 
         private void page_PageUpdated(object sender, HandyControl.Data.FunctionEventArgs<int> e)
         {
-            GridPart.ItemsSource = partList.Skip((e.Info - 1) * 10).Take(10).ToList();
+            //GridPart.ItemsSource = partList.Skip((e.Info - 1) * 10).Take(10).ToList();
         }
 
 
