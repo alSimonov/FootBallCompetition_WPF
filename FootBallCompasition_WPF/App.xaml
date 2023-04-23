@@ -1,6 +1,7 @@
 ﻿<Application x:Class="FootBallCompasition_WPF.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
              xmlns:local="clr-namespace:FootBallCompasition_WPF"
              xmlns:hc="https://handyorg.github.io/handycontrol"
              StartupUri="MainWindow.xaml">
@@ -10,8 +11,12 @@
             <ResourceDictionary.MergedDictionaries>
                 <!--<hc:ThemeResources/>-->
                 <hc:Theme/>
+                <ResourceDictionary Source="Dictionaries/Dictionary1.xaml" />
+
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
+
+       
 
     </Application.Resources>
 </Application>

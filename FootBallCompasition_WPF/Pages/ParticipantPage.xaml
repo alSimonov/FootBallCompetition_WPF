@@ -22,8 +22,8 @@
         </Grid.ColumnDefinitions>
 
 
+        <!--<hc:OutlineText Grid.Column="0" Grid.Row="0"  Margin="0,10,0,0" FontSize="30" Fill="{DynamicResource SuccessBrush}" />-->
 
-        
         <hc:Pagination x:Name="pagPart" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Center"  DataCountPerPage="10" MaxPageCount="10" PageUpdated="page_PageUpdated" PageIndex="1"/>
 
         <StackPanel Grid.Column="1" Grid.Row="1" VerticalAlignment="Center">
