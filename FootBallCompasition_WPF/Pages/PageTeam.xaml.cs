@@ -34,6 +34,8 @@ namespace FootBallCompasition_WPF.Pages
             InitializeComponent();
             dbConfiguration.ConfigureServices();
             _db = dbConfiguration.Services.GetService<MainDBContext>();
+
+
             loadTeam();
 
         }
@@ -50,9 +52,24 @@ namespace FootBallCompasition_WPF.Pages
                     CityName = s.City.Name
                 }).ToList();
 
-            GridTeam.ItemsSource = teamList;
+            //GridTeam.ItemsSource = teamList;
 
 
+            GridTeam.ItemsSource = teamList.Take(10).ToList();
+
+            pagGrid.MaxPageCount = (int)Math.Ceiling(teamList.Count / 10.0);
+
+            txtblListCount.Text = "Найдено записей: ";
+            txtblListCount.Text += teamList.Count().ToString();
+
+
+
+        }
+
+
+        private void page_PageUpdated(object sender, HandyControl.Data.FunctionEventArgs<int> e)
+        {
+            GridTeam.ItemsSource = teamList.Skip((e.Info - 1) * 10).Take(10).ToList();
         }
 
 

@@ -35,18 +35,31 @@ namespace FootBallCompasition_WPF
         {
             InitializeComponent();
 
+
+            btnTabBtnPlayer.Click += btnTabBtnPlayer_Click;
+            btnTabBtnReferee.Click += btnTabBtnReferee_Click;
+
+
+
             dbConfiguration.ConfigureServices();
             _db = dbConfiguration.Services.GetService<MainDBContext>();
 
 
 
             loadPart(whereStr);
-            //pagPart.MaxPageCount = (int) Math.Ceiling(partList.Count / 10.0);
-        
             
-        
         }
 
+        private void btnTabBtnPlayer_Click(object sender, RoutedEventArgs e)
+        {
+            loadPart("Игрок");
+        }
+
+        private void btnTabBtnReferee_Click(object sender, RoutedEventArgs e)
+        {
+            loadPart("Судья");
+
+        }
 
         private void loadPart(string whereStr)
         {
@@ -66,6 +79,14 @@ namespace FootBallCompasition_WPF
 
             //GridPart.ItemsSource = partList;
 
+            pagPart.MaxPageCount = (int)Math.Ceiling(partList.Count / 10.0);
+
+
+            GridPart.ItemsSource = partList.Take(10).ToList();
+
+            txtblListCount.Text = "Найдено записей: ";
+            txtblListCount.Text += partList.Count().ToString();
+
 
 
         }
@@ -73,7 +94,7 @@ namespace FootBallCompasition_WPF
 
         private void page_PageUpdated(object sender, HandyControl.Data.FunctionEventArgs<int> e)
         {
-            //GridPart.ItemsSource = partList.Skip((e.Info - 1) * 10).Take(10).ToList();
+            GridPart.ItemsSource = partList.Skip((e.Info - 1) * 10).Take(10).ToList();
         }
 
 

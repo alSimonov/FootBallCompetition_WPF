@@ -3,6 +3,7 @@ using FootBallCompasition_WPF.Short;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,6 +11,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -56,10 +58,29 @@ namespace FootBallCompasition_WPF.Pages
                     TypeOfMatch = s.TypeOfMatch.Name
                 }).ToList();
 
-            GridMatch.ItemsSource = matchList;
+            //GridMatch.ItemsSource = matchList;
+
+            GridMatch.ItemsSource = matchList.Take(10).ToList();
+
+
+            pagGrid.MaxPageCount = (int)Math.Ceiling(matchList.Count / 10.0);
+
+
+            txtblListCount.Text = "Найдено записей: ";
+            txtblListCount.Text += matchList.Count().ToString();
+
+
 
 
         }
+
+
+        private void page_PageUpdated(object sender, HandyControl.Data.FunctionEventArgs<int> e)
+        {
+            GridMatch.ItemsSource = matchList.Skip((e.Info - 1) * 10).Take(10).ToList();
+        }
+
+
 
 
 

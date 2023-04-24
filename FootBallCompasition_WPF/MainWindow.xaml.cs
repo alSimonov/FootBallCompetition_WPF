@@ -1,4 +1,6 @@
 ﻿using FootBallCompasition_WPF.context;
+using FootBallCompasition_WPF.Pages;
+using FootBallCompasition_WPF.Windows;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Windows;
@@ -22,21 +24,57 @@ namespace FootBallCompasition_WPF
 
 
             btnFrameTeam.Click += btnFrameTeam_Click;
+            btnFrameMatch.Click += btnFrameMatch_Click;
+            btnFrameStadium.Click += btnFrameStadium_Click;
+            btnFrameParticipant.Click += btnFrameParticipant_Click;
+
 
             btnWindowClose.Click += btnWindowClose_Click;
             //tglbtnWindowScreen.Click += tglbtnWindowScreen_Click;
             btnWindowHide.Click += btnWindowHide_Click;
 
 
-            dbConfiguration.ConfigureServices();
-            _db = dbConfiguration.Services.GetService<MainDBContext>();
+
+            var dialog = new WindowAuthorization();
+            if(dialog.ShowDialog() == false)
+            {
+                Close();
+
+            }
+            else     
+            {
+                dbConfiguration.ConfigureServices();
+                _db = dbConfiguration.Services.GetService<MainDBContext>();
+
+            }
 
 
 
 
+        }
+
+        
 
 
 
+        private void btnFrameTeam_Click(object sender, RoutedEventArgs e)
+        {
+            frame.Navigate(new PageTeam());
+        }
+
+        private void btnFrameParticipant_Click(object sender, RoutedEventArgs e)
+        {
+            frame.Navigate(new PageParticipant("Игрок"));
+        }
+
+        private void btnFrameStadium_Click(object sender, RoutedEventArgs e)
+        {
+            frame.Navigate(new PageStadium());
+        }
+
+        private void btnFrameMatch_Click(object sender, RoutedEventArgs e)
+        {
+            frame.Navigate(new PageMatch());
         }
 
         //private void tglbtnWindowScreen_Click(object sender, RoutedEventArgs e)
@@ -58,10 +96,6 @@ namespace FootBallCompasition_WPF
         private void btnWindowHide_Click(object sender, RoutedEventArgs e)
         {
             WindowState = WindowState.Minimized;
-        }
-        private void btnFrameTeam_Click(object sender, RoutedEventArgs e)
-        {
-            frame.Navigate(new PageParticipant("Игрок"));
         }
 
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)

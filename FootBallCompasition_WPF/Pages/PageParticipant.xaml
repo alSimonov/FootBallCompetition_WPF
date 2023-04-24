@@ -25,7 +25,7 @@
         </Grid.RowDefinitions>
 
         <!--Page Title-->
-        <TextBlock Text="Members" Grid.Row="0" FontSize="32" FontWeight="SemiBold" Margin="0 20 0 0" HorizontalAlignment="Left" Foreground="#121518"/>
+        <TextBlock Text="Участники" Grid.Row="0" FontSize="32" FontWeight="SemiBold" Margin="0 20 0 0" HorizontalAlignment="Left" Foreground="#121518"/>
 
 
         <!--Add Button-->
@@ -41,14 +41,13 @@
 
         <!--Tab Buttons-->
         <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0 10 0 0">
-            <Button Content="Club Staff" Style="{StaticResource tabButton}" BorderBrush="#784ff2"/>
-            <Button Content="Players" Style="{StaticResource tabButton}"/>
-            <Button Content="Archived" Style="{StaticResource tabButton}"/>
+            <Button x:Name="btnTabBtnPlayer" Content="Игроки" Style="{StaticResource tabButton}" BorderBrush="#784ff2"/>
+            <Button x:Name="btnTabBtnReferee" Content="Судьи" Style="{StaticResource tabButton}"/>
         </StackPanel>
 
 
         <!--Counter Title-->
-        <TextBlock Text="68 Club Staff" Grid.Row="3" FontSize="18" FontWeight="SemiBold" Foreground="#121518" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <TextBlock x:Name="txtblListCount" Text="68 Club Staff" Grid.Row="3" FontSize="18" FontWeight="SemiBold" Foreground="#121518" HorizontalAlignment="Left" VerticalAlignment="Center"/>
 
         <TextBlock Text="Filter by" Grid.Row="3" FontSize="13" FontWeight="SemiBold" Margin="0 0 215 0" Foreground="#121518" HorizontalAlignment="Right" VerticalAlignment="Center"/>
 
@@ -63,20 +62,31 @@
         </Grid>
 
         <!--Members datagrid-->
-        <DataGrid Grid.Row="4">
+
+        <DataGrid Grid.Row="4"  HeadersVisibility="All" RowHeaderWidth="60" AutoGenerateColumns="False" x:Name="GridPart" >
+            <DataGrid.RowHeaderTemplate>
+                <DataTemplate>
+                    <CheckBox IsChecked="{Binding IsSelected,RelativeSource={RelativeSource AncestorType=DataGridRow}}"/>
+                </DataTemplate>
+            </DataGrid.RowHeaderTemplate>
+            <DataGrid.Columns>
 
 
+                <DataGridTextColumn Width="*" Binding="{Binding Surname}" Header="Фамилия" CellStyle="{StaticResource DataGridCellStyle}"/>
+                <DataGridTextColumn Width="*" Binding="{Binding Name}" Header="Имя"/>
+                <DataGridTextColumn Width="*" Binding="{Binding Patronymic}" Header="Отчество"/>
+                <DataGridTextColumn Width="*" Binding="{Binding DateOfBirth}"  Header="Дата рождения"/>
+                <DataGridTextColumn Width="*" Binding="{Binding Telephone}" Header="Телефон"/>
 
+            </DataGrid.Columns>
         </DataGrid>
 
 
 
 
         <!--Pagination Section-->
-        <hc:Pagination Grid.Row="5" >
-            
-            
-        </hc:Pagination>
+        <hc:Pagination x:Name="pagPart" Grid.Row="5" HorizontalAlignment="Center"  DataCountPerPage="10" MaxPageCount="10"
+                       PageUpdated="page_PageUpdated" PageIndex="1"/>
 
     </Grid>
 </Page>

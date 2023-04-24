@@ -11,6 +11,7 @@ namespace FootBallCompasition_WPF.context
 {
     public class MainDBContext : DbContext
     {
+        public DbSet<Account> Accounts { get; set; }
         public DbSet<AmpluaRole> AmpluaRoles { get; set; }
         public DbSet<City> Cities { get; set; }
         public DbSet<Event> Events { get; set; }
@@ -28,17 +29,13 @@ namespace FootBallCompasition_WPF.context
         public DbSet<TypeOfСoverage> TypeOfCoverages { get; set; }
 
         public MainDBContext(DbContextOptions<MainDBContext> options) :base(options)
-        {
-            //this.Stadiums.s
-        }
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //=> optionsBuilder.UseSqlServer("Data Source=DESKTOP-IBJCCC1;Initial Catalog=FootballCompetitions;" +
-        //    "Trusted_Connection=True;Encrypt=False;");
-
+        {}
+        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //modelBuilder.Entity<Participant>().ToTable("Participant");
 
+
+            modelBuilder.ApplyConfiguration(new AccountConfiguration());
 
             modelBuilder.ApplyConfiguration(new EventConfiguration());
             modelBuilder.ApplyConfiguration(new JudgingStaffConfigration());
@@ -54,10 +51,5 @@ namespace FootBallCompasition_WPF.context
 
 
         }
-        //DESKTOP-IBJCCC1\lenovo
-        //[FootballCompetitions]
-
-
-
     }
 }

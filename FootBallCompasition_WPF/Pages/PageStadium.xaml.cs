@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -54,14 +56,31 @@ namespace FootBallCompasition_WPF
                     StadiumName = s.Name,
                     CityName = s.City.Name,
                     Capacity = s.Capacity,
-                    TypeOfСoverageName = s.TypeOfСoverage.Name,
+                    //TypeOfСoverageName = s.TypeOfСoverage.Name,
                     TypeOfStadiumName = s.TypeOfStadium.Name
                 }).ToList();
 
-            GridStadium.ItemsSource = stadiumList;
+            //GridStadium.ItemsSource = stadiumList;
+
+
+
+            GridStadium.ItemsSource = stadiumList.Take(10).ToList();
+
+            pagGrid.MaxPageCount = (int)Math.Ceiling(stadiumList.Count / 10.0);
+
+            txtblListCount.Text = "Найдено записей: ";
+            txtblListCount.Text += stadiumList.Count().ToString();
+
 
 
         }
+
+
+        private void page_PageUpdated(object sender, HandyControl.Data.FunctionEventArgs<int> e)
+        {
+            GridStadium.ItemsSource = stadiumList.Skip((e.Info - 1) * 10).Take(10).ToList();
+        }
+
 
 
 

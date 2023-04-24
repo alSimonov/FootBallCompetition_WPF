@@ -11,6 +11,10 @@
     <None Remove="Images\calendar.png" />
     <None Remove="Images\delete.png" />
     <None Remove="Images\group.png" />
+    <None Remove="Images\logo.png" />
+    <None Remove="Images\logoOnlyBall.png" />
+    <None Remove="Images\logoOnlyText.png" />
+    <None Remove="Images\logoShort.png" />
     <None Remove="Images\pen %281%29.png" />
     <None Remove="Images\pitch.png" />
     <None Remove="Images\plus.png" />
@@ -22,6 +26,10 @@
     <Resource Include="Images\calendar.png" />
     <Resource Include="Images\delete.png" />
     <Resource Include="Images\group.png" />
+    <Resource Include="Images\logo.png" />
+    <Resource Include="Images\logoOnlyBall.png" />
+    <Resource Include="Images\logoOnlyText.png" />
+    <Resource Include="Images\logoShort.png" />
     <Resource Include="Images\pen (1).png" />
     <Resource Include="Images\pitch.png" />
     <Resource Include="Images\plus.png" />

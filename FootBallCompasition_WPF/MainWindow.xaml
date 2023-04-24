@@ -31,8 +31,15 @@
                 </Grid.RowDefinitions>
 
                 <!--Menu Icon-->
-                <Button Margin="20 28 0 35" Style="{StaticResource topButton}" >
-                    <Icon:PackIconMaterial Kind="Menu" Width="15" Height="15" />
+                <Button Margin="10 28 0 15" Style="{StaticResource mainButton}" Width="175" HorizontalAlignment="Left">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="Images/logoOnlyBall.png" Width="50" Height="50" Margin="0 0 0 0" VerticalAlignment="Center"/>
+                        <Image Source="Images/logoOnlyText.png" Width="80" Height="50"   Margin="10 0 0 0"  VerticalAlignment="Center"/>
+                        <!--<TextBlock Text="Команды" VerticalAlignment="Center" Foreground="Black"/>-->
+
+
+                    </StackPanel>
+
                 </Button>
 
 
@@ -50,34 +57,80 @@
 
                             <Button Style="{StaticResource menuButton}" x:Name="btnFrameTeam">
                                 <StackPanel Orientation="Horizontal">
-                                    <Image Source="Images\group.png" Width="24" Height="24" Margin="0 0 20 0"/>
-                                    <TextBlock Text="Команды"/>
+                                    <Image Source="Images\group.png" Width="32" Height="32" Margin="0 0 20 0"/>
+                                    <TextBlock Text="Команды" VerticalAlignment="Center" />
                                 </StackPanel>
                             </Button>
 
 
-                            <Button Style="{StaticResource menuButton}">
+                            <Button Style="{StaticResource menuButton}" x:Name="btnFrameMatch">
                                 <StackPanel Orientation="Horizontal">
-                                    <Image Source="Images\pitch.png" Width="24" Height="24" Margin="0 0 20 0"/>
-                                    <TextBlock Text="Матчи" />
+                                    <Image Source="Images\pitch.png" Width="32" Height="32" Margin="0 0 20 0"/>
+                                    <TextBlock Text="Матчи" VerticalAlignment="Center"/>
                                 </StackPanel>
                             </Button>
 
-                            <Button Style="{StaticResource menuButton}" >
+                            <Button Style="{StaticResource menuButton}" x:Name="btnFrameStadium" >
                                 <StackPanel Orientation="Horizontal">
-                                    <Image Source="Images\stadium.png" Width="24" Height="24" Margin="0 0 20 0"/>
-                                    <TextBlock Text="Стадионы"/>
+                                    <Image Source="Images\stadium.png" Width="32" Height="32" Margin="0 0 20 0"/>
+                                    <TextBlock Text="Стадионы" VerticalAlignment="Center"/>
                                 </StackPanel>
                             </Button>
 
-                            <Button Style="{StaticResource menuButton}">
+                            <Button Style="{StaticResource menuButton}" x:Name="btnFrameParticipant">
                                 <StackPanel Orientation="Horizontal">
-                                    <Image Source="Images\shoot.png" Width="24" Height="24" Margin="0 0 20 0"/>
-                                    <TextBlock Text="Участники"/>
+                                    <Image Source="Images\shoot.png" Width="32" Height="32" Margin="0 0 20 0"/>
+                                    <TextBlock Text="Участники" VerticalAlignment="Center"/>
                                 </StackPanel>
                             </Button>
 
                         </StackPanel>
+
+                        <!--<hc:SideMenu x:Name="SideMenu"  BorderThickness="1" Width="150" Height="300" Margin="0"  Grid.Column="0" Grid.Row="1" 
+                                          HorizontalAlignment="Left" VerticalAlignment="Top" Background="Transparent" >
+                            <hc:Interaction.Triggers>
+                                <hc:EventTrigger EventName="SelectionChanged">
+                                    <hc:EventToCommand Command="{Binding SwitchItemCmd}"   PassEventArgsToCommand="True" />
+                                </hc:EventTrigger>
+                            </hc:Interaction.Triggers>
+                            <hc:SideMenuItem x:Name="smTeam" Header="Команды" Background="Transparent" Foreground="#d0c0ff" Margin="13 0 0 0">
+                                <hc:SideMenuItem.Icon>
+                                    <Image Source="Images\group.png" Width="42" Height="42"/>
+                                </hc:SideMenuItem.Icon>
+              
+                            </hc:SideMenuItem>
+                            <hc:SideMenuItem x:Name="smMatch" Header="Матчи" Background="Transparent" Foreground="#d0c0ff" Margin="13 0 0 0">
+                                <hc:SideMenuItem.Icon>
+                                    <Image Source="Images\pitch.png" Width="42" Height="42"/>
+                                </hc:SideMenuItem.Icon>
+                            </hc:SideMenuItem>
+                            <hc:SideMenuItem x:Name="smStadium" Header="Стадионы" Background="Transparent" Foreground="#d0c0ff" Margin="13 0 0 0">
+                                <hc:SideMenuItem.Icon>
+                                    <Image Source="Images\stadium.png" Width="42" Height="42"/>
+                                </hc:SideMenuItem.Icon>
+                            </hc:SideMenuItem>
+                            <hc:SideMenuItem Header="Участники" Background="Transparent" Foreground="#d0c0ff" Margin="13 0 0 0">
+                                <hc:SideMenuItem.Icon>
+                                    <Image Source="Images\shoot.png" Width="42" Height="42" />
+                                </hc:SideMenuItem.Icon>
+
+                                <hc:SideMenuItem x:Name="smPlayers" Header="Игроки"  >
+                                    <hc:SideMenuItem.Icon>
+                                        <TextBlock Text="&#xf2cb;" />
+                                    </hc:SideMenuItem.Icon>
+                                </hc:SideMenuItem>
+
+
+                                <hc:SideMenuItem x:Name="smReferee" Header="Судьи" >
+                                    <hc:SideMenuItem.Icon>
+                                        <TextBlock Text="&#xf2cb;" />
+                                    </hc:SideMenuItem.Icon>
+                                </hc:SideMenuItem>
+
+
+                            </hc:SideMenuItem>
+            
+                        </hc:SideMenu>-->
 
 
                         <Button Style="{StaticResource menuButton}" VerticalAlignment="Bottom" DockPanel.Dock="Bottom" Margin="15 0 15 20">
@@ -115,12 +168,11 @@
                 <!--<ToggleButton Grid.Row="0" x:Name="tglbtnWindowScreen" Style="{StaticResource  topToggleButton}" Margin="0 0 40 0"  HorizontalAlignment="Right">
                     <Icon:PackIconMaterial Kind="AspectRatio"/>
                     -->
-                <!--AspectRatio-->
-                <!--Fullscreen-->
-                <!--SquareOutline-->
-                <!--
+                    <!--AspectRatio
+                    Fullscreen
+                    SquareOutline-->
 
-                    <ToggleButton.Triggers>
+                    <!--<ToggleButton.Triggers>
                         <EventTrigger RoutedEvent="ToggleButton.Unchecked">
                             <BeginStoryboard>
                                 <Storyboard >
