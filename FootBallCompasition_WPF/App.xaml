@@ -11,7 +11,11 @@
             <ResourceDictionary.MergedDictionaries>
                 <!--<hc:ThemeResources/>-->
                 <hc:Theme/>
+
                 <ResourceDictionary Source="Dictionaries/Dictionary1.xaml" />
+                
+                <!--<ResourceDictionary Source="Dictionaries/Dictionary2.xaml" />-->
+                
 
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>

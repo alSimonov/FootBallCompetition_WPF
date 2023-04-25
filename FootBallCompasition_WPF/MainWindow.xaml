@@ -31,10 +31,10 @@
                 </Grid.RowDefinitions>
 
                 <!--Menu Icon-->
-                <Button Margin="10 28 0 15" Style="{StaticResource mainButton}" Width="175" HorizontalAlignment="Left">
+                <Button Margin="10 15 0 15" Style="{StaticResource mainButton}" Width="175" HorizontalAlignment="Left" VerticalAlignment="Center">
                     <StackPanel Orientation="Horizontal">
                         <Image Source="Images/logoOnlyBall.png" Width="50" Height="50" Margin="0 0 0 0" VerticalAlignment="Center"/>
-                        <Image Source="Images/logoOnlyText.png" Width="80" Height="50"   Margin="10 0 0 0"  VerticalAlignment="Center"/>
+                        <Image Source="Images/logoOnlyText.png"  Height="70"   Margin="10 0 0 0"  VerticalAlignment="Center"/>
                         <!--<TextBlock Text="Команды" VerticalAlignment="Center" Foreground="Black"/>-->
 
 

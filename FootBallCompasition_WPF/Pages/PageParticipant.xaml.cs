@@ -1,5 +1,8 @@
 ﻿using FootBallCompasition_WPF.context;
 using FootBallCompasition_WPF.Short;
+using FootBallCompasition_WPF.UserControls;
+using FootBallCompasition_WPF.Windows;
+using HandyControl.Controls;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -97,6 +100,11 @@ namespace FootBallCompasition_WPF
             GridPart.ItemsSource = partList.Skip((e.Info - 1) * 10).Take(10).ToList();
         }
 
+       
+        private void btnPartAdd_Click(object sender, RoutedEventArgs e)
+        {
+            Dialog.Show(new UsControlDialogPartAdd());
 
+        }
     }
 }
