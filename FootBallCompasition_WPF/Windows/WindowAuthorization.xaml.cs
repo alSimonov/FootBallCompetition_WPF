@@ -36,6 +36,8 @@ namespace FootBallCompasition_WPF.Windows
             InitializeComponent();
 
             btnLogin.Click += btnLogin_Click;
+            btnRegister.Click += BtnRegister_Click;
+
 
             btnWindowClose.Click += btnWindowClose_Click;
 
@@ -43,8 +45,25 @@ namespace FootBallCompasition_WPF.Windows
 
 
 
+
             dbConfiguration.ConfigureServices();
             _db = dbConfiguration.Services.GetService<MainDBContext>();
+
+        }
+
+        private void BtnRegister_Click(object sender, RoutedEventArgs e)
+        {
+
+            var dialog = new WindowRegistration();
+            if (dialog.ShowDialog() == false)
+            {
+                
+            }
+            else
+            {
+
+            }
+
 
         }
 
@@ -122,6 +141,14 @@ namespace FootBallCompasition_WPF.Windows
         private void tbLogin_GotFocus(object sender, RoutedEventArgs e)
         {
             //tbLogin.Text = String.Empty;
+        }
+
+        private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+            {
+                this.DragMove();
+            }
         }
 
         private void pbPassword_GotFocus(object sender, RoutedEventArgs e)

@@ -10,27 +10,23 @@
         mc:Ignorable="d"
         Title="WindowAuthorization" Height="450" Width="380" WindowStartupLocation="CenterScreen"
         AllowsTransparency="True" Background="Transparent"  WindowStyle="None" ResizeMode="NoResize">
-    <Grid>
-        <Grid>
+    <Grid MouseDown="Grid_MouseDown">
+        <Grid >
             <Grid.RowDefinitions>
                 <RowDefinition />
                 <RowDefinition />
 
             </Grid.RowDefinitions>
 
-            <Border CornerRadius="10" Grid.RowSpan="2">
-                <Border.Background>
-                    <LinearGradientBrush>
-                        <GradientStop Color="#111111" Offset="0.5" />
-                        <GradientStop Color="DarkGoldenrod" Offset="0.8"/>
-                        <GradientStop Color="Gold" Offset="1" />
-                    </LinearGradientBrush>
-                </Border.Background>                
-            </Border>
-            
-                <Button Grid.Row="0" Style="{StaticResource  topButton}" x:Name="btnWindowClose" Margin="0 0 0 0"  HorizontalAlignment="Right" VerticalAlignment="Top">
+            <Border CornerRadius="10" Grid.RowSpan="2" Style="{DynamicResource BorderThemeBackground}"/>
+
+            <Button Grid.Row="0" Style="{StaticResource  topButton}" x:Name="btnWindowClose" Margin="0 0 0 0"  HorizontalAlignment="Right" VerticalAlignment="Top">
                     <Icon:PackIconMaterial Kind="Power"/>
-                </Button>
+            </Button>
+
+            <Button Grid.Row="0" Style="{StaticResource  topButton}" x:Name="btnSetting" Margin="0 0 30 0"  HorizontalAlignment="Right" VerticalAlignment="Top">
+                <Icon:PackIconMaterial Kind="Cog"/>
+            </Button>
 
 
             <StackPanel VerticalAlignment="Center" >
@@ -42,33 +38,37 @@
 
                 <StackPanel Orientation="Horizontal">
 
-                    <TextBox x:Name="tbLogin" GotFocus="tbLogin_GotFocus"  FontWeight="Light" FontFamily="helvetica" Text="Username" FontSize="20" Foreground="White"
-                             HorizontalAlignment="Center" Background="Transparent" BorderThickness="0" Width="235" HorizontalContentAlignment="Left" Opacity="0.5" 
-                             Height="25" Margin="63 0 0 0"/>
+                    <TextBox x:Name="tbLogin" GotFocus="tbLogin_GotFocus" Text="Username" Style="{DynamicResource tbEnterData}"/>
 
-                    <Icon:PackIconMaterial Kind="Account" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White"/>
+                    <Icon:PackIconMaterial Kind="Account" Style="{DynamicResource IconPackMaterial}"/>
 
                 </StackPanel>
-                <Border Width="250" Height="2" Background="White" Opacity="0.5"  />
+                <Border Style="{DynamicResource BorderSeparatorForTB}"  />
 
                 <StackPanel Orientation="Horizontal" Margin="0 20 0 0">
-                    <!--<PasswordBox x:Name="pbPassword" GotFocus="pbPassword_GotFocus" FontWeight="Light" FontFamily="helvetica" Password="Password" FontSize="20" Foreground="White"
-                                 HorizontalAlignment="Center" Background="Transparent" BorderThickness="0" Width="235" HorizontalContentAlignment="Left" Opacity="0.5" 
-                                 Height="25" Margin="63 0 0 0"/>-->
 
-
-                    <PasswordBox x:Name="pbPassword" Style="{DynamicResource PasswordBoxExtend}" PasswordChar="*" hc:PasswordBoxAttach.PasswordLength="0" FontSize="20" Opacity="0.5"  
-                                 hc:InfoElement.Placeholder="Password" VerticalAlignment="Center" Width="235" Margin="63 0 0 0" Background="Transparent" BorderThickness="0"
-                                 Foreground="White"/>
+                    <hc:PasswordBox Name="pbPassword"  ShowClearButton="True" ShowEyeButton="True" Password="123456" IsSafeEnabled="False" FontSize="20" Opacity="0.5"  
+                                 hc:InfoElement.Placeholder="Password" VerticalAlignment="Center" Width="257" Margin="63 0 0 0" Background="Transparent" BorderThickness="0"
+                                 Foreground="{DynamicResource ForeGroundColorAuthorization}" CaretBrush="{DynamicResource ForeGroundColorAuthorization}" BorderBrush="{DynamicResource ForeGroundColorAuthorization}" 
+                                    SelectionBrush="{DynamicResource ForeGroundColorAuthorization}" SelectionTextBrush="{DynamicResource ForeGroundColorAuthorization}" >
+                        <!--<TextElement.Foreground ="">
+                            <TextElement.Foreground/>-->
+                  
+                    </hc:PasswordBox>
                     
-                    <Icon:PackIconMaterial Kind="FormTextboxPassword" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White"/>
+                    
+                    <!--<hc:PasswordBox x:Name="pbPassword" Style="{DynamicResource PasswordBoxExtend}" PasswordChar="*" hc:PasswordBoxAttach.PasswordLength="0" FontSize="20" Opacity="0.5"  
+                                 hc:InfoElement.Placeholder="Password" VerticalAlignment="Center" Width="235" Margin="63 0 0 0" Background="Transparent" BorderThickness="0"
+                                 Foreground="{DynamicResource ForeGroundColorAuthorization}"/>-->
+                    
+                    <!--<Icon:PackIconMaterial Kind="FormTextboxPassword" Style="{DynamicResource IconPackMaterial}"/>-->
 
                 </StackPanel>
-                <Border Width="250" Height="2" Background="White" Opacity="0.5"  />
+                <Border Style="{DynamicResource BorderSeparatorForTB}"  />
 
                 <StackPanel Orientation="Horizontal" Margin="0 50 0 0">
-                    <Button x:Name="btnLogin" Style="{StaticResource btnAuthorization}" Width="100" Height="40" Content="LOGIN" Margin="60 0 60 0"/>
-                    <Button Style="{StaticResource btnAuthorization}" Width="100" Height="40" Content="REGISTER" />
+                    <Button x:Name="btnLogin" Style="{DynamicResource btnAuthorization}" Width="100" Height="40" Content="LOGIN" Margin="60 0 60 0"/>
+                    <Button x:Name="btnRegister" Style="{DynamicResource btnAuthorization}" Width="100" Height="40" Content="REGISTER" />
                 </StackPanel>
 
 

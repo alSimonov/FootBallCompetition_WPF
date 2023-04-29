@@ -66,16 +66,17 @@ namespace FootBallCompasition_WPF
 
         private void loadPart(string whereStr)
         {
-            
+
             partList = _db.Participants.Where(s => s.Role.Name == whereStr).
                 Select(s =>
                 new ParticipantShort()
                 {
                     //Id = s.Id, 
-                    Surname = s.Surname, 
-                    Name = s.Name, 
-                    Patronymic = s.Patronymic,
-                    DateOfBirth = s.DateOfBirth.ToString("D"), 
+                    //Surname = s.Surname, 
+                    //Name = s.Name, 
+                    //Patronymic = s.Patronymic,
+                    FIO = $"{s.Surname} {s.Name} {s.Patronymic}",
+                    DateOfBirth = s.DateOfBirth.ToString("D"),
                     Telephone = s.Telephone
                 }).ToList();
 

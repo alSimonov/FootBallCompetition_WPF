@@ -9,12 +9,20 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <!--<hc:ThemeResources/>-->
+                <!--<hc:ThemeResources RequestedTheme="Dark" AccentColor="Red"/>-->
                 <hc:Theme/>
 
+
+                
                 <ResourceDictionary Source="Dictionaries/Dictionary1.xaml" />
                 
-                <!--<ResourceDictionary Source="Dictionaries/Dictionary2.xaml" />-->
+                
+                <ResourceDictionary Source="Dictionaries/DictionaryThemeMain.xaml" />
+                
+                
+                <!--<ResourceDictionary Source="Dictionaries/DictionaryTheme1.xaml" />-->
+                
+                <!--<ResourceDictionary Source="Dictionaries/DictionaryTheme2.xaml" />-->
                 
 
             </ResourceDictionary.MergedDictionaries>

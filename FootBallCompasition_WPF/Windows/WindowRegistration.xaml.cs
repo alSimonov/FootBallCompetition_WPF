@@ -22,6 +22,74 @@ namespace FootBallCompasition_WPF.Windows
         public WindowRegistration()
         {
             InitializeComponent();
+
+            btnWindowClose.Click += BtnWindowClose_Click;
+        
+        
+        }
+
+        private void BtnWindowClose_Click(object sender, RoutedEventArgs e)
+        {
+            DialogResult = false;
+        }
+
+        private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+            {
+                this.DragMove();
+            }
+        }
+
+        private void tglbtnTheme_Click(object sender, RoutedEventArgs e)
+        {
+            
+            string NameTheme;
+
+
+            if (tglbtnTheme.IsChecked == true)
+            {
+                NameTheme = "DictionaryTheme2";
+
+
+            }
+            else 
+            {
+                NameTheme = "DictionaryTheme1";
+            }
+
+
+
+            Application.Current.Resources.Clear();
+
+
+            ////Подгрузка основного стиля
+
+            //string dict = $"Dictionaries/{NameTheme}";
+            //var uriDict = new Uri(dict + ".xaml", UriKind.Relative);
+
+
+            //ResourceDictionary resourceDictionary = Application.LoadComponent(uriDict) as ResourceDictionary;
+
+            //Application.Current.Resources.MergedDictionaries.Add(resourceDictionary);
+
+
+
+
+            //Подгрузка темы
+
+            string style = $"Dictionaries/{NameTheme}";
+            var uriStyle = new Uri(style + ".xaml", UriKind.Relative);
+
+
+            ResourceDictionary resourceTheme = Application.LoadComponent(uriStyle) as ResourceDictionary;
+
+
+            Application.Current.Resources.MergedDictionaries.Add(resourceTheme);
+
+
+
+
         }
     }
 }

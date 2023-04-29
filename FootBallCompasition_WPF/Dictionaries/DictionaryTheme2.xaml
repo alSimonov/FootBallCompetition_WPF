@@ -1,0 +1,67 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+
+    
+    <!--Authorization-->
+    
+    <Style x:Key="BorderThemeBackground" TargetType="Border">
+        <Setter  Property="Background">
+            <Setter.Value>
+                <LinearGradientBrush>
+                    <GradientStop Color="#FFFFFF" Offset="0.5" />
+                    <GradientStop Color="#6DD5FA" Offset="0.8"/>
+                    <GradientStop Color="#2980B9" Offset="1" />
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    
+    
+
+
+    <Style x:Key="BorderThemeBackgroundDialog" TargetType="Border">
+        <Setter  Property="Background"  Value="#eff2f7"/>
+    </Style>
+
+
+
+
+
+
+    <!--Color Main-->
+
+    <SolidColorBrush Color="#eff2f7" x:Key="BackGroundColorMain"/>
+    <SolidColorBrush Color="#623ed0" x:Key="BackGroundColorMainSideMenu"/>
+
+
+
+    <!--Color Pages-->
+    <SolidColorBrush Color="#eff2f7" x:Key="BackGroundColorPage"/>
+    <SolidColorBrush Color="#623ed0" x:Key="ForegroundColorPage"/>
+
+
+
+    <!--Color Background-->
+
+    <SolidColorBrush Color="#ae8b9c" x:Key="BackGroundColor"/>
+
+    <!--Color text-->
+
+
+    <SolidColorBrush Color="#596164" x:Key="ForeGroundColor"/>
+    <SolidColorBrush Color="#596164" x:Key="BorderBrushColor"/>
+
+
+
+    <!--Color text Dialog-->
+
+    <SolidColorBrush Color="#623ed0" x:Key="ForeGroundColorDialog"/>
+    <SolidColorBrush Color="#623ed0" x:Key="BorderBrushColorDialog"/>
+
+
+
+
+</ResourceDictionary>

@@ -298,17 +298,18 @@
 
     </Style>
 
-    <Style x:Key="btnAuthorization" TargetType="Button">
-        <Setter Property="Foreground" Value="White"/>
+
+    <Style x:Key="btnConfirmDialog" TargetType="Button">
+        <Setter Property="Foreground" Value="{DynamicResource ForeGroundColorDialog}"/>
         <Setter Property="FontFamily" Value="Helvetica"/>
         <Setter Property="FontWeight" Value="Light"/>
-        
-        
+
+
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border Background="{TemplateBinding Background}" CornerRadius="20" BorderThickness="2"  BorderBrush="White">
+                    <Border Background="{TemplateBinding Background}" CornerRadius="20" BorderThickness="2"  BorderBrush="{DynamicResource BorderBrushColorDialog}">
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Border>
                 </ControlTemplate>
@@ -324,15 +325,22 @@
 
 
             </Trigger>
-            
+
         </Style.Triggers>
 
 
     </Style>
 
+
+
+
+    <!--Style WindowAuthorization-->
+
+
+    
     
     <Style x:Key="tbEnterData" TargetType="TextBox">
-        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="Foreground" Value="{DynamicResource ForeGroundColorAuthorization}"/>
         <Setter Property="FontWeight" Value="Light"/>
         <Setter Property="FontFamily" Value="helvetica"/>
         <Setter Property="FontSize" Value="20"/>
@@ -341,8 +349,109 @@
         <Setter Property="HorizontalAlignment" Value="Left"/>
         <Setter Property="Opacity" Value="0.5"/>
         <Setter Property="Height" Value="25"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Width" Value="235"/>
+        <Setter Property="Margin" Value="63 0 0 0"/>
+
+    </Style>
+
+    <Style x:Key="IconPackMaterial" TargetType="Icon:PackIconMaterial">
+        <Setter Property="Foreground" Value="{DynamicResource ForeGroundColorAuthorization}"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+
+    <Style x:Key="BorderSeparatorForTB" TargetType="Border">
+        <Setter Property="Background" Value="{DynamicResource ForeGroundColorAuthorization}"/>
+        <Setter Property="Width" Value="250"/>
+        <Setter Property="Height" Value="2"/>
+        <Setter Property="Opacity" Value="0.5"/>
+    </Style>
+
+
+    <Style x:Key="pbPassword" TargetType="PasswordBox">
+        <Setter Property="Foreground" Value="{DynamicResource ForeGroundColor}"/>
+        <Setter Property="FontFamily" Value="helvetica"/>
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Width" Value="235"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Opacity" Value="0.5"/>
+        <Setter Property="Height" Value="25"/>
+        <Setter Property="Margin" Value="63 0 0 0"/>
+    </Style>
+
+
+
+
+    <Style x:Key="btnAuthorization" TargetType="Button">
+        <Setter Property="Foreground" Value="{DynamicResource ForeGroundColorAuthorization}"/>
+        <Setter Property="FontFamily" Value="Helvetica"/>
+        <Setter Property="FontWeight" Value="Light"/>
+
+
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}" CornerRadius="20" BorderThickness="2"  BorderBrush="{DynamicResource BorderBrushColorAuthorization}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="White"/>
+                <Setter Property="Opacity" Value="0.4"/>
+                <Setter Property="Foreground" Value="DeepSkyBlue"/>
+
+
+            </Trigger>
+
+        </Style.Triggers>
+
+
+    </Style>
+
+
+
+
+    <!--Style Dialog-->
+
+    <Style x:Key="tbEnterDataDialog" TargetType="TextBox">
+        <Setter Property="Foreground" Value="{DynamicResource ForeGroundColorDialog}"/>
+        <Setter Property="FontWeight" Value="Light"/>
+        <Setter Property="FontFamily" Value="helvetica"/>
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Opacity" Value="0.5"/>
+        <Setter Property="Height" Value="25"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Width" Value="156"/>
+        <Setter Property="Margin" Value="63 0 0 0"/>
+    </Style>
+
+    
+    <Style x:Key="BorderSeparatorForTBDialog" TargetType="Border">
+        <Setter Property="Background" Value="{DynamicResource ForeGroundColorDialog}"/>
+        <Setter Property="Width" Value="172"/>
+        <Setter Property="Height" Value="2"/>
+        <Setter Property="Opacity" Value="0.5"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Margin" Value="65 0 0 0"/>
         
     </Style>
+
+
+
+
+
 
 
 </ResourceDictionary>

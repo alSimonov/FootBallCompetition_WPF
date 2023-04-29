@@ -16,7 +16,7 @@
     </Window.Resources>
 
     <!--MouseLeftButtonDown="Border_MouseLeftButtonDown"-->
-    <Border Background="#eff2f7" CornerRadius="30" MouseDown="Border_MouseDown"     >
+    <Border Background="{DynamicResource BackGroundColorMain}" CornerRadius="30" MouseDown="Border_MouseDown"     >
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"/>
@@ -43,7 +43,7 @@
                 </Button>
 
 
-                <Border Grid.Row="1" Background="#623ed0" CornerRadius="0 50 0 30">
+                <Border Grid.Row="1" Background="{DynamicResource BackGroundColorMainSideMenu}" CornerRadius="0 50 0 30">
                     <DockPanel>
 
                         <!--Menu separator-->
@@ -225,6 +225,12 @@
                     <Icon:PackIconMaterial Kind="Bell"/>
                 </Button>
 
+                <StackPanel Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 0 100 0" >
+                    <ToggleButton Style="{StaticResource ToggleButtonSwitch}" x:Name="tglbtnTheme" Click="tglbtnTheme_Click" />
+                </StackPanel>
+
+
+
                 <Frame Grid.Row="2" x:Name="frame" >
 
 
@@ -233,6 +239,10 @@
 
                 </Frame>
 
+
+                <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Hidden" HorizontalAlignment="Right">
+                    <StackPanel hc:Growl.GrowlParent="True" VerticalAlignment="Bottom" Margin="0,10,10,10" />
+                </ScrollViewer>
 
             </Grid>
 
