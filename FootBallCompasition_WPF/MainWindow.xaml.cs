@@ -1,4 +1,4 @@
-﻿using FootBallCompasition_WPF.context;
+﻿ using FootBallCompasition_WPF.context;
 using FootBallCompasition_WPF.Pages;
 using FootBallCompasition_WPF.Windows;
 using Microsoft.Extensions.DependencyInjection;
@@ -69,6 +69,7 @@ namespace FootBallCompasition_WPF
 
         private void btnFrameStadium_Click(object sender, RoutedEventArgs e)
         {
+
             frame.Navigate(new PageStadium());
         }
 

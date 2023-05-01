@@ -1,8 +1,10 @@
 ﻿using FootBallCompasition_WPF.context;
+using FootBallCompasition_WPF.FootballClass;
 using FootBallCompasition_WPF.Short;
 using FootBallCompasition_WPF.UserControls;
 using FootBallCompasition_WPF.Windows;
 using HandyControl.Controls;
+using HandyControl.Tools.Extension;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -14,6 +16,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -42,6 +45,7 @@ namespace FootBallCompasition_WPF
             btnTabBtnPlayer.Click += btnTabBtnPlayer_Click;
             btnTabBtnReferee.Click += btnTabBtnReferee_Click;
 
+            //tbFilter.KeyDown += KeyEventHandler(tbFilter_KeyDown);
 
 
             dbConfiguration.ConfigureServices();
@@ -71,7 +75,7 @@ namespace FootBallCompasition_WPF
                 Select(s =>
                 new ParticipantShort()
                 {
-                    //Id = s.Id, 
+                    Id = s.Id,
                     //Surname = s.Surname, 
                     //Name = s.Name, 
                     //Patronymic = s.Patronymic,
@@ -94,6 +98,90 @@ namespace FootBallCompasition_WPF
 
 
         }
+        
+        
+        
+        
+        private void loadPart(string whereStr, string filtrby)
+        {
+
+            if (filtrby == "")
+            {
+                loadPart(whereStr);
+
+            }
+            else
+            {
+
+                //string[] strings = filtrby.Split(" ", StringSplitOptions.RemoveEmptyEntries);
+
+
+                partList = _db.Participants.Where( x => x.Role.Name == whereStr && x.Surname.Contains(filtrby) ).
+                //            .Where(x => x.FirstName.Contains(firstName))
+                Select(s =>
+                new ParticipantShort()
+                {
+                    Id = s.Id,
+                    //Surname = s.Surname, 
+                    //Name = s.Name, 
+                    //Patronymic = s.Patronymic,
+                    FIO = $"{s.Surname} {s.Name} {s.Patronymic}",
+                    DateOfBirth = s.DateOfBirth.ToString("D"),
+                    Telephone = s.Telephone
+                }).ToList();
+
+
+            //GridPart.ItemsSource = partList;
+
+            pagPart.MaxPageCount = (int)Math.Ceiling(partList.Count / 10.0);
+
+
+            GridPart.ItemsSource = partList.Take(10).ToList();
+
+            txtblListCount.Text = "Найдено записей: ";
+            txtblListCount.Text += partList.Count().ToString();
+
+
+
+            }
+
+
+
+
+        }
+
+
+        //private void loadEmpl(string firstName)
+        //{
+        //    if (firstName == "")
+        //    {
+        //        loadEmpl();
+
+        //    }
+        //    else
+        //    {
+        //        emplList = _db.Employees
+        //            .Where(x => x.FirstName.Contains(firstName))
+        //            .Select(s => new EmployeeShort()
+        //            {
+        //                Id = s.Id,
+        //                FirstName = s.FirstName,
+        //                LastName = s.LastName,
+        //                Patronymic = s.Patronymic,
+        //                DateOfBirth = s.DateOfBirth,
+        //                DateStartContract = s.DateStartContract,
+        //                DateEndContract = s.DateEndContract,
+        //                LastQualification = s.LastQualification,
+        //                PostName = s.Post.Name,
+        //                GenderName = s.Gender.LongName
+        //            })
+        //            .ToList();
+
+        //        loadDataGrid();
+
+        //    }
+        //}
+
 
 
         private void page_PageUpdated(object sender, HandyControl.Data.FunctionEventArgs<int> e)
@@ -104,8 +192,58 @@ namespace FootBallCompasition_WPF
        
         private void btnPartAdd_Click(object sender, RoutedEventArgs e)
         {
-            Dialog.Show(new UsControlDialogPartAdd());
 
+            Dialog.Show(new UsControlDialogPartAdd(0, true));
+
+            
+
+            loadPart("Игрок");
+
+        }
+
+
+
+
+        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            int id = (GridPart.SelectedItem as ParticipantShort).Id;
+
+            Participant participant = _db.Participants.Find(id);
+            
+            _db.Participants.Remove(participant);
+            _db.SaveChanges();
+
+            loadPart("Игрок");
+
+            Growl.Success("Участник успешно удален!");
+
+
+        }
+
+        private void btnModify_Click(object sender, RoutedEventArgs e)
+        {
+
+            int id = (GridPart.SelectedItem as ParticipantShort).Id;
+
+
+            Dialog.Show(new UsControlDialogPartAdd(id, false));
+
+            loadPart("Игрок");
+
+        }
+
+        //private void tbFilter_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        //{
+
+        //    if (e.Key == Key.Enter)
+        //    {
+        //        loadPart("Игрок", tbFilter.Text.Trim());
+        //    }
+        //}
+
+        private void tbFilter_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            loadPart("Игрок", tbFilter.Text.Trim());
         }
     }
 }

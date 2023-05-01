@@ -19,19 +19,7 @@ namespace FootBallCompasition_WPF.FootballClass
         public byte IdRole { get; set; }
         public Role Role { get; set; }
 
-        //TODO конструторк и NULL
-/*
-        public Participant(int id, string surname, string name, string patronymic, DateTime dateOfBirth, string telephone)
-        {
-            this.id = id;
-            this.surname = surname;
-            this.name = name;
-            this.patronymic = patronymic;
-            this.dateOfBirth = dateOfBirth;
-            this.telephone = telephone;
-
-        }
-*/
+       
         public Participant() { }
         
         public Participant(int id, string surname, string name, string patronymic, DateTime dateOfBirth, string telephone, byte idRole)
@@ -44,50 +32,6 @@ namespace FootBallCompasition_WPF.FootballClass
             this.Telephone = telephone;
             this.IdRole = idRole;
         }
-/*
-        public int Id
-        {
-            get { return id; }
-            set { id = value; }
-        }
-
-        public String Surname
-        {
-            get { return surname; }
-            set { surname = value; }
-        }
-
-        public string Name
-        {
-            get { return name; }
-            set { name = value; }
-        }
-
-        public string Patronymic
-        {
-            get { return patronymic; }
-            set { patronymic = value; }
-        }
-
-        public DateTime DateOfBirth
-        {
-            get { return dateOfBirth; }
-            set { dateOfBirth = value; }
-        }
-
-        public string Telephone
-        {
-            get { return telephone; }
-            set { telephone = value; }
-        }
-
-        public Role IdRole
-        {
-            get { return idRole; }
-            set { idRole = value; }
-        }
-*/
-
 
         //_______________________________
 
@@ -101,7 +45,7 @@ namespace FootBallCompasition_WPF.FootballClass
 
 
 
-        //TODO  
+       
         public string GetAge()
         {
             return (DateTime.Now.Year - DateOfBirth.Year).ToString();

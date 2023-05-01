@@ -9,7 +9,7 @@
 
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800" 
-      Title="ParticipantPage">
+      Title="ParticipantPage" x:Name="ParticipantPage">
 
     <Page.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVis"/>
@@ -33,7 +33,7 @@
         <Button x:Name="btnPartAdd" Grid.Row="0" Style="{StaticResource addButton}" Click="btnPartAdd_Click">
             <StackPanel Orientation="Horizontal">
                 <Icon:PackIconMaterial Kind="Plus" VerticalAlignment="Center" Width="11" Height="11" Margin="0 1 8 0"/>
-                <TextBlock Text="Add New Member"/>
+                <TextBlock Text="Добавить участника"/>
             </StackPanel>
         </Button>
 
@@ -46,9 +46,30 @@
             <Button x:Name="btnTabBtnReferee" Content="Судьи" Style="{StaticResource tabButton}" Foreground="{DynamicResource ForegroundColorPage}"/>
         </StackPanel>
 
+        
+        <!--TODO-->
+        
+        <!--Style="{DynamicResource listBoxtglbtn}"--><!--
+        <ListBox Grid.Row="1"  ScrollViewer.HorizontalScrollBarVisibility="Disabled" VerticalAlignment="Bottom" HorizontalAlignment="Center" 
+            Background="Transparent" Foreground="#121518" FocusVisualStyle="{x:Null}" BorderThickness="0" BorderBrush="Transparent" FontSize="20" FontWeight="SemiBold"
+
+            >
+            
+
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel IsItemsHost="True"/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+
+            <ListBoxItem Background="Transparent" BorderThickness="0 0 0 1" BorderBrush="#784ff2"> gdfgdfg</ListBoxItem>
+            <ListBoxItem> gdfgdfg</ListBoxItem>
+            <ListBoxItem> gdfgdfg</ListBoxItem>
+           
+        </ListBox>-->
 
         <!--Counter Title-->
-        <TextBlock x:Name="txtblListCount" Text="68 Club Staff" Grid.Row="3" FontSize="18" FontWeight="SemiBold"  HorizontalAlignment="Left" VerticalAlignment="Center" 
+        <TextBlock x:Name="txtblListCount" Text="Найдено записей: " Grid.Row="3" FontSize="18" FontWeight="SemiBold"  HorizontalAlignment="Left" VerticalAlignment="Center" 
                    Foreground="{DynamicResource ForegroundColorPage}"/>
 
         <TextBlock Text="Filter by" Grid.Row="3" FontSize="13" FontWeight="SemiBold" Margin="0 0 215 0" HorizontalAlignment="Right" VerticalAlignment="Center" 
@@ -58,10 +79,15 @@
         <!--Filter textbox-->
 
         <Grid Width="200" HorizontalAlignment="Right" Grid.Row="3">
-            <TextBlock Margin="15 0" VerticalAlignment="Center" Foreground="#b0b9c6" IsHitTestVisible="False" Panel.ZIndex="1" Text="Search in Members..."
-                               Visibility="{Binding ElementName=txtSearch, Path=Text.IsEmpty, Converter={StaticResource BoolToVis}}"/>
+            <!--<TextBlock Margin="15 0" VerticalAlignment="Center" Foreground="#b0b9c6" IsHitTestVisible="False" Panel.ZIndex="1" Text="Search in Members..."
+                               Visibility="{Binding ElementName=txtSearch, Path=Text.IsEmpty, Converter={StaticResource BoolToVis}}"/>-->
 
-            <TextBox x:Name="txtFilter" Style="{StaticResource textboxFilter}"/>
+
+            
+            <TextBox x:Name="tbFilter" Style="{DynamicResource TextBoxExtend}" hc:InfoElement.Placeholder="Поиск среди участников"  Padding="10 7" Margin="0 10"
+                      TextChanged="tbFilter_TextChanged"/>
+            <!--KeyDown="tbFilter_KeyDown"-->
+            
         </Grid>
 
         <!--Members datagrid-->
@@ -71,22 +97,46 @@
         <!--Foreground="{DynamicResource ForegroundColorPage}" 
                   Background="{DynamicResource BackGroundColorPage}"  RowBackground="{DynamicResource BackGroundColorPage}"-->
         
-        <DataGrid Grid.Row="4"  HeadersVisibility="All"  RowHeaderWidth="60" AutoGenerateColumns="False" x:Name="GridPart"  >
-            <DataGrid.RowHeaderTemplate>
+        <DataGrid Grid.Row="4"  HeadersVisibility="All" SelectionMode="Single"  RowHeaderWidth="60" AutoGenerateColumns="False" x:Name="GridPart"  >
+            <!--<DataGrid.RowHeaderTemplate>
                 <DataTemplate>
                     <CheckBox IsChecked="{Binding IsSelected,RelativeSource={RelativeSource AncestorType=DataGridRow}}"/>
                 </DataTemplate>
-            </DataGrid.RowHeaderTemplate>
+            </DataGrid.RowHeaderTemplate>-->
             <DataGrid.Columns >
 
 
                 <!--<DataGridTextColumn Width="*" Binding="{Binding Surname}" Header="Фамилия" CellStyle="{StaticResource DataGridCellStyle}" />
                 <DataGridTextColumn Width="*" Binding="{Binding Name}" Header="Имя"/>
                 <DataGridTextColumn Width="*" Binding="{Binding Patronymic}" Header="Отчество"/>-->
+                
                 <DataGridTextColumn Width="*" Binding="{Binding FIO}" Header="ФИО" Foreground="{DynamicResource ForegroundColorPage}" />
                 <DataGridTextColumn Width="*" Binding="{Binding DateOfBirth}"  Header="Дата рождения" Foreground="{DynamicResource ForegroundColorPage}"/>
                 <DataGridTextColumn Width="*" Binding="{Binding Telephone}" Header="Телефон" Foreground="{DynamicResource ForegroundColorPage}"/>
 
+
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button BorderThickness="0" x:Name="btnModify" Click="btnModify_Click" >
+                                <Icon:PackIconMaterial Kind="Pencil" Style="{DynamicResource IconPackMaterial}" Foreground="Orange" />
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <!--Command="{Binding DataContext.DeleteCommand, ElementName=ParticipantPage}" CommandParameter="{Binding}"-->
+                            <Button BorderThickness="0" x:Name="btnDelete" Click="btnDelete_Click">
+                                <Icon:PackIconMaterial Kind="Delete" Style="{DynamicResource IconPackMaterial}" Foreground="Red" />
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                
             </DataGrid.Columns>
         </DataGrid>
 

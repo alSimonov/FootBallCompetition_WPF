@@ -22,25 +22,7 @@ namespace FootBallCompasition_WPF.FootballClass
             this.Name = name;
             this.IdCity = idCity;
         }
-/*
-        public int Id
-        {
-            get { return id; }
-            set { id = value; }
-        }
 
-        public string Name
-        {
-            get { return name; }
-            set { name = value; }
-        }
-
-        public City IdCity
-        {
-            get { return idCity; }
-            set { idCity = value; }
-        }
-*/
 
 
         public override string ToString()

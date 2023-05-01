@@ -38,41 +38,7 @@ namespace FootBallCompasition_WPF.FootballClass
             this.IdTypeOfMatch = idTypeOfMatch;
 
         }
-/*
-        public int Id
-        {
-            get { return id; }
-            set { id = value; }
-        }
 
-        public Season IdSeason
-        {
-            get { return idSeason; }
-            set { idSeason = value; }
-        }
-
-        public Team IdTeam1
-        {
-            get { return idTeam1; }
-            set { idTeam1 = value; }
-        }
-
-        public Team IdTeam2
-        {
-            get { return idTeam2; }
-            set { idTeam2 = value; }
-        }
-
-
-        public DateTime Date
-        {
-            get { return date; }
-            set
-            {
-                date = value;
-            }
-        }
-*/
 
 
         public override string ToString()

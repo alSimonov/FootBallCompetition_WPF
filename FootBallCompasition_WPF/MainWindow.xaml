@@ -86,30 +86,30 @@
 
                         </StackPanel>
 
-                        <!--<hc:SideMenu x:Name="SideMenu"  BorderThickness="1" Width="150" Height="300" Margin="0"  Grid.Column="0" Grid.Row="1" 
+                        <!--<hc:SideMenu x:Name="SideMenu"  BorderThickness="0" Width="170" Height="300" Margin="0"  Grid.Column="0" Grid.Row="1" 
                                           HorizontalAlignment="Left" VerticalAlignment="Top" Background="Transparent" >
                             <hc:Interaction.Triggers>
                                 <hc:EventTrigger EventName="SelectionChanged">
                                     <hc:EventToCommand Command="{Binding SwitchItemCmd}"   PassEventArgsToCommand="True" />
                                 </hc:EventTrigger>
                             </hc:Interaction.Triggers>
-                            <hc:SideMenuItem x:Name="smTeam" Header="Команды" Background="Transparent" Foreground="#d0c0ff" Margin="13 0 0 0">
+                            <hc:SideMenuItem x:Name="smTeam" Header="Команды" Background="Transparent" Foreground="#d0c0ff" FontSize="18"  Margin="15 0 0 0">
                                 <hc:SideMenuItem.Icon>
-                                    <Image Source="Images\group.png" Width="42" Height="42"/>
+                                    <Image Source="Images\group.png" Width="42" Height="42" Margin="0 0 0 0" />
                                 </hc:SideMenuItem.Icon>
               
                             </hc:SideMenuItem>
-                            <hc:SideMenuItem x:Name="smMatch" Header="Матчи" Background="Transparent" Foreground="#d0c0ff" Margin="13 0 0 0">
+                            <hc:SideMenuItem x:Name="smMatch" Header="Матчи" Background="Transparent" FontSize="18" Foreground="#d0c0ff" Margin="15 0 0 0">
                                 <hc:SideMenuItem.Icon>
                                     <Image Source="Images\pitch.png" Width="42" Height="42"/>
                                 </hc:SideMenuItem.Icon>
                             </hc:SideMenuItem>
-                            <hc:SideMenuItem x:Name="smStadium" Header="Стадионы" Background="Transparent" Foreground="#d0c0ff" Margin="13 0 0 0">
+                            <hc:SideMenuItem x:Name="smStadium" Header="Стадионы" Background="Transparent" Foreground="#d0c0ff" FontSize="18"  Margin="15 0 0 0">
                                 <hc:SideMenuItem.Icon>
                                     <Image Source="Images\stadium.png" Width="42" Height="42"/>
                                 </hc:SideMenuItem.Icon>
                             </hc:SideMenuItem>
-                            <hc:SideMenuItem Header="Участники" Background="Transparent" Foreground="#d0c0ff" Margin="13 0 0 0">
+                            <hc:SideMenuItem Header="Участники" Background="Transparent" Foreground="#d0c0ff" FontSize="18"  Margin="15 0 0 0">
                                 <hc:SideMenuItem.Icon>
                                     <Image Source="Images\shoot.png" Width="42" Height="42" />
                                 </hc:SideMenuItem.Icon>

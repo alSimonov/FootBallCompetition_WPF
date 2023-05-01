@@ -23,56 +23,17 @@ namespace FootBallCompasition_WPF.FootballClass
         public TypeOfStadium TypeOfStadium { get; set; }
 
         public Stadium() { }
-        public Stadium(int id, string name, int idCity, int capacity, byte idTypeOfСoverage, byte idTypeOfStadium)
-        {
-            this.Id = id;
-            this.Name = name;
-            this.IdCity = idCity;
-            this.Capacity = capacity;
-            this.IdTypeOfСoverage = idTypeOfСoverage;
-            this.IdTypeOfStadium = idTypeOfStadium;
-        }
 
-        /*
-                public int Id
-                {
-                    get { return id; }
-                    set { id = value; }
-                }
+        //public Stadium(int id, string name, int idCity, int capacity, byte idTypeOfСoverage, byte idTypeOfStadium)
+        //{
+        //    this.Id = id;
+        //    this.Name = name;
+        //    this.IdCity = idCity;
+        //    this.Capacity = capacity;
+        //    this.IdTypeOfСoverage = idTypeOfСoverage;
+        //    this.IdTypeOfStadium = idTypeOfStadium;
+        //}
 
-                public string Name
-                {
-                    get { return name; }
-                    set { name = value; }
-                }
-
-                public City IdCity
-                {
-                    get { return idCity; }
-                    set { idCity = value; }
-
-                }
-
-                public int Capacity
-                {
-                    get { return capacity; }
-                    set { capacity = value; }
-
-                }
-
-                public Сoverage IdСoverage
-                {
-                    get { return idСoverage; }
-                    set { idСoverage = value; }
-
-                }
-
-                public TypeOfStadium IdTypeOfStadium
-                {
-                    get { return idTypeOfStadium; }
-                    set { idTypeOfStadium = value; }
-                }
-        */
 
 
         public string GetNameCityCapacity()

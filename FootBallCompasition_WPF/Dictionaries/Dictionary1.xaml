@@ -210,6 +210,7 @@
 
 
 
+
     <Style x:Key="textboxFilter" TargetType="TextBox" BasedOn="{StaticResource textboxSearch}">
         <Setter Property="Padding" Value="10 7"/>
         <Setter Property="Template">
@@ -433,23 +434,76 @@
         <Setter Property="Opacity" Value="0.5"/>
         <Setter Property="Height" Value="25"/>
         <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="Width" Value="156"/>
+        <Setter Property="Width" Value="170"/>
         <Setter Property="Margin" Value="63 0 0 0"/>
     </Style>
 
-    
+
+
+
     <Style x:Key="BorderSeparatorForTBDialog" TargetType="Border">
         <Setter Property="Background" Value="{DynamicResource ForeGroundColorDialog}"/>
-        <Setter Property="Width" Value="172"/>
+        <Setter Property="Width" Value="185"/>
         <Setter Property="Height" Value="2"/>
         <Setter Property="Opacity" Value="0.5"/>
-        <Setter Property="HorizontalAlignment" Value="Left"/>
-        <Setter Property="Margin" Value="65 0 0 0"/>
-        
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="0 0 0 0"/>
+        <!--65-->
     </Style>
 
 
+    <!--TODO доделать, либо уже удалить.-->
 
+    <Style x:Key="listBoxtglbtn" TargetType="{x:Type ListBox}">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="#121518"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        
+
+
+
+        <Setter Property="ListBox.ItemTemplate">
+            <Setter.Value>
+                <DataTemplate DataType="ToggleButton">
+
+                    <ToggleButton Content="{Binding}" BorderThickness="0 0 0 1" 
+                                  IsChecked="{Binding IsSelected, Mode=TwoWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBoxItem}}}"
+                                  Background="Transparent" 
+                />
+
+
+                    <!--<DataTemplate.Triggers>
+                        <DataTrigger Binding="{Binding
+                                RelativeSource={RelativeSource
+                                Mode=FindAncestor,
+                                AncestorType={x:Type ListBoxItem}},
+                                Path=IsSelected}"
+                                Value="True">
+
+                            <Setter
+                                Property="BorderBrush"
+                                 Value="#784ff2"/>
+
+
+                        </DataTrigger>
+
+
+
+                    </DataTemplate.Triggers>-->
+                    
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+
+    </Style>
+
+
+      
 
 
 

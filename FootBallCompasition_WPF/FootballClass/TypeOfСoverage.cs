@@ -15,24 +15,26 @@ namespace FootBallCompasition_WPF.FootballClass
         public string Name { get; set; }
 
         public TypeOfСoverage() { }
-        public TypeOfСoverage(byte id, string name)
+       
+        /*public TypeOfСoverage(byte id, string name)
         {
             this.Id = id;
             this.Name = name;
-        }
-/*
-        public int Id
-        {
-            get { return id; }
-            set { id = value; }
-        }
+        }*/
 
-        public string Name
-        {
-            get { return name; }
-            set { name = value; }
-        }
-*/
+        /*
+                public int Id
+                {
+                    get { return id; }
+                    set { id = value; }
+                }
+
+                public string Name
+                {
+                    get { return name; }
+                    set { name = value; }
+                }
+        */
 
 
         public override string ToString()
