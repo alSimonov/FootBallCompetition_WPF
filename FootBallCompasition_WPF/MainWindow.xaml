@@ -84,6 +84,13 @@
                                 </StackPanel>
                             </Button>
 
+                            <Button Style="{StaticResource menuButton}" x:Name="btnFrameAccount" Click="btnFrameAccount_Click">
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="Images\profile.png" Width="32" Height="32" Margin="0 0 20 0"/>
+                                    <TextBlock Text="Аккаунты" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </Button>
+
                         </StackPanel>
 
                         <!--<hc:SideMenu x:Name="SideMenu"  BorderThickness="0" Width="170" Height="300" Margin="0"  Grid.Column="0" Grid.Row="1" 

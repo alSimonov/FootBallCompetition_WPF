@@ -33,6 +33,17 @@ namespace FootBallCompasition_WPF.FootballClass
             this.IdRole = idRole;
         }
 
+
+        public string FullName { get; set; } = string.Empty;
+
+
+        public void SetFullName()
+        {
+            FullName = $"{Surname} {Name} {Patronymic} {Telephone}";
+        }
+
+
+
         //_______________________________
 
 

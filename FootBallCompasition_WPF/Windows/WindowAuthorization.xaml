@@ -38,7 +38,12 @@
 
                 <StackPanel Orientation="Horizontal">
 
-                    <TextBox x:Name="tbLogin" GotFocus="tbLogin_GotFocus" Text="Username" Style="{DynamicResource tbEnterData}"/>
+                    <!--<TextBox x:Name="tbLogin" GotFocus="tbLogin_GotFocus" Text="Username" Style="{DynamicResource tbEnterData}"/>-->
+
+                    <TextBox x:Name="tbLogin"   Style="{StaticResource TextBoxExtend}" hc:InfoElement.Placeholder="Логин" FontWeight="Light" FontFamily="helvetica" 
+                             FontSize="20" Foreground="{DynamicResource ForeGroundColor}" BorderThickness="0"  Height="34" Background="Transparent"
+                             Width="235" Margin="63 0 0 0" />
+
 
                     <Icon:PackIconMaterial Kind="Account" Style="{DynamicResource IconPackMaterial}"/>
 
@@ -47,12 +52,12 @@
 
                 <StackPanel Orientation="Horizontal" Margin="0 20 0 0">
 
-                    <hc:PasswordBox Name="pbPassword"  ShowClearButton="True" ShowEyeButton="True" Password="123456" IsSafeEnabled="False" FontSize="20" Opacity="0.5"  
-                                 hc:InfoElement.Placeholder="Password" VerticalAlignment="Center" Width="257" Margin="63 0 0 0" Background="Transparent" BorderThickness="0"
-                                 Foreground="{DynamicResource ForeGroundColorAuthorization}" CaretBrush="{DynamicResource ForeGroundColorAuthorization}" BorderBrush="{DynamicResource ForeGroundColorAuthorization}" 
-                                    SelectionBrush="{DynamicResource ForeGroundColorAuthorization}" SelectionTextBrush="{DynamicResource ForeGroundColorAuthorization}" >
-                        <!--<TextElement.Foreground ="">
-                            <TextElement.Foreground/>-->
+
+                    <hc:PasswordBox Name="pbPassword"  ShowClearButton="True" ShowEyeButton="True" IsSafeEnabled="False" FontSize="20"  
+                                 hc:InfoElement.Placeholder="Пароль" VerticalAlignment="Center" Width="257" Margin="63 0 0 0" Background="Transparent" BorderThickness="0"
+                                 Foreground="{DynamicResource ForeGroundColor}" CaretBrush="{DynamicResource ForeGroundColorAuthorization}" BorderBrush="{DynamicResource ForeGroundColorAuthorization}" 
+                                    SelectionBrush="{DynamicResource ForeGroundColorAuthorization}" SelectionTextBrush="{DynamicResource ForeGroundColorAuthorization}" 
+                                FontWeight="Light" FontFamily="helvetica" >
                   
                     </hc:PasswordBox>
                     
@@ -67,8 +72,9 @@
                 <Border Style="{DynamicResource BorderSeparatorForTB}"  />
 
                 <StackPanel Orientation="Horizontal" Margin="0 50 0 0">
-                    <Button x:Name="btnLogin" Style="{DynamicResource btnAuthorization}" Width="100" Height="40" Content="LOGIN" Margin="60 0 60 0"/>
-                    <Button x:Name="btnRegister" Style="{DynamicResource btnAuthorization}" Width="100" Height="40" Content="REGISTER" />
+                    <!--Margin="60 0 60 0"-->
+                    <Button x:Name="btnLogin" Style="{DynamicResource btnAuthorization}" Width="100" Height="40" Content="ВОЙТИ" Margin="140 0 60 0"  />
+                    <!--<Button x:Name="btnRegister" Style="{DynamicResource btnAuthorization}" Width="100" Height="40" Content="REGISTER" />-->
                 </StackPanel>
 
 

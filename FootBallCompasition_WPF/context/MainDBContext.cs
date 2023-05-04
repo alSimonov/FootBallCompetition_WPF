@@ -12,6 +12,7 @@ namespace FootBallCompasition_WPF.context
     public class MainDBContext : DbContext
     {
         public DbSet<Account> Accounts { get; set; }
+        public DbSet<AccountRole> AccountRoles { get; set; }
         public DbSet<AmpluaRole> AmpluaRoles { get; set; }
         public DbSet<City> Cities { get; set; }
         public DbSet<Event> Events { get; set; }

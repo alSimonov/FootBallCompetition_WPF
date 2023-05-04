@@ -27,21 +27,13 @@ namespace FootBallCompasition_WPF.UserControls
     /// Логика взаимодействия для uscDialogMatchAdd.xaml
     /// </summary>
     public partial class uscDialogMatchAdd : UserControl
-    {
-
-        public record class StadiumR(int id, string StadiumAndCityName);
-
-
+    {       
         public MainDBContext? _db;
-
 
         FootballClass.Match _match;
 
-
         int _idP;
         bool _addOrModify;
-
-
 
 
         public uscDialogMatchAdd(int idP, bool addOrModify)
@@ -72,15 +64,15 @@ namespace FootBallCompasition_WPF.UserControls
             cbTeam2.DisplayMemberPath = "Name";
 
 
-            //StadiumAndCityName
 
-            //TODO Сделать вывод наименования стадиона вместе с городом 
+            
+            var ll = _db.Stadiums.Include(x => x.City).ToList();
 
-            //cbStadium.ItemsSource = _db.Stadiums.Select(s => new StadiumR(s.Id, $"{s.Name} ({s.City.Name})")).ToList();
+            ll.ForEach(x => x.SetStadiumAndCityName());
 
-            cbStadium.ItemsSource = _db.Stadiums.ToList();
+            cbStadium.ItemsSource = ll;
             cbStadium.SelectedValuePath = "Id";
-            cbStadium.DisplayMemberPath = "Name";
+            cbStadium.DisplayMemberPath = "StadiumAndCityName";
 
             
             cbTypeOfMatch.ItemsSource = _db.TypeOfMatches.ToList();

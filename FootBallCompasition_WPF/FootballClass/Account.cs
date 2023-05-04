@@ -21,15 +21,6 @@ namespace FootBallCompasition_WPF.FootballClass
 
         public Account() { }
 
-        //public Account(int id, string login, byte[] password, string email, Participant participant, AccountRole accountRole)
-        //{
-        //    Id = id;
-        //    Login = login;
-        //    Password = password;
-        //    Email = email;
-        //    Participant = participant;
-        //    AccountRole = accountRole;
-        //}
-
+        
     }
 }

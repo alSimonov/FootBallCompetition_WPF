@@ -18,6 +18,7 @@
     <None Remove="Images\pen %281%29.png" />
     <None Remove="Images\pitch.png" />
     <None Remove="Images\plus.png" />
+    <None Remove="Images\profile.png" />
     <None Remove="Images\shoot.png" />
     <None Remove="Images\stadium.png" />
   </ItemGroup>
@@ -33,6 +34,7 @@
     <Resource Include="Images\pen (1).png" />
     <Resource Include="Images\pitch.png" />
     <Resource Include="Images\plus.png" />
+    <Resource Include="Images\profile.png" />
     <Resource Include="Images\shoot.png" />
     <Resource Include="Images\stadium.png" />
   </ItemGroup>

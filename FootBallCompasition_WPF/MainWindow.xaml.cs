@@ -78,6 +78,11 @@ namespace FootBallCompasition_WPF
             frame.Navigate(new PageMatch());
         }
 
+        private void btnFrameAccount_Click(object sender, RoutedEventArgs e)
+        {
+            frame.Navigate(new PageAccount());
+        }
+
         //private void tglbtnWindowScreen_Click(object sender, RoutedEventArgs e)
         //{
         //    if()

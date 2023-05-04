@@ -46,28 +46,23 @@ namespace FootBallCompasition_WPF
             dbConfiguration.ConfigureServices();
             _db = dbConfiguration.Services.GetService<MainDBContext>();
 
-            //Text1.Click += Text1_Click;
-
+            
             loadStadium();
 
         }
 
         private void loadStadium()
         {
-            //TODO разобраться почему не выводит TypeOfСoverage
-
+            
             stadiumList = _db.Stadiums.Select(s => new StadiumShort()
                 {
                     Id = s.Id,
                     StadiumName = s.Name,
                     CityName = s.City.Name,
                     Capacity = s.Capacity,
-                    //TypeOfСoverageName = s.TypeOfСoverage.Name,
-                    //TypeOfStadiumName = s.TypeOfStadium.Name
+                TypeOfСoverageName = s.TypeOfСoverage.Name,
+                TypeOfStadiumName = s.TypeOfStadium.Name
             }).ToList();
-
-            //GridStadium.ItemsSource = stadiumList;
-
 
 
             GridStadium.ItemsSource = stadiumList.Take(10).ToList();
@@ -91,15 +86,15 @@ namespace FootBallCompasition_WPF
             }
             else
             {
-                stadiumList = _db.Stadiums.Where(x => x.Name.Contains(filtrby))
+                stadiumList = _db.Stadiums.Where(x => x.Name.StartsWith(filtrby))
                 .Select(s => new StadiumShort()
                 {
                     Id = s.Id,
                     StadiumName = s.Name,
                     CityName = s.City.Name,
                     Capacity = s.Capacity,
-                    //TypeOfСoverageName = s.TypeOfСoverage.Name,
-                    //TypeOfStadiumName = s.TypeOfStadium.Name
+                    TypeOfСoverageName = s.TypeOfСoverage.Name,
+                    TypeOfStadiumName = s.TypeOfStadium.Name
                 }).ToList();
 
                 GridStadium.ItemsSource = stadiumList.Take(10).ToList();
@@ -117,7 +112,7 @@ namespace FootBallCompasition_WPF
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
 
-            //Dialog.Show(new uscDialogMatchAdd(0, true));
+            Dialog.Show(new uscDialogStadiumAdd(0, true));
 
             loadStadium();
 
@@ -130,11 +125,9 @@ namespace FootBallCompasition_WPF
             int id = (GridStadium.SelectedItem as StadiumShort).Id;
 
 
-            //Dialog.Show(new uscDialogMatchAdd(id, false));
+            Dialog.Show(new uscDialogStadiumAdd(id, false));
 
             loadStadium();
-
-
         }
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)

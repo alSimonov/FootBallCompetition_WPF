@@ -87,7 +87,7 @@ namespace FootBallCompasition_WPF.Pages
             }
             else
             {
-                matchList = _db.Matches.Where(x => x.Team1.Name.Contains(filtrby) || x.Team2.Name.Contains(filtrby)).
+                matchList = _db.Matches.Where(x => x.Team1.Name.StartsWith(filtrby) || x.Team2.Name.StartsWith(filtrby)).
                 Select(s => new MatchShort()
                 {
                     Id = s.Id,

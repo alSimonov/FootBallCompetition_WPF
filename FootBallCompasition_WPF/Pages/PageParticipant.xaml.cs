@@ -2,26 +2,13 @@
 using FootBallCompasition_WPF.FootballClass;
 using FootBallCompasition_WPF.Short;
 using FootBallCompasition_WPF.UserControls;
-using FootBallCompasition_WPF.Windows;
 using HandyControl.Controls;
-using HandyControl.Tools.Extension;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Forms;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace FootBallCompasition_WPF
 {
@@ -116,7 +103,7 @@ namespace FootBallCompasition_WPF
                 //string[] strings = filtrby.Split(" ", StringSplitOptions.RemoveEmptyEntries);
 
 
-                partList = _db.Participants.Where( x => x.Role.Name == whereStr && x.Surname.Contains(filtrby) ).
+                partList = _db.Participants.Where( x => x.Role.Name == whereStr && x.Surname.StartsWith(filtrby) ).
                 //            .Where(x => x.FirstName.Contains(firstName))
                 Select(s =>
                 new ParticipantShort()

@@ -14,6 +14,7 @@ namespace FootBallCompasition_WPF.Configuration
 
         public void Configure(EntityTypeBuilder<Participant> builder)
         {
+            builder.Ignore(x => x.FullName);
 
             builder
                     .HasOne(p => p.Role)

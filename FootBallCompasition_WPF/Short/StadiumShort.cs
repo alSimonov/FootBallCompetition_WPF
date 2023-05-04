@@ -13,8 +13,8 @@ namespace FootBallCompasition_WPF.Short
         public string StadiumName { get; set; }
         public string CityName { get; set; }
         public int Capacity { get; set; }
-        //public string TypeOfСoverageName { get; set; }
-        //public string TypeOfStadiumName { get; set; }
+        public string TypeOfСoverageName { get; set; }
+        public string TypeOfStadiumName { get; set; }
 
         public StadiumShort() { }
         

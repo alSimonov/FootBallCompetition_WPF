@@ -148,4 +148,5 @@
                        Foreground="{DynamicResource ForegroundColorPage}" PageUpdated="page_PageUpdated" PageIndex="1"/>
 
     </Grid>
+    
 </Page>

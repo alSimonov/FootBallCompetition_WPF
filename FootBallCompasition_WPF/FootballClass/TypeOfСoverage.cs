@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FootBallCompasition_WPF.FootballClass
 {
-    [Table("TypeOfСoverage")]
+    [Table("TypeOfCoverage")]
     public class TypeOfСoverage
     {
 

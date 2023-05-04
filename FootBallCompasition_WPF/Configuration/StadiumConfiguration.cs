@@ -15,6 +15,9 @@ namespace FootBallCompasition_WPF.Configuration
         public void Configure(EntityTypeBuilder<Stadium> builder)
         {
 
+
+            builder.Ignore(x => x.StadiumAndCityName);
+
             builder
                     .HasOne(x => x.TypeOfСoverage)
                     .WithMany()
@@ -29,6 +32,9 @@ namespace FootBallCompasition_WPF.Configuration
                     .HasOne(x => x.City)
                     .WithMany()
                     .HasForeignKey(x => x.IdCity);
+
+
+
 
         }
 

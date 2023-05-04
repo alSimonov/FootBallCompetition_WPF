@@ -36,7 +36,7 @@ namespace FootBallCompasition_WPF.Windows
             InitializeComponent();
 
             btnLogin.Click += btnLogin_Click;
-            btnRegister.Click += BtnRegister_Click;
+            //btnRegister.Click += BtnRegister_Click;
 
 
             btnWindowClose.Click += btnWindowClose_Click;
@@ -78,7 +78,7 @@ namespace FootBallCompasition_WPF.Windows
             string Login = tbLogin.Text;
             string Password = pbPassword.Password;
 
-            DialogResult = true;
+            //DialogResult = true;
 
 
             //byte[] passwordAdmin = SHA512.Create().ComputeHash(Encoding.BigEndianUnicode.GetBytes("admin@gmail.comadminadminСкрипеевСофронЗосимович22 июля 1998 г."));
@@ -105,43 +105,43 @@ namespace FootBallCompasition_WPF.Windows
             //tbLogin.Text = strnn;
 
 
-            //if (_db.Accounts.Any(u => u.Login == Login))
-            //{
+            if (_db.Accounts.Any(u => u.Login == Login))
+            {
 
 
-            //    var accountList = _db.Accounts.Where(s => s.Login == Login).
-            //        Select(u => new AccountR(u.Email, u.AccountRole.Name, u.Participant.Surname, u.Participant.Name, u.Participant.Patronymic, u.Participant.DateOfBirth)).ToList();
+                var accountList = _db.Accounts.Where(s => s.Login == Login).
+                    Select(u => new AccountR(u.Email, u.AccountRole.Name, u.Participant.Surname, u.Participant.Name, u.Participant.Patronymic, u.Participant.DateOfBirth)).ToList();
 
-            //    var dateOfBirth = accountList[0].PartDateOfBirth.ToString("D");
-            //    string forHash = $"{accountList[0].Email}{Login}{Password}{accountList[0].PartSurname}{accountList[0].PartName}{accountList[0].PartPatronymic}{dateOfBirth}";
+                var dateOfBirth = accountList[0].PartDateOfBirth.ToString("D");
+                string forHash = $"{accountList[0].Email}{Login}{Password}{accountList[0].PartSurname}{accountList[0].PartName}{accountList[0].PartPatronymic}{dateOfBirth}";
 
-            //    byte[] passwordByte = SHA512.Create().ComputeHash(Encoding.BigEndianUnicode.GetBytes(forHash));
+                byte[] passwordByte = SHA512.Create().ComputeHash(Encoding.BigEndianUnicode.GetBytes(forHash));
 
 
 
-            //    if (_db.Accounts.Any(u => u.Login == Login && u.Password == passwordByte))
-            //    {
+                if (_db.Accounts.Any(u => u.Login == Login && u.Password == passwordByte))
+                {
 
-            //        HandyControl.Controls.MessageBox.Show("Вход подтвержден");
-            //        DialogResult = true;
+                    HandyControl.Controls.MessageBox.Show("Вход подтвержден");
+                    DialogResult = true;
 
-            //        //TheAccountRole = accountList[0].Name;
+                    //TheAccountRole = accountList[0].Name;
 
-            //        //this.Close();
-            //    }
-            //    else
-            //        HandyControl.Controls.MessageBox.Show("Не верный пароль.");
-            //}
-            //else
-            //    HandyControl.Controls.MessageBox.Show("Не верный логин.");
+                    //this.Close();
+                }
+                else
+                    HandyControl.Controls.MessageBox.Show("Не верный пароль.");
+            }
+            else
+                HandyControl.Controls.MessageBox.Show("Не верный логин.");
 
 
         }
 
-        private void tbLogin_GotFocus(object sender, RoutedEventArgs e)
-        {
-            //tbLogin.Text = String.Empty;
-        }
+        //private void tbLogin_GotFocus(object sender, RoutedEventArgs e)
+        //{
+        //    //tbLogin.Text = String.Empty;
+        //}
 
         private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -151,9 +151,9 @@ namespace FootBallCompasition_WPF.Windows
             }
         }
 
-        private void pbPassword_GotFocus(object sender, RoutedEventArgs e)
-        {
-            pbPassword.Password = String.Empty;
-        }
+        //private void pbPassword_GotFocus(object sender, RoutedEventArgs e)
+        //{
+        //    pbPassword.Password = String.Empty;
+        //}
     }
 }

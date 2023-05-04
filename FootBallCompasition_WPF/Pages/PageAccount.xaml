@@ -1,16 +1,17 @@
-﻿<Page x:Class="FootBallCompasition_WPF.PageStadium"
+﻿<Page x:Class="FootBallCompasition_WPF.Pages.PageAccount"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:FootBallCompasition_WPF"
-      xmlns:hc="https://handyorg.github.io/handycontrol"
+      xmlns:local="clr-namespace:FootBallCompasition_WPF.Pages"
+      
+      xmlns:hc="https://handyorg.github.io/handycontrol" 
       xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
       
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="StadiumPage">
-
+      
+      d:DesignHeight="450" d:DesignWidth="800" 
+      Title="PageAccount" >
 
 
     <Page.Resources>
@@ -28,14 +29,14 @@
         </Grid.RowDefinitions>
 
         <!--Page Title-->
-        <TextBlock Text="Стадионы" Grid.Row="0" FontSize="32" FontWeight="SemiBold" Margin="0 20 0 0" HorizontalAlignment="Left" Foreground="#121518"/>
+        <TextBlock Text="Аккаунты" Grid.Row="0" FontSize="32" FontWeight="SemiBold" Margin="0 20 0 0" HorizontalAlignment="Left" Foreground="{DynamicResource ForegroundColorPage}"/>
 
 
         <!--Add Button-->
-        <Button Grid.Row="0" Style="{StaticResource addButton}" x:Name="btnAdd" Click="btnAdd_Click">
+        <Button x:Name="btnAdd" Grid.Row="0" Style="{StaticResource addButton}" Click="btnAdd_Click">
             <StackPanel Orientation="Horizontal">
                 <Icon:PackIconMaterial Kind="Plus" VerticalAlignment="Center" Width="11" Height="11" Margin="0 1 8 0"/>
-                <TextBlock Text="Добавить стадион"/>
+                <TextBlock Text="Добавить аккаунт"/>
             </StackPanel>
         </Button>
 
@@ -44,13 +45,13 @@
 
         <!--Tab Buttons-->
         <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0 10 0 0">
-            <Button x:Name="btnTabBtnList" Click="btnTabBtnList_Click"  Content="Список" Style="{StaticResource tabButton}" BorderBrush="#784ff2"/>
-            <!--<Button x:Name="btnTabBtnReferee" Content="Статистика" Style="{StaticResource tabButton}" />-->
+            <Button x:Name="btnTabBtnPlayer" Content="Игроки" Style="{StaticResource tabButton}" BorderBrush="#784ff2" Foreground="{DynamicResource ForegroundColorPage}"/>
+            <Button x:Name="btnTabBtnReferee" Content="Судьи" Style="{StaticResource tabButton}" Foreground="{DynamicResource ForegroundColorPage}"/>
         </StackPanel>
 
 
         <!--Counter Title-->
-        <TextBlock x:Name="txtblListCount" Text="Найдено записей:" Grid.Row="3" FontSize="18" FontWeight="SemiBold"  HorizontalAlignment="Left" VerticalAlignment="Center" 
+        <TextBlock x:Name="txtblListCount" Text="Найдено записей: " Grid.Row="3" FontSize="18" FontWeight="SemiBold"  HorizontalAlignment="Left" VerticalAlignment="Center" 
                    Foreground="{DynamicResource ForegroundColorPage}"/>
 
         <TextBlock Text="Filter by" Grid.Row="3" FontSize="13" FontWeight="SemiBold" Margin="0 0 215 0" HorizontalAlignment="Right" VerticalAlignment="Center" 
@@ -60,21 +61,24 @@
         <!--Filter textbox-->
 
         <Grid Width="200" HorizontalAlignment="Right" Grid.Row="3">
-            <TextBox x:Name="tbFilter" Style="{DynamicResource TextBoxExtend}" hc:InfoElement.Placeholder="Поиск среди стадионов"  Padding="10 7" Margin="0 10"
+
+            <TextBox x:Name="tbFilter" Style="{DynamicResource TextBoxExtend}" hc:InfoElement.Placeholder="Поиск среди аккаунтов"  Padding="10 7" Margin="0 10"
                       TextChanged="tbFilter_TextChanged"/>
+
         </Grid>
 
         <!--Members datagrid-->
 
-        <DataGrid Grid.Row="4" HeadersVisibility="All" SelectionMode="Single" RowHeaderWidth="60" AutoGenerateColumns="False" x:Name="GridStadium" >
-            <DataGrid.Columns>
 
 
-                <DataGridTextColumn Width="*" Binding="{Binding StadiumName}" Header="Стадион" CellStyle="{StaticResource DataGridCellStyle}"/>
-                <DataGridTextColumn Width="*" Binding="{Binding CityName}" Header="Город"/>
-                <DataGridTextColumn Width="*" Binding="{Binding Capacity}" Header="Вместимость"/>
-                <DataGridTextColumn Width="*" Binding="{Binding TypeOfСoverageName}" Header="Покрытие"/>
-                <DataGridTextColumn Width="*" Binding="{Binding TypeOfStadiumName}" Header="ТипСтадиона"/>
+        <DataGrid Grid.Row="4"  HeadersVisibility="All" SelectionMode="Single"  RowHeaderWidth="60" AutoGenerateColumns="False" x:Name="GridAccount"  >
+            <DataGrid.Columns >
+
+
+                <DataGridTextColumn Width="*" Binding="{Binding Login}" Header="ФИО" Foreground="{DynamicResource ForegroundColorPage}" />
+                <DataGridTextColumn Width="*" Binding="{Binding Email}"  Header="Дата рождения" Foreground="{DynamicResource ForegroundColorPage}"/>
+                <DataGridTextColumn Width="*" Binding="{Binding PartFullName}" Header="Телефон" Foreground="{DynamicResource ForegroundColorPage}"/>
+                <DataGridTextColumn Width="*" Binding="{Binding AccountRole}" Header="Телефон" Foreground="{DynamicResource ForegroundColorPage}"/>
 
 
                 <DataGridTemplateColumn>
@@ -91,14 +95,13 @@
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
+                            <!--Command="{Binding DataContext.DeleteCommand, ElementName=ParticipantPage}" CommandParameter="{Binding}"-->
                             <Button BorderThickness="0" x:Name="btnDelete" Click="btnDelete_Click">
                                 <Icon:PackIconMaterial Kind="Delete" Style="{DynamicResource IconPackMaterial}" Foreground="Red" />
                             </Button>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-
-
 
             </DataGrid.Columns>
         </DataGrid>
@@ -107,13 +110,9 @@
 
 
         <!--Pagination Section-->
-        <hc:Pagination x:Name="pagGrid" Grid.Row="5" HorizontalAlignment="Center"  DataCountPerPage="10" MaxPageCount="10"
-                       PageUpdated="page_PageUpdated" PageIndex="1"/>
+        <hc:Pagination x:Name="pagAccount" Grid.Row="5" HorizontalAlignment="Center"  DataCountPerPage="10" MaxPageCount="10" Background="{DynamicResource BackGroundColorPage}" 
+                       Foreground="{DynamicResource ForegroundColorPage}" PageUpdated="page_PageUpdated" PageIndex="1"/>
 
     </Grid>
-
-
-
-
 
 </Page>

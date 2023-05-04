@@ -81,7 +81,7 @@ namespace FootBallCompasition_WPF.Pages
             {
 
                
-                teamList = _db.Teams.Where(x => x.Name.Contains(filtrby)).
+                teamList = _db.Teams.Where(x => x.Name.StartsWith(filtrby)).
                     Select(s => new TeamShort()
                     {
                         Id = s.Id,

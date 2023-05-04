@@ -9,6 +9,7 @@ namespace FootBallCompasition_WPF.Short
 {
     class MatchShort
     {
+
         public int Id { get; set; }
         public string Season { get; set; }
         public string Team1Name { get; set; }
