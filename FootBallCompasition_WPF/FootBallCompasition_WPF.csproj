@@ -15,28 +15,27 @@
     <None Remove="Images\logoOnlyBall.png" />
     <None Remove="Images\logoOnlyText.png" />
     <None Remove="Images\logoShort.png" />
+    <None Remove="Images\match.png" />
+    <None Remove="Images\participant.png" />
     <None Remove="Images\pen %281%29.png" />
     <None Remove="Images\pitch.png" />
     <None Remove="Images\plus.png" />
     <None Remove="Images\profile.png" />
     <None Remove="Images\shoot.png" />
     <None Remove="Images\stadium.png" />
+    <None Remove="Images\team.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Images\calendar.png" />
-    <Resource Include="Images\delete.png" />
-    <Resource Include="Images\group.png" />
     <Resource Include="Images\logo.png" />
     <Resource Include="Images\logoOnlyBall.png" />
     <Resource Include="Images\logoOnlyText.png" />
     <Resource Include="Images\logoShort.png" />
-    <Resource Include="Images\pen (1).png" />
-    <Resource Include="Images\pitch.png" />
-    <Resource Include="Images\plus.png" />
+    <Resource Include="Images\match.png" />
+    <Resource Include="Images\participant.png" />
     <Resource Include="Images\profile.png" />
-    <Resource Include="Images\shoot.png" />
     <Resource Include="Images\stadium.png" />
+    <Resource Include="Images\team.png" />
   </ItemGroup>
 
   <ItemGroup>

@@ -9,10 +9,12 @@
     <Style x:Key="BorderThemeBackground" TargetType="Border">
         <Setter  Property="Background">
             <Setter.Value>
-                <LinearGradientBrush>
-                    <GradientStop Color="#111111" Offset="0.5" />
-                    <GradientStop Color="DarkGoldenrod" Offset="0.8"/>
-                    <GradientStop Color="Gold" Offset="1" />
+                <LinearGradientBrush StartPoint="0.5,1" EndPoint="0.5,0">
+                    <GradientStop Color="#111111" Offset="0.5"/>
+                    <GradientStop Color="#DECBA4" Offset="0.4"/>
+                    <GradientStop Color="#111111" Offset="0.2"/>
+                    <!--<gradientstop color="#111111" offset="0.3"/>
+                    <gradientstop color="#ad931b" offset="1.9"/>-->
                 </LinearGradientBrush>
             </Setter.Value>
         </Setter>
@@ -61,6 +63,8 @@
     <!--Color text Authorization-->
 
 
+    <SolidColorBrush Color="Black" x:Key="ForeGroundColorAuthorizationSpecial"/>
+    
     <SolidColorBrush Color="White" x:Key="ForeGroundColorAuthorization"/>
     <SolidColorBrush Color="White" x:Key="BorderBrushColorAuthorization"/>
 

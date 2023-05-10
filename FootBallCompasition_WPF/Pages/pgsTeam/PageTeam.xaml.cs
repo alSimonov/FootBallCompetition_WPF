@@ -19,7 +19,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace FootBallCompasition_WPF.Pages
+namespace FootBallCompasition_WPF.Pages.pgsTeam
 {
     /// <summary>
     /// Логика взаимодействия для TeamPage.xaml

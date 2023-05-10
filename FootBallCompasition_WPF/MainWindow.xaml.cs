@@ -1,9 +1,18 @@
 ﻿ using FootBallCompasition_WPF.context;
 using FootBallCompasition_WPF.Pages;
+using FootBallCompasition_WPF.Pages.pgsMatch;
+using FootBallCompasition_WPF.Pages.pgsParticipant;
+using FootBallCompasition_WPF.Pages.pgsStadium;
+using FootBallCompasition_WPF.Pages.pgsTeam;
+using FootBallCompasition_WPF.UserControls.SideMenu;
 using FootBallCompasition_WPF.Windows;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Collections.Generic;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 
 namespace FootBallCompasition_WPF
@@ -23,16 +32,7 @@ namespace FootBallCompasition_WPF
             InitializeComponent();
 
 
-            btnFrameTeam.Click += btnFrameTeam_Click;
-            btnFrameMatch.Click += btnFrameMatch_Click;
-            btnFrameStadium.Click += btnFrameStadium_Click;
-            btnFrameParticipant.Click += btnFrameParticipant_Click;
-
-
-            btnWindowClose.Click += btnWindowClose_Click;
             //tglbtnWindowScreen.Click += tglbtnWindowScreen_Click;
-            btnWindowHide.Click += btnWindowHide_Click;
-
 
 
             var dialog = new WindowAuthorization();
@@ -49,10 +49,39 @@ namespace FootBallCompasition_WPF
             }
 
 
+            //var menuExpenses = new List<SubItem>();
+            //menuExpenses.Add(new SubItem("Cash flow", new PageParticipant("Игрок")));
+            ////var item1 = new ItemMenu("Financial", menuExpenses, iconMaterial: MahApps.Metro.IconPacks.PackIconMaterialKind.Cog);
+            //var item1 = new ItemMenu("Financial", menuExpenses);
+
+
+
+            //stcSideMenu.Children.Add(new uscMenuItem(item1, this));
+
+
 
 
         }
 
+        //internal void SwitchScreen(object sender)
+        //{
+        //    //var screen = ((UserControl)sender);
+
+        //    var screen = ((Page)sender);
+        
+
+        //    if(screen != null)
+        //    {
+        //        //stcSideMenu.Children.Clear();
+        //        //stcSideMenu.Children.Add(screen);
+
+        //        frame.Navigate(screen);
+
+        //    }
+        
+        
+        
+        //}
         
 
 
@@ -81,6 +110,11 @@ namespace FootBallCompasition_WPF
         private void btnFrameAccount_Click(object sender, RoutedEventArgs e)
         {
             frame.Navigate(new PageAccount());
+        }
+
+        private void btnFrameStatistic_Click(object sender, RoutedEventArgs e)
+        {
+            frame.Navigate(new PageStatistic());
         }
 
         //private void tglbtnWindowScreen_Click(object sender, RoutedEventArgs e)
@@ -130,7 +164,7 @@ namespace FootBallCompasition_WPF
 
 
 
-            Application.Current.Resources.Clear();
+            //Application.Current.Resources.Clear();
 
 
             ////Подгрузка основного стиля
@@ -152,10 +186,10 @@ namespace FootBallCompasition_WPF
             var uriStyle = new Uri(style + ".xaml", UriKind.Relative);
 
 
-            ResourceDictionary resourceTheme = Application.LoadComponent(uriStyle) as ResourceDictionary;
+            ResourceDictionary resourceTheme = System.Windows.Application.LoadComponent(uriStyle) as ResourceDictionary;
 
 
-            Application.Current.Resources.MergedDictionaries.Add(resourceTheme);
+            System.Windows.Application.Current.Resources.MergedDictionaries.Add(resourceTheme);
 
 
 

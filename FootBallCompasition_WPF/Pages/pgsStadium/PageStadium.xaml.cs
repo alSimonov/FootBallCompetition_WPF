@@ -23,7 +23,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using static FootBallCompasition_WPF.MainWindow;
 
-namespace FootBallCompasition_WPF
+namespace FootBallCompasition_WPF.Pages.pgsStadium
 {
     /// <summary>
     /// Логика взаимодействия для StadiumPage.xaml

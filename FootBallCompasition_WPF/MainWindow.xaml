@@ -53,33 +53,35 @@
                         <!--Menu buttons-->
 
 
+                        <!--<StackPanel x:Name="stcSideMenu" DockPanel.Dock="Top"/>-->
+
                         <StackPanel DockPanel.Dock="Top">
 
-                            <Button Style="{StaticResource menuButton}" x:Name="btnFrameTeam">
+                            <Button Style="{StaticResource menuButton}" x:Name="btnFrameTeam" Click="btnFrameTeam_Click">
                                 <StackPanel Orientation="Horizontal">
-                                    <Image Source="Images\group.png" Width="32" Height="32" Margin="0 0 20 0"/>
+                                    <Image Source="Images\team.png" Width="32" Height="32" Margin="0 0 20 0"/>
                                     <TextBlock Text="Команды" VerticalAlignment="Center" />
                                 </StackPanel>
                             </Button>
 
 
-                            <Button Style="{StaticResource menuButton}" x:Name="btnFrameMatch">
+                            <Button Style="{StaticResource menuButton}" x:Name="btnFrameMatch" Click="btnFrameMatch_Click">
                                 <StackPanel Orientation="Horizontal">
-                                    <Image Source="Images\pitch.png" Width="32" Height="32" Margin="0 0 20 0"/>
+                                    <Image Source="Images\match.png" Width="32" Height="32" Margin="0 0 20 0"/>
                                     <TextBlock Text="Матчи" VerticalAlignment="Center"/>
                                 </StackPanel>
                             </Button>
 
-                            <Button Style="{StaticResource menuButton}" x:Name="btnFrameStadium" >
+                            <Button Style="{StaticResource menuButton}" x:Name="btnFrameStadium" Click="btnFrameStadium_Click" >
                                 <StackPanel Orientation="Horizontal">
                                     <Image Source="Images\stadium.png" Width="32" Height="32" Margin="0 0 20 0"/>
                                     <TextBlock Text="Стадионы" VerticalAlignment="Center"/>
                                 </StackPanel>
                             </Button>
 
-                            <Button Style="{StaticResource menuButton}" x:Name="btnFrameParticipant">
+                            <Button Style="{StaticResource menuButton}" x:Name="btnFrameParticipant" Click="btnFrameParticipant_Click">
                                 <StackPanel Orientation="Horizontal">
-                                    <Image Source="Images\shoot.png" Width="32" Height="32" Margin="0 0 20 0"/>
+                                    <Image Source="Images\participant.png" Width="32" Height="32" Margin="0 0 20 0"/>
                                     <TextBlock Text="Участники" VerticalAlignment="Center"/>
                                 </StackPanel>
                             </Button>
@@ -88,6 +90,13 @@
                                 <StackPanel Orientation="Horizontal">
                                     <Image Source="Images\profile.png" Width="32" Height="32" Margin="0 0 20 0"/>
                                     <TextBlock Text="Аккаунты" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </Button>
+
+                            <Button Style="{StaticResource menuButton}" x:Name="btnFrameStatistic" Click="btnFrameStatistic_Click">
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="Images\profile.png" Width="32" Height="32" Margin="0 0 20 0"/>
+                                    <TextBlock Text="Статистика" VerticalAlignment="Center"/>
                                 </StackPanel>
                             </Button>
 
@@ -104,7 +113,20 @@
                                 <hc:SideMenuItem.Icon>
                                     <Image Source="Images\group.png" Width="42" Height="42" Margin="0 0 0 0" />
                                 </hc:SideMenuItem.Icon>
-              
+
+                                <hc:SideMenuItem Header="Summary" Command="{Binding SelectCmd}" CommandParameter="{Binding Header,RelativeSource={RelativeSource Self}}">
+                                    <hc:SideMenuItem.Icon>
+                                        <TextBlock Text="&#xf2cb;" />
+                                    </hc:SideMenuItem.Icon>
+                                </hc:SideMenuItem>
+
+
+                                <hc:SideMenuItem Header="Summaryeee" Command="{Binding SelectCmd}" CommandParameter="{Binding Header,RelativeSource={RelativeSource Self}}">
+                                    <hc:SideMenuItem.Icon>
+                                        <TextBlock Text="&#xf2cb;" />
+                                    </hc:SideMenuItem.Icon>
+                                </hc:SideMenuItem>
+
                             </hc:SideMenuItem>
                             <hc:SideMenuItem x:Name="smMatch" Header="Матчи" Background="Transparent" FontSize="18" Foreground="#d0c0ff" Margin="15 0 0 0">
                                 <hc:SideMenuItem.Icon>
@@ -167,7 +189,7 @@
 
                 <!--buttons Hide/Show close-->
 
-                <Button Grid.Row="0" Style="{StaticResource  topButton}" x:Name="btnWindowClose" Margin="0 0 0 0"  HorizontalAlignment="Right">
+                <Button Grid.Row="0" Style="{StaticResource  topButton}" x:Name="btnWindowClose" Margin="0 0 0 0"  HorizontalAlignment="Right" Click="btnWindowClose_Click">
                     <Icon:PackIconMaterial Kind="Power"/>
                 </Button>
 
@@ -203,7 +225,7 @@
                     
                 </ToggleButton>-->
 
-                <Button Grid.Row="0" x:Name="btnWindowHide" Style="{StaticResource  topButton}" Margin="0 0 30 0" HorizontalAlignment="Right">
+                <Button Grid.Row="0" x:Name="btnWindowHide" Style="{StaticResource  topButton}" Margin="0 0 30 0" HorizontalAlignment="Right" Click="btnWindowHide_Click">
                     <Icon:PackIconMaterial Kind="MinusBoxOutline"/>
                 </Button>
 

@@ -2,38 +2,28 @@
 using FootBallCompasition_WPF.FootballClass;
 using FootBallCompasition_WPF.Short;
 using FootBallCompasition_WPF.UserControls;
+using FootBallCompasition_WPF.UserControls.ucsMatch;
 using HandyControl.Controls;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Forms;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
-namespace FootBallCompasition_WPF.Pages
+namespace FootBallCompasition_WPF.Pages.pgsMatch
 {
     /// <summary>
-    /// Логика взаимодействия для MatchPage.xaml
+    /// Логика взаимодействия для PageMatchList.xaml
     /// </summary>
-    public partial class PageMatch : Page
+    public partial class PageMatchList : Page
     {
 
         public MainDBContext? _db;
 
         List<MatchShort> matchList = new List<MatchShort>();
 
-        public PageMatch()
+        public PageMatchList()
         {
             InitializeComponent();
 
@@ -42,7 +32,9 @@ namespace FootBallCompasition_WPF.Pages
 
             loadMatch();
 
+
         }
+
 
 
         private void loadMatch()
@@ -121,15 +113,7 @@ namespace FootBallCompasition_WPF.Pages
             GridMatch.ItemsSource = matchList.Skip((e.Info - 1) * 10).Take(10).ToList();
         }
 
-        private void btnAdd_Click(object sender, RoutedEventArgs e)
-        {
-            Dialog.Show(new uscDialogMatchAdd(0, true));
-
-            loadMatch();
-
-
-        }
-
+        
         private void btnModify_Click(object sender, RoutedEventArgs e)
         {
             int id = (GridMatch.SelectedItem as MatchShort).Id;
@@ -161,9 +145,55 @@ namespace FootBallCompasition_WPF.Pages
             loadMatch(tbFilter.Text.Trim());
         }
 
-        private void btnTabBtnList_Click(object sender, RoutedEventArgs e)
+        //private void mnitGetReferees_Click(object sender, RoutedEventArgs e)
+        //{
+            
+
+        //}
+
+        //private void mnitGetEvents_Click(object sender, RoutedEventArgs e)
+        //{
+
+        //}
+
+
+
+        private void btnTabBtnReferee_Click(object sender, RoutedEventArgs e)
         {
-            loadMatch();
+
+            if(GridMatch.SelectedItem == null)
+            {
+                Growl.Error("Матч не был выбран!");
+            }
+            else
+            {
+                //int id = (GridMatch.SelectedItem as MatchShort).Id;
+
+                 
+                Dialog.Show(new ucsReferee((MatchShort) GridMatch.SelectedItem));
+
+            }
+
+        }
+
+        private void btnTabBtnEvent_Click(object sender, RoutedEventArgs e)
+        {
+
+
+            if (GridMatch.SelectedItem == null)
+            {
+                Growl.Error("Матч не был выбран!");
+            }
+            else
+            {
+                
+
+                Dialog.Show(new uscEvents((MatchShort)GridMatch.SelectedItem));
+
+            }
+
+
+
         }
     }
 }

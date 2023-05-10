@@ -21,9 +21,9 @@ namespace FootBallCompasition_WPF.Configuration
                 .HasForeignKey(x => x.IdMatch);
 
             builder
-                .HasOne(x => x.Participant)
+                .HasOne(x => x.TeamComposition)
                 .WithMany()
-                .HasForeignKey(x => x.IdParticipant);
+                .HasForeignKey(x => x.IdTeamComposition);
 
             builder
                 .HasOne(x => x.TypeOfEvent)

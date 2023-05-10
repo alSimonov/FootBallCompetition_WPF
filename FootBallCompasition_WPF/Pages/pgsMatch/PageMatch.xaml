@@ -1,16 +1,16 @@
-﻿<Page x:Class="FootBallCompasition_WPF.PageStadium"
+﻿<Page x:Class="FootBallCompasition_WPF.Pages.pgsMatch.PageMatch"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:FootBallCompasition_WPF"
+      xmlns:local="clr-namespace:FootBallCompasition_WPF.Pages"
       xmlns:hc="https://handyorg.github.io/handycontrol"
       xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
       
+
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="StadiumPage">
-
+      Title="MatchPage">
 
 
     <Page.Resources>
@@ -22,20 +22,18 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
         <!--Page Title-->
-        <TextBlock Text="Стадионы" Grid.Row="0" FontSize="32" FontWeight="SemiBold" Margin="0 20 0 0" HorizontalAlignment="Left" Foreground="#121518"/>
+        <TextBlock Text="Матчи" Grid.Row="0" FontSize="32" FontWeight="SemiBold" Margin="0 20 0 0" HorizontalAlignment="Left" Foreground="#121518"/>
 
 
         <!--Add Button-->
         <Button Grid.Row="0" Style="{StaticResource addButton}" x:Name="btnAdd" Click="btnAdd_Click">
             <StackPanel Orientation="Horizontal">
                 <Icon:PackIconMaterial Kind="Plus" VerticalAlignment="Center" Width="11" Height="11" Margin="0 1 8 0"/>
-                <TextBlock Text="Добавить стадион"/>
+                <TextBlock Text="Добавить матч"/>
             </StackPanel>
         </Button>
 
@@ -44,37 +42,53 @@
 
         <!--Tab Buttons-->
         <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0 10 0 0">
-            <Button x:Name="btnTabBtnList" Click="btnTabBtnList_Click"  Content="Список" Style="{StaticResource tabButton}" BorderBrush="#784ff2"/>
+            <Button x:Name="btnTabBtnList" Click="btnTabBtnList_Click" Content="Список" Style="{StaticResource tabButton}" BorderBrush="#784ff2"/>
             <!--<Button x:Name="btnTabBtnReferee" Content="Статистика" Style="{StaticResource tabButton}" />-->
         </StackPanel>
 
 
-        <!--Counter Title-->
+
+        <Frame x:Name="frameMatch" Grid.Row="3">
+
+
+        </Frame>
+
+
+
+        <!--Counter Title--><!--
         <TextBlock x:Name="txtblListCount" Text="Найдено записей:" Grid.Row="3" FontSize="18" FontWeight="SemiBold"  HorizontalAlignment="Left" VerticalAlignment="Center" 
                    Foreground="{DynamicResource ForegroundColorPage}"/>
 
         <TextBlock Text="Filter by" Grid.Row="3" FontSize="13" FontWeight="SemiBold" Margin="0 0 215 0" HorizontalAlignment="Right" VerticalAlignment="Center" 
-                   Foreground="{DynamicResource ForegroundColorPage}"/>
+                   Foreground="{DynamicResource ForegroundColorPage}"/>-->
 
 
-        <!--Filter textbox-->
+        <!--Filter textbox--><!--
+
 
         <Grid Width="200" HorizontalAlignment="Right" Grid.Row="3">
-            <TextBox x:Name="tbFilter" Style="{DynamicResource TextBoxExtend}" hc:InfoElement.Placeholder="Поиск среди стадионов"  Padding="10 7" Margin="0 10"
+            <TextBox x:Name="tbFilter" Style="{DynamicResource TextBoxExtend}" hc:InfoElement.Placeholder="Поиск среди матчей"  Padding="10 7" Margin="0 10"
                       TextChanged="tbFilter_TextChanged"/>
         </Grid>
 
-        <!--Members datagrid-->
+        --><!--Members datagrid--><!--
 
-        <DataGrid Grid.Row="4" HeadersVisibility="All" SelectionMode="Single" RowHeaderWidth="60" AutoGenerateColumns="False" x:Name="GridStadium" >
+        <DataGrid Grid.Row="4" HeadersVisibility="All"  SelectionMode="Single"  RowHeaderWidth="60" AutoGenerateColumns="False" x:Name="GridMatch" >
+
             <DataGrid.Columns>
 
 
-                <DataGridTextColumn Width="*" Binding="{Binding StadiumName}" Header="Стадион" CellStyle="{StaticResource DataGridCellStyle}"/>
-                <DataGridTextColumn Width="*" Binding="{Binding CityName}" Header="Город"/>
-                <DataGridTextColumn Width="*" Binding="{Binding Capacity}" Header="Вместимость"/>
-                <DataGridTextColumn Width="*" Binding="{Binding TypeOfСoverageName}" Header="Покрытие"/>
-                <DataGridTextColumn Width="*" Binding="{Binding TypeOfStadiumName}" Header="ТипСтадиона"/>
+                <DataGridTextColumn Width="*" Binding="{Binding Season}" Header="Сезон" CellStyle="{StaticResource DataGridCellStyle}"/>
+                <DataGridTextColumn Width="*" Binding="{Binding Team1Name}" Header="Команда 1"/>
+                <DataGridTextColumn Width="*" Binding="{Binding Team2Name}" Header="Команда 2"/>
+                <DataGridTextColumn Width="*" Binding="{Binding Date}" Header="Дата"/>
+
+                <DataGridTextColumn Width="*" Binding="{Binding StadiumAndCityName}" Header="Стадион (Город)"/>
+
+                --><!--<DataGridTextColumn Width="*" Binding="{Binding StadiumName}" Header="Стадион"/>
+                <DataGridTextColumn Width="*" Binding="{Binding CityName}" Header="Город"/>--><!--
+                <DataGridTextColumn Width="*" Binding="{Binding TypeOfMatch}" Header="Тип матча"/>
+
 
 
                 <DataGridTemplateColumn>
@@ -104,16 +118,12 @@
         </DataGrid>
 
 
+        --><!--Pagination Section--><!--
 
-
-        <!--Pagination Section-->
         <hc:Pagination x:Name="pagGrid" Grid.Row="5" HorizontalAlignment="Center"  DataCountPerPage="10" MaxPageCount="10"
-                       PageUpdated="page_PageUpdated" PageIndex="1"/>
+                       PageUpdated="page_PageUpdated" PageIndex="1"/>-->
 
     </Grid>
-
-
-
 
 
 </Page>

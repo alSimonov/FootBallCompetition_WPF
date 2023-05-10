@@ -13,11 +13,13 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 namespace FootBallCompasition_WPF.Windows
 {
@@ -36,13 +38,8 @@ namespace FootBallCompasition_WPF.Windows
             InitializeComponent();
 
             btnLogin.Click += btnLogin_Click;
-            //btnRegister.Click += BtnRegister_Click;
-
-
+            
             btnWindowClose.Click += btnWindowClose_Click;
-
-
-
 
 
 
@@ -51,21 +48,7 @@ namespace FootBallCompasition_WPF.Windows
 
         }
 
-        private void BtnRegister_Click(object sender, RoutedEventArgs e)
-        {
 
-            var dialog = new WindowRegistration();
-            if (dialog.ShowDialog() == false)
-            {
-                
-            }
-            else
-            {
-
-            }
-
-
-        }
 
         private void btnWindowClose_Click(object sender, RoutedEventArgs e)
         {
@@ -122,14 +105,13 @@ namespace FootBallCompasition_WPF.Windows
                 if (_db.Accounts.Any(u => u.Login == Login && u.Password == passwordByte))
                 {
 
-                    HandyControl.Controls.MessageBox.Show("Вход подтвержден");
+                    //HandyControl.Controls.MessageBox.Show( new HandyControl.Data.MessageBoxInfo { Message = "Вход подтвержден" });
                     DialogResult = true;
 
                     //TheAccountRole = accountList[0].Name;
 
-                    //this.Close();
                 }
-                else
+                else //TODO Руссифицировать messageBox
                     HandyControl.Controls.MessageBox.Show("Не верный пароль.");
             }
             else
@@ -138,10 +120,6 @@ namespace FootBallCompasition_WPF.Windows
 
         }
 
-        //private void tbLogin_GotFocus(object sender, RoutedEventArgs e)
-        //{
-        //    //tbLogin.Text = String.Empty;
-        //}
 
         private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -151,9 +129,5 @@ namespace FootBallCompasition_WPF.Windows
             }
         }
 
-        //private void pbPassword_GotFocus(object sender, RoutedEventArgs e)
-        //{
-        //    pbPassword.Password = String.Empty;
-        //}
     }
 }

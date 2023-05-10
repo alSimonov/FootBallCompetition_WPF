@@ -10,7 +10,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace FootBallCompasition_WPF
+namespace FootBallCompasition_WPF.Pages.pgsParticipant
 {
     /// <summary>
     /// Логика взаимодействия для ParticipantPage.xaml

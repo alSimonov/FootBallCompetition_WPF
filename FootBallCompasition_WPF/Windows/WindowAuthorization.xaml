@@ -19,7 +19,10 @@
             </Grid.RowDefinitions>
 
             <Border CornerRadius="10" Grid.RowSpan="2" Style="{DynamicResource BorderThemeBackground}"/>
-
+            <StackPanel Grid.Row="1">
+                <Border Background="#ffffff">
+                </Border>
+            </StackPanel>
             <Button Grid.Row="0" Style="{StaticResource  topButton}" x:Name="btnWindowClose" Margin="0 0 0 0"  HorizontalAlignment="Right" VerticalAlignment="Top">
                     <Icon:PackIconMaterial Kind="Power"/>
             </Button>
@@ -41,8 +44,8 @@
                     <!--<TextBox x:Name="tbLogin" GotFocus="tbLogin_GotFocus" Text="Username" Style="{DynamicResource tbEnterData}"/>-->
 
                     <TextBox x:Name="tbLogin"   Style="{StaticResource TextBoxExtend}" hc:InfoElement.Placeholder="Логин" FontWeight="Light" FontFamily="helvetica" 
-                             FontSize="20" Foreground="{DynamicResource ForeGroundColor}" BorderThickness="0"  Height="34" Background="Transparent"
-                             Width="235" Margin="63 0 0 0" />
+                             FontSize="20" Foreground="{DynamicResource ForeGroundColorAuthorizationSpecial}" BorderThickness="0"  Height="34" Background="Transparent"
+                             Width="235" Margin="63 0 0 0" Text="admin" />
 
 
                     <Icon:PackIconMaterial Kind="Account" Style="{DynamicResource IconPackMaterial}"/>
@@ -57,7 +60,7 @@
                                  hc:InfoElement.Placeholder="Пароль" VerticalAlignment="Center" Width="257" Margin="63 0 0 0" Background="Transparent" BorderThickness="0"
                                  Foreground="{DynamicResource ForeGroundColor}" CaretBrush="{DynamicResource ForeGroundColorAuthorization}" BorderBrush="{DynamicResource ForeGroundColorAuthorization}" 
                                     SelectionBrush="{DynamicResource ForeGroundColorAuthorization}" SelectionTextBrush="{DynamicResource ForeGroundColorAuthorization}" 
-                                FontWeight="Light" FontFamily="helvetica" >
+                                FontWeight="Light" FontFamily="helvetica" Password="admin" >
                   
                     </hc:PasswordBox>
                     
