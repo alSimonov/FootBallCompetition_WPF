@@ -1,5 +1,6 @@
 ﻿using FootBallCompasition_WPF.context;
 using FootBallCompasition_WPF.FootballClass;
+using FootBallCompasition_WPF.Pages.pgsParticipant;
 using HandyControl.Controls;
 using HandyControl.Tools;
 using Microsoft.EntityFrameworkCore;
@@ -30,32 +31,30 @@ namespace FootBallCompasition_WPF.UserControls
 
         public MainDBContext? _db;
 
+        PageParticipant _pageParticipant;
+
         Participant _participant;
 
 
         int _idP;
         bool _addOrModify;
 
-        public UsControlDialogPartAdd(int idP, bool addOrModify)
+        public UsControlDialogPartAdd(int idP, bool addOrModify, PageParticipant pageParticipant)
         {
             InitializeComponent();
-
 
             //Установка языка для datePicker
 
             ConfigHelper.Instance.SetLang("ru");
 
-
-
             dbConfiguration.ConfigureServices();
             _db = dbConfiguration.Services.GetService<MainDBContext>();
 
+            _pageParticipant = pageParticipant;
 
             cbRole.ItemsSource = _db.Roles.ToList();
             cbRole.SelectedValuePath = "Id";
             cbRole.DisplayMemberPath = "Name";
-
-
 
             _idP = idP;
             _addOrModify = addOrModify;
@@ -114,6 +113,8 @@ namespace FootBallCompasition_WPF.UserControls
 
                 _db.SaveChanges();
 
+                _pageParticipant.loadPart();
+
                 Growl.Success("Участник успешно добавлен!");
 
 
@@ -145,9 +146,9 @@ namespace FootBallCompasition_WPF.UserControls
 
                 _db.SaveChanges();
 
-                Growl.Success("Участник успешно изменен!");
+                _pageParticipant.loadPart();
 
-                
+                Growl.Success("Участник успешно изменен!");                
 
             }
 

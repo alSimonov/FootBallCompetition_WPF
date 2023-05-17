@@ -40,33 +40,6 @@
         <!--Separator-->
         <Separator Height="1" Grid.Row="2" Background="#dae2ea" Margin="0 -1 0 10" />
 
-        <!--Tab Buttons-->
-        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0 10 0 0">
-            <Button x:Name="btnTabBtnPlayer" Content="Игроки" Style="{StaticResource tabButton}" BorderBrush="#784ff2" Foreground="{DynamicResource ForegroundColorPage}"/>
-            <Button x:Name="btnTabBtnReferee" Content="Судьи" Style="{StaticResource tabButton}" Foreground="{DynamicResource ForegroundColorPage}"/>
-        </StackPanel>
-
-        
-        <!--TODO-->
-        
-        <!--Style="{DynamicResource listBoxtglbtn}"--><!--
-        <ListBox Grid.Row="1"  ScrollViewer.HorizontalScrollBarVisibility="Disabled" VerticalAlignment="Bottom" HorizontalAlignment="Center" 
-            Background="Transparent" Foreground="#121518" FocusVisualStyle="{x:Null}" BorderThickness="0" BorderBrush="Transparent" FontSize="20" FontWeight="SemiBold"
-
-            >
-            
-
-            <ListBox.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapPanel IsItemsHost="True"/>
-                </ItemsPanelTemplate>
-            </ListBox.ItemsPanel>
-
-            <ListBoxItem Background="Transparent" BorderThickness="0 0 0 1" BorderBrush="#784ff2"> gdfgdfg</ListBoxItem>
-            <ListBoxItem> gdfgdfg</ListBoxItem>
-            <ListBoxItem> gdfgdfg</ListBoxItem>
-           
-        </ListBox>-->
 
         <!--Counter Title-->
         <TextBlock x:Name="txtblListCount" Text="Найдено записей: " Grid.Row="3" FontSize="18" FontWeight="SemiBold"  HorizontalAlignment="Left" VerticalAlignment="Center" 
@@ -78,54 +51,39 @@
 
         <!--Tab Buttons-->
         <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="0 10 0 0" HorizontalAlignment="Center">
-            <!--BorderBrush="#784ff2"-->
             <Button x:Name="btnTabBtnTeamComposition" Click="btnTabBtnTeamComposition_Click"  Content="Контракты" Style="{StaticResource tabButton}" />
-            <!--<Button x:Name="btnTabBtnEvent" Click="btnTabBtnEvent_Click" Content="События" Style="{StaticResource tabButton}" />-->
         </StackPanel>
 
 
+
+        <!--ComboBox-->
+
+        <hc:ComboBox x:Name="cbRole" Grid.Row="3" hc:InfoElement.Placeholder="Роль" SelectedIndex="0" Text="Item 1" ShowClearButton="True" SelectionChanged="cbRole_SelectionChanged"
+                          Width="135" Height="30" HorizontalAlignment="Center" Margin="250 5 0 0" Background="Transparent" Foreground="{DynamicResource ForeGroundColorDialog}" 
+                          BorderThickness="0" FontSize="14" FontFamily="helvetica" FontWeight="Light" VerticalContentAlignment="Center" />
 
 
         <!--Filter textbox-->
 
         <Grid Width="200" HorizontalAlignment="Right" Grid.Row="3">
-            <!--<TextBlock Margin="15 0" VerticalAlignment="Center" Foreground="#b0b9c6" IsHitTestVisible="False" Panel.ZIndex="1" Text="Search in Members..."
-                               Visibility="{Binding ElementName=txtSearch, Path=Text.IsEmpty, Converter={StaticResource BoolToVis}}"/>-->
-
-
-            
             <TextBox x:Name="tbFilter" Style="{DynamicResource TextBoxExtend}" hc:InfoElement.Placeholder="Поиск среди участников"  Padding="10 7" Margin="0 10"
                       TextChanged="tbFilter_TextChanged"/>
-            <!--KeyDown="tbFilter_KeyDown"-->
             
         </Grid>
 
         <!--Members datagrid-->
-        
-        
-        
-        <!--Foreground="{DynamicResource ForegroundColorPage}" 
-                  Background="{DynamicResource BackGroundColorPage}"  RowBackground="{DynamicResource BackGroundColorPage}"-->
-        
+                
+
         <DataGrid Grid.Row="4"  HeadersVisibility="All" SelectionMode="Single"  RowHeaderWidth="60" AutoGenerateColumns="False" x:Name="GridPart"  >
-            <!--<DataGrid.RowHeaderTemplate>
-                <DataTemplate>
-                    <CheckBox IsChecked="{Binding IsSelected,RelativeSource={RelativeSource AncestorType=DataGridRow}}"/>
-                </DataTemplate>
-            </DataGrid.RowHeaderTemplate>-->
             <DataGrid.Columns >
-
-
-                <!--<DataGridTextColumn Width="*" Binding="{Binding Surname}" Header="Фамилия" CellStyle="{StaticResource DataGridCellStyle}" />
-                <DataGridTextColumn Width="*" Binding="{Binding Name}" Header="Имя"/>
-                <DataGridTextColumn Width="*" Binding="{Binding Patronymic}" Header="Отчество"/>-->
 
                 <DataGridTextColumn Width="auto" Binding="{Binding FIO}" Header="ФИО" Foreground="{DynamicResource ForegroundColorPage}" />
                 <DataGridTextColumn Width="auto" Binding="{Binding DateOfBirth}"  Header="Дата рождения" Foreground="{DynamicResource ForegroundColorPage}"/>
-                <DataGridTextColumn Width="*" Binding="{Binding Telephone}" Header="Телефон" Foreground="{DynamicResource ForegroundColorPage}"/>
+                <DataGridTextColumn Width="auto" Binding="{Binding Telephone}" Header="Телефон" Foreground="{DynamicResource ForegroundColorPage}"/>
+                <DataGridTextColumn Width="*" Binding="{Binding RoleName}" Header="Роль" Foreground="{DynamicResource ForegroundColorPage}"/>
 
 
-                <DataGridTemplateColumn >
+                <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button BorderThickness="0" x:Name="btnModify" Click="btnModify_Click" >
@@ -135,11 +93,9 @@
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
 
-
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <!--Command="{Binding DataContext.DeleteCommand, ElementName=ParticipantPage}" CommandParameter="{Binding}"-->
                             <Button BorderThickness="0" x:Name="btnDelete" Click="btnDelete_Click">
                                 <Icon:PackIconMaterial Kind="Delete" Style="{DynamicResource IconPackMaterial}" Foreground="Red" />
                             </Button>

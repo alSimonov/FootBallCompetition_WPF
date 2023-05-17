@@ -1,5 +1,6 @@
 ﻿using FootBallCompasition_WPF.context;
 using FootBallCompasition_WPF.FootballClass;
+using FootBallCompasition_WPF.Pages;
 using HandyControl.Controls;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -31,13 +32,15 @@ namespace FootBallCompasition_WPF.UserControls
 
         public MainDBContext? _db;
 
+        PageAccount _pageAccount;
+
         FootballClass.Account _account;
 
         int _idP;
         bool _addOrModify;
 
 
-        public uscDialogAccountAdd(int idP, bool addOrModify)
+        public uscDialogAccountAdd(int idP, bool addOrModify, PageAccount pageAccount)
         {
             InitializeComponent();
 
@@ -45,7 +48,7 @@ namespace FootBallCompasition_WPF.UserControls
             dbConfiguration.ConfigureServices();
             _db = dbConfiguration.Services.GetService<MainDBContext>();
 
-
+            _pageAccount = pageAccount;
 
             cbAccountRole.ItemsSource = _db.AccountRoles.ToList();
             cbAccountRole.SelectedValuePath = "Id";
@@ -117,6 +120,8 @@ namespace FootBallCompasition_WPF.UserControls
 
                 _db.SaveChanges();
 
+                _pageAccount.loadAccount();
+
                 Growl.Success("Аккаунт успешно добавлен!");
 
 
@@ -148,9 +153,9 @@ namespace FootBallCompasition_WPF.UserControls
 
                 _db.SaveChanges();
 
+                _pageAccount.loadAccount();
+
                 Growl.Success("Аккаунт успешно изменен!");
-
-
 
             }
         }

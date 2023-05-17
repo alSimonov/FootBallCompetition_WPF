@@ -27,6 +27,8 @@ namespace FootBallCompasition_WPF.UserControls.fUscTeamComposition
     {
         private MainDBContext? _db;
 
+
+
         List<TeamCompositionShort> dataGridList = new List<TeamCompositionShort>();
 
         int _idP;
@@ -53,7 +55,7 @@ namespace FootBallCompasition_WPF.UserControls.fUscTeamComposition
 
 
 
-        private void loadDataGrid()
+        public void loadDataGrid()
         {
 
             dataGridList = _db.TeamCompositions.Where(x => x.IdTeam == _idP)
@@ -114,18 +116,14 @@ namespace FootBallCompasition_WPF.UserControls.fUscTeamComposition
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            Dialog.Show(new uscTeamCompositionForTeamDialogAdd(0, true, _idP));
-
-            loadDataGrid();
+            Dialog.Show(new uscTeamCompositionForTeamDialogAdd(0, true, _idP, this));
         }
 
         private void btnModify_Click(object sender, RoutedEventArgs e)
         {
             int id = (GridReferee.SelectedItem as TeamCompositionShort).Id;
 
-            Dialog.Show(new uscTeamCompositionForTeamDialogAdd(id, false, _idP));
-
-            loadDataGrid();
+            Dialog.Show(new uscTeamCompositionForTeamDialogAdd(id, false, _idP, this));
         }
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)

@@ -51,7 +51,7 @@ namespace FootBallCompasition_WPF.Pages.pgsStadium
 
         }
 
-        private void loadStadium()
+        public void loadStadium()
         {
             
             stadiumList = _db.Stadiums.Select(s => new StadiumShort()
@@ -111,23 +111,14 @@ namespace FootBallCompasition_WPF.Pages.pgsStadium
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-
-            Dialog.Show(new uscDialogStadiumAdd(0, true));
-
-            loadStadium();
-
-
+            Dialog.Show(new uscDialogStadiumAdd(0, true, this));
         }
 
         private void btnModify_Click(object sender, RoutedEventArgs e)
         {
-
             int id = (GridStadium.SelectedItem as StadiumShort).Id;
 
-
-            Dialog.Show(new uscDialogStadiumAdd(id, false));
-
-            loadStadium();
+            Dialog.Show(new uscDialogStadiumAdd(id, false, this));
         }
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)

@@ -93,7 +93,7 @@ namespace FootBallCompasition_WPF
 
         private void btnFrameParticipant_Click(object sender, RoutedEventArgs e)
         {
-            frame.Navigate(new PageParticipant("Игрок"));
+            frame.Navigate(new PageParticipant());
         }
 
         private void btnFrameStadium_Click(object sender, RoutedEventArgs e)
@@ -195,5 +195,9 @@ namespace FootBallCompasition_WPF
 
 
         }
+
+
+        //TODO сделать кнопку выхода из аккаунта
+
     }
 }

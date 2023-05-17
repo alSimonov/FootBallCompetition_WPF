@@ -48,9 +48,11 @@ namespace FootBallCompasition_WPF.Pages.pgsMatch
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            Dialog.Show(new uscDialogMatchAdd(0, true));
+            //Dialog.Show(new uscDialogMatchAdd(0, true));
 
-            //loadMatch();
+            //TODO передалать Match в одну страницу
+
+
 
 
         }

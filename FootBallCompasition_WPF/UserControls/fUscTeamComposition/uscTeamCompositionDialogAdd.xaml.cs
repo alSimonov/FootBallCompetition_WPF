@@ -31,6 +31,8 @@ namespace FootBallCompasition_WPF.UserControls.fUscTeamComposition
 
         public MainDBContext? _db;
 
+        uscTeamComposition _uscTeamComposition;
+
         FootballClass.TeamComposition _teamComposition;
         FootballClass.Participant _participant;
 
@@ -41,7 +43,7 @@ namespace FootBallCompasition_WPF.UserControls.fUscTeamComposition
 
 
 
-        public uscTeamCompositionDialogAdd(int idT, bool addOrModify, int idP)
+        public uscTeamCompositionDialogAdd(int idT, bool addOrModify, int idP, uscTeamComposition uscTeamComposition)
         {
             InitializeComponent();
 
@@ -50,6 +52,8 @@ namespace FootBallCompasition_WPF.UserControls.fUscTeamComposition
 
             dbConfiguration.ConfigureServices();
             _db = dbConfiguration.Services.GetService<MainDBContext>();
+
+            this._uscTeamComposition = uscTeamComposition;
 
             _idP = idP;
 
@@ -128,6 +132,8 @@ namespace FootBallCompasition_WPF.UserControls.fUscTeamComposition
                 _db.TeamCompositions.Add(teamComposition);
                 _db.SaveChanges();
 
+                _uscTeamComposition.loadDataGrid();
+
                 Growl.Success("Контракт успешно добавлен!");
 
             }
@@ -162,6 +168,8 @@ namespace FootBallCompasition_WPF.UserControls.fUscTeamComposition
 
                 _db.Entry(_teamComposition).State = EntityState.Modified;
                 _db.SaveChanges();
+
+                _uscTeamComposition.loadDataGrid();
 
                 Growl.Success("Контракт успешно изменен!");
 

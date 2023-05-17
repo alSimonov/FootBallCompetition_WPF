@@ -30,6 +30,8 @@ namespace FootBallCompasition_WPF.UserControls.ucsMatch
 
         public MainDBContext? _db;
 
+        uscEvents _uscEvents;
+
         FootballClass.Event _event;
         FootballClass.Match _match;
 
@@ -39,13 +41,15 @@ namespace FootBallCompasition_WPF.UserControls.ucsMatch
         int _idM;
 
 
-        public uscEventsDialogAdd(int idP, bool addOrModify, int idM)
+        public uscEventsDialogAdd(int idP, bool addOrModify, int idM, uscEvents uscEvents)
         {
             InitializeComponent();
 
 
             dbConfiguration.ConfigureServices();
             _db = dbConfiguration.Services.GetService<MainDBContext>();
+
+            _uscEvents = uscEvents;
 
             _idM = idM;
 
@@ -122,6 +126,8 @@ namespace FootBallCompasition_WPF.UserControls.ucsMatch
                 _db.Events.Add(eventtt);
                 _db.SaveChanges();
 
+                _uscEvents.loadDataGrid();
+
                 Growl.Success("Событие успешно добавлено!");
 
             }
@@ -133,6 +139,8 @@ namespace FootBallCompasition_WPF.UserControls.ucsMatch
 
                 _db.Entry(_event).State = EntityState.Modified;
                 _db.SaveChanges();
+
+                _uscEvents.loadDataGrid();
 
                 Growl.Success("Событие успешно изменено!");
 

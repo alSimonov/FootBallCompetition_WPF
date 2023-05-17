@@ -55,7 +55,7 @@ namespace FootBallCompasition_WPF.UserControls.ucsMatch
 
         }
 
-        private void loadDataGrid()
+        public void loadDataGrid()
         {
 
             dataGridList = _db.Events.Where(x => x.IdMatch == _idM)
@@ -114,18 +114,14 @@ namespace FootBallCompasition_WPF.UserControls.ucsMatch
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            Dialog.Show(new uscEventsDialogAdd(0, true, _idM));
-
-            loadDataGrid();
+            Dialog.Show(new uscEventsDialogAdd(0, true, _idM, this));
         }
 
         private void btnModify_Click(object sender, RoutedEventArgs e)
         {
             int id = (GridReferee.SelectedItem as EventShort).Id;
 
-            Dialog.Show(new uscEventsDialogAdd(id, false, _idM));
-
-            loadDataGrid();
+            Dialog.Show(new uscEventsDialogAdd(id, false, _idM, this));
         }
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)

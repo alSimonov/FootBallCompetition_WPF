@@ -1,5 +1,6 @@
 ﻿using FootBallCompasition_WPF.context;
 using FootBallCompasition_WPF.FootballClass;
+using FootBallCompasition_WPF.Pages.pgsStadium;
 using HandyControl.Controls;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -29,6 +30,8 @@ namespace FootBallCompasition_WPF.UserControls
 
         public MainDBContext? _db;
 
+        PageStadium _pageStadium;
+
         FootballClass.Stadium _stadium;
 
         int _idP;
@@ -36,7 +39,7 @@ namespace FootBallCompasition_WPF.UserControls
 
 
 
-        public uscDialogStadiumAdd(int idP, bool addOrModify)
+        public uscDialogStadiumAdd(int idP, bool addOrModify, PageStadium pageStadium)
         {
             InitializeComponent();
 
@@ -44,6 +47,7 @@ namespace FootBallCompasition_WPF.UserControls
             dbConfiguration.ConfigureServices();
             _db = dbConfiguration.Services.GetService<MainDBContext>();
 
+            _pageStadium = pageStadium;
 
             cbCity.ItemsSource = _db.Cities.ToList();
             cbCity.SelectedValuePath = "Id";
@@ -84,11 +88,9 @@ namespace FootBallCompasition_WPF.UserControls
         {
             if (_addOrModify)
             {
-
                 FootballClass.Stadium stadium = new FootballClass.Stadium();
 
                 stadium.Name = tbStadiumName.Text;
-
                 stadium.City = (City)cbCity.SelectedItem;
                 
                 
@@ -104,21 +106,17 @@ namespace FootBallCompasition_WPF.UserControls
                 stadium.TypeOfСoverage = (TypeOfСoverage)cbTypeOfCoverage.SelectedItem;
                 stadium.TypeOfStadium = (TypeOfStadium)cbTypeOfStadium.SelectedItem;
 
-
                 _db.Stadiums.Add(stadium);
-
                 _db.SaveChanges();
+                _pageStadium.loadStadium();
 
                 Growl.Success("Стадион успешно добавлен!");
-
-
 
             }
             else if (!_addOrModify)
             {
 
                 _stadium.Name = tbStadiumName.Text;
-
                 _stadium.City = (City)cbCity.SelectedItem;
 
 
@@ -135,19 +133,15 @@ namespace FootBallCompasition_WPF.UserControls
                 _stadium.TypeOfStadium = (TypeOfStadium)cbTypeOfStadium.SelectedItem;
 
 
-
                 _db.Entry(_stadium).State = EntityState.Modified;
 
                 _db.SaveChanges();
 
+                _pageStadium.loadStadium();
+
                 Growl.Success("Стадион успешно изменен!");
 
-
-
             }
-
-
-
 
 
         }

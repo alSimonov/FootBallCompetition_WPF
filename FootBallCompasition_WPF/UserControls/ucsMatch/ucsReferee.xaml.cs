@@ -53,7 +53,7 @@ namespace FootBallCompasition_WPF.UserControls.ucsMatch
 
         }
 
-        private void loadDataGrid()
+        public void loadDataGrid()
         {
 
             dataGridList = _db.JudgingStaffs.Where(x => x.IdMatch == _idM)
@@ -112,23 +112,14 @@ namespace FootBallCompasition_WPF.UserControls.ucsMatch
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-
-            Dialog.Show(new ucsJudgingStaffDialogAdd(0, true, _idM));
-
-            loadDataGrid();
-
-
+            Dialog.Show(new ucsJudgingStaffDialogAdd(0, true, _idM, this));
         }
 
         private void btnModify_Click(object sender, RoutedEventArgs e)
         {
-
             int id = (GridReferee.SelectedItem as JudgingStaffShort).Id;
 
-
-            Dialog.Show(new ucsJudgingStaffDialogAdd(id, false, _idM));
-
-            loadDataGrid();
+            Dialog.Show(new ucsJudgingStaffDialogAdd(id, false, _idM, this));
         }
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)

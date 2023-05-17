@@ -1,5 +1,6 @@
 ﻿using FootBallCompasition_WPF.context;
 using FootBallCompasition_WPF.FootballClass;
+using FootBallCompasition_WPF.Pages.pgsMatch;
 using HandyControl.Controls;
 using HandyControl.Tools;
 using Microsoft.EntityFrameworkCore;
@@ -30,13 +31,15 @@ namespace FootBallCompasition_WPF.UserControls
     {       
         public MainDBContext? _db;
 
+        PageMatchList _pageMatchList;
+
         FootballClass.Match _match;
 
         int _idP;
         bool _addOrModify;
 
 
-        public uscDialogMatchAdd(int idP, bool addOrModify)
+        public uscDialogMatchAdd(int idP, bool addOrModify, PageMatchList pageMatchList)
         {
             InitializeComponent();
 
@@ -49,6 +52,7 @@ namespace FootBallCompasition_WPF.UserControls
             dbConfiguration.ConfigureServices();
             _db = dbConfiguration.Services.GetService<MainDBContext>();
 
+            _pageMatchList = pageMatchList;
 
             cbSeason.ItemsSource = _db.Seasons.ToList();
             cbSeason.SelectedValuePath = "Id";
@@ -137,9 +141,9 @@ namespace FootBallCompasition_WPF.UserControls
 
                 _db.SaveChanges();
 
+                _pageMatchList.loadMatch();
+
                 Growl.Success("Матч успешно добавлен!");
-
-
 
             }
             else if (!_addOrModify)
@@ -171,9 +175,9 @@ namespace FootBallCompasition_WPF.UserControls
 
                 _db.SaveChanges();
 
+                _pageMatchList.loadMatch();
+
                 Growl.Success("Матч успешно изменен!");
-
-
 
             }
 

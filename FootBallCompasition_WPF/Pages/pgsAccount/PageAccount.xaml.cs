@@ -43,7 +43,7 @@ namespace FootBallCompasition_WPF.Pages
         }
 
 
-        private void loadAccount()
+        public void loadAccount()
         {
 
             accountList = _db.Accounts.Select(s =>
@@ -101,11 +101,7 @@ namespace FootBallCompasition_WPF.Pages
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-
-            Dialog.Show(new uscDialogAccountAdd(0, true));
-
-            loadAccount();
-
+            Dialog.Show(new uscDialogAccountAdd(0, true, this));
         }
 
 
@@ -113,10 +109,7 @@ namespace FootBallCompasition_WPF.Pages
         {
             int id = (GridAccount.SelectedItem as AccountShort).Id;
 
-            Dialog.Show(new uscDialogAccountAdd(id, false));
-
-            loadAccount();
-
+            Dialog.Show(new uscDialogAccountAdd(id, false, this));
         }
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)

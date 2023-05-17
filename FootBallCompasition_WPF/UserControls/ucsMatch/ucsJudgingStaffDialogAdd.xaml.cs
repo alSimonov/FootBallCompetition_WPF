@@ -4,19 +4,9 @@ using HandyControl.Controls;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace FootBallCompasition_WPF.UserControls.ucsMatch
 {
@@ -29,6 +19,8 @@ namespace FootBallCompasition_WPF.UserControls.ucsMatch
 
         public MainDBContext? _db;
 
+        ucsReferee _ucsReferee;
+
         FootballClass.JudgingStaff _judgingStaff;
 
         int _idP;
@@ -36,7 +28,7 @@ namespace FootBallCompasition_WPF.UserControls.ucsMatch
         int _idM;
 
 
-        public ucsJudgingStaffDialogAdd(int idP, bool addOrModify, int idM)
+        public ucsJudgingStaffDialogAdd(int idP, bool addOrModify, int idM, ucsReferee ucsReferee)
         {
             InitializeComponent();
 
@@ -45,6 +37,7 @@ namespace FootBallCompasition_WPF.UserControls.ucsMatch
             dbConfiguration.ConfigureServices();
             _db = dbConfiguration.Services.GetService<MainDBContext>();
 
+            _ucsReferee = ucsReferee;
 
             var ll = _db.Participants.Where(x => x.Role.Name == "Судья").ToList();
 
@@ -102,6 +95,8 @@ namespace FootBallCompasition_WPF.UserControls.ucsMatch
 
                 _db.SaveChanges();
 
+                _ucsReferee.loadDataGrid();
+
                 Growl.Success("Судья успешно добавлен!");
 
 
@@ -109,21 +104,15 @@ namespace FootBallCompasition_WPF.UserControls.ucsMatch
             }
             else if (!_addOrModify)
             {
-
-
                 _judgingStaff.Participant = (Participant)cbParticipant.SelectedItem;
-
-
                 _judgingStaff.AmpluaRole = (AmpluaRole)cbAmpluaRole.SelectedItem;
 
-
                 _db.Entry(_judgingStaff).State = EntityState.Modified;
-
                 _db.SaveChanges();
 
+                _ucsReferee.loadDataGrid();
+
                 Growl.Success("Судья успешно изменен!");
-
-
 
             }
 

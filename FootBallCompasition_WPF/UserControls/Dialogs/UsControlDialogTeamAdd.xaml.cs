@@ -1,5 +1,6 @@
 ﻿using FootBallCompasition_WPF.context;
 using FootBallCompasition_WPF.FootballClass;
+using FootBallCompasition_WPF.Pages.pgsTeam;
 using HandyControl.Controls;
 using HandyControl.Tools;
 using Microsoft.EntityFrameworkCore;
@@ -29,19 +30,23 @@ namespace FootBallCompasition_WPF.UserControls
 
         public MainDBContext? _db;
 
+        PageTeam _pageTeam;
+
         Team _team;
 
         int _idP;
         bool _addOrModify;
 
 
-        public UsControlDialogTeamAdd(int idP, bool addOrModify)
+        public UsControlDialogTeamAdd(int idP, bool addOrModify, PageTeam pageTeam)
         {
             InitializeComponent();
 
             dbConfiguration.ConfigureServices();
             _db = dbConfiguration.Services.GetService<MainDBContext>();
 
+
+            _pageTeam = pageTeam;
 
 
             cbCity.ItemsSource = _db.Cities.ToList();
@@ -78,6 +83,12 @@ namespace FootBallCompasition_WPF.UserControls
                 _db.Teams.Add(team);
                 _db.SaveChanges();
 
+                //(this.pageTeam as PageTeam).loadTeam();
+
+                _pageTeam.loadTeam();
+
+                //PageTeam.loadTeam();
+
                 Growl.Success("Команда успешно добавлена!");
 
             }
@@ -89,6 +100,9 @@ namespace FootBallCompasition_WPF.UserControls
                 _db.Entry(_team).State = EntityState.Modified;
 
                 _db.SaveChanges();
+
+
+                _pageTeam.loadTeam();
 
                 Growl.Success("Команда успешно изменена!");
 

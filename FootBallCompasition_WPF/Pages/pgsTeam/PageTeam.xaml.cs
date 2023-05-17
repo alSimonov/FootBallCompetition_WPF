@@ -5,6 +5,7 @@ using FootBallCompasition_WPF.UserControls;
 using FootBallCompasition_WPF.UserControls.fUscTeamComposition;
 using FootBallCompasition_WPF.UserControls.ucsMatch;
 using HandyControl.Controls;
+using HandyControl.Tools.Extension;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -114,16 +115,8 @@ namespace FootBallCompasition_WPF.Pages.pgsTeam
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-
-
-            Dialog.Show(new UsControlDialogTeamAdd(0, true));
-
-            loadTeam();
-
-
+            Dialog.Show(new UsControlDialogTeamAdd(0, true, this));
         }
-
-
 
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
@@ -147,10 +140,7 @@ namespace FootBallCompasition_WPF.Pages.pgsTeam
             int id = (GridTeam.SelectedItem as TeamShort).Id;
 
 
-            Dialog.Show(new UsControlDialogTeamAdd(id, false));
-
-            loadTeam();
-
+            Dialog.Show(new UsControlDialogTeamAdd(id, false, this));
 
 
         }

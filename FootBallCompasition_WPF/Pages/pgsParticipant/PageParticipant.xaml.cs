@@ -21,59 +21,57 @@ namespace FootBallCompasition_WPF.Pages.pgsParticipant
     {
         public MainDBContext? _db;
 
+        byte? _idRole;
+
         //public record class PartRole(int id, string last, string first, DateTime date, string NameRole);
 
         List<ParticipantShort> partList = new List<ParticipantShort>();
 
 
-        public PageParticipant(string whereStr)
+        public PageParticipant()
         {
             InitializeComponent();
-
-
-            btnTabBtnPlayer.Click += btnTabBtnPlayer_Click;
-            btnTabBtnReferee.Click += btnTabBtnReferee_Click;
-
-            //tbFilter.KeyDown += KeyEventHandler(tbFilter_KeyDown);
-
 
             dbConfiguration.ConfigureServices();
             _db = dbConfiguration.Services.GetService<MainDBContext>();
 
+            cbRole.ItemsSource = _db.Roles.ToList();
+            cbRole.SelectedValuePath = "Id";
+            cbRole.DisplayMemberPath = "Name";
 
-
-            loadPart(whereStr);
-            
+            loadPart();            
         }
 
-        private void btnTabBtnPlayer_Click(object sender, RoutedEventArgs e)
-        {
-            loadPart("Игрок");
-        }
-
-        private void btnTabBtnReferee_Click(object sender, RoutedEventArgs e)
-        {
-            loadPart("Судья");
-
-        }
-
-        private void loadPart(string whereStr)
+        public void loadPart()
         {
 
-            partList = _db.Participants.Where(s => s.Role.Name == whereStr).
-                Select(s =>
-                new ParticipantShort()
-                {
-                    Id = s.Id,
-                    //Surname = s.Surname, 
-                    //Name = s.Name, 
-                    //Patronymic = s.Patronymic,
-                    FIO = $"{s.Surname} {s.Name} {s.Patronymic}",
-                    DateOfBirth = s.DateOfBirth.ToString("D"),
-                    Telephone = s.Telephone,
-                    RoleName = s.Role.Name,
-                }).ToList();
+            if(_idRole == null)
+            {
+                partList = _db.Participants
+                    .Select(s => new ParticipantShort()
+                    {
+                        Id = s.Id,
+                        FIO = $"{s.Surname} {s.Name} {s.Patronymic}",
+                        DateOfBirth = s.DateOfBirth.ToString("D"),
+                        Telephone = s.Telephone,
+                        RoleName = s.Role.Name,
+                    }).ToList();
 
+            }
+            else
+            {
+                partList = _db.Participants.Where(s => s.IdRole == _idRole).
+                    Select(s =>
+                    new ParticipantShort()
+                    {
+                        Id = s.Id,
+                        FIO = $"{s.Surname} {s.Name} {s.Patronymic}",
+                        DateOfBirth = s.DateOfBirth.ToString("D"),
+                        Telephone = s.Telephone,
+                        RoleName = s.Role.Name,
+                    }).ToList();
+
+            }
 
             //GridPart.ItemsSource = partList;
 
@@ -85,19 +83,17 @@ namespace FootBallCompasition_WPF.Pages.pgsParticipant
             txtblListCount.Text = "Найдено записей: ";
             txtblListCount.Text += partList.Count().ToString();
 
-
-
         }
         
         
         
         
-        private void loadPart(string whereStr, string filtrby)
+        private void loadPart(string filtrby)
         {
 
             if (filtrby == "")
             {
-                loadPart(whereStr);
+                loadPart();
 
             }
             else
@@ -106,73 +102,53 @@ namespace FootBallCompasition_WPF.Pages.pgsParticipant
                 //string[] strings = filtrby.Split(" ", StringSplitOptions.RemoveEmptyEntries);
 
 
-                partList = _db.Participants.Where( x => x.Role.Name == whereStr && x.Surname.StartsWith(filtrby) ).
-                //            .Where(x => x.FirstName.Contains(firstName))
-                Select(s =>
-                new ParticipantShort()
+                if (_idRole == null)
                 {
-                    Id = s.Id,
-                    //Surname = s.Surname, 
-                    //Name = s.Name, 
-                    //Patronymic = s.Patronymic,
-                    FIO = $"{s.Surname} {s.Name} {s.Patronymic}",
-                    DateOfBirth = s.DateOfBirth.ToString("D"),
-                    Telephone = s.Telephone,
-                    RoleName = s.Role.Name,
-                }).ToList();
+
+                    partList = _db.Participants.Where(x => x.Surname.StartsWith(filtrby)).
+                    Select(s =>
+                    new ParticipantShort()
+                    {
+                        Id = s.Id,
+                        FIO = $"{s.Surname} {s.Name} {s.Patronymic}",
+                        DateOfBirth = s.DateOfBirth.ToString("D"),
+                        Telephone = s.Telephone,
+                        RoleName = s.Role.Name,
+                    }).ToList();
 
 
-            //GridPart.ItemsSource = partList;
-
-            pagPart.MaxPageCount = (int)Math.Ceiling(partList.Count / 10.0);
-
-
-            GridPart.ItemsSource = partList.Take(10).ToList();
-
-            txtblListCount.Text = "Найдено записей: ";
-            txtblListCount.Text += partList.Count().ToString();
+                }
+                else
+                {
 
 
+                    partList = _db.Participants.Where(x => x.IdRole == _idRole && x.Surname.StartsWith(filtrby)).
+                    Select(s =>
+                    new ParticipantShort()
+                    {
+                        Id = s.Id,
+                        FIO = $"{s.Surname} {s.Name} {s.Patronymic}",
+                        DateOfBirth = s.DateOfBirth.ToString("D"),
+                        Telephone = s.Telephone,
+                        RoleName = s.Role.Name,
+                    }).ToList();
+
+
+                }
+
+              
+                pagPart.MaxPageCount = (int)Math.Ceiling(partList.Count / 10.0);
+
+
+                GridPart.ItemsSource = partList.Take(10).ToList();
+
+                txtblListCount.Text = "Найдено записей: ";
+                txtblListCount.Text += partList.Count().ToString();
 
             }
 
 
-
-
         }
-
-
-        //private void loadEmpl(string firstName)
-        //{
-        //    if (firstName == "")
-        //    {
-        //        loadEmpl();
-
-        //    }
-        //    else
-        //    {
-        //        emplList = _db.Employees
-        //            .Where(x => x.FirstName.Contains(firstName))
-        //            .Select(s => new EmployeeShort()
-        //            {
-        //                Id = s.Id,
-        //                FirstName = s.FirstName,
-        //                LastName = s.LastName,
-        //                Patronymic = s.Patronymic,
-        //                DateOfBirth = s.DateOfBirth,
-        //                DateStartContract = s.DateStartContract,
-        //                DateEndContract = s.DateEndContract,
-        //                LastQualification = s.LastQualification,
-        //                PostName = s.Post.Name,
-        //                GenderName = s.Gender.LongName
-        //            })
-        //            .ToList();
-
-        //        loadDataGrid();
-
-        //    }
-        //}
-
 
 
         private void page_PageUpdated(object sender, HandyControl.Data.FunctionEventArgs<int> e)
@@ -183,13 +159,7 @@ namespace FootBallCompasition_WPF.Pages.pgsParticipant
        
         private void btnPartAdd_Click(object sender, RoutedEventArgs e)
         {
-
-            Dialog.Show(new UsControlDialogPartAdd(0, true));
-
-            
-
-            loadPart("Игрок");
-
+            Dialog.Show(new UsControlDialogPartAdd(0, true,  this)); 
         }
 
 
@@ -204,37 +174,20 @@ namespace FootBallCompasition_WPF.Pages.pgsParticipant
             _db.Participants.Remove(participant);
             _db.SaveChanges();
 
-            loadPart("Игрок");
-
+            loadPart();
             Growl.Success("Участник успешно удален!");
-
-
         }
 
         private void btnModify_Click(object sender, RoutedEventArgs e)
         {
-
             int id = (GridPart.SelectedItem as ParticipantShort).Id;
-
-
-            Dialog.Show(new UsControlDialogPartAdd(id, false));
-
-            loadPart("Игрок");
-
+         
+            Dialog.Show(new UsControlDialogPartAdd(id, false, this));
         }
-
-        //private void tbFilter_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
-        //{
-
-        //    if (e.Key == Key.Enter)
-        //    {
-        //        loadPart("Игрок", tbFilter.Text.Trim());
-        //    }
-        //}
 
         private void tbFilter_TextChanged(object sender, TextChangedEventArgs e)
         {
-            loadPart("Игрок", tbFilter.Text.Trim());
+            loadPart(tbFilter.Text.Trim());
         }
 
         private void btnTabBtnTeamComposition_Click(object sender, RoutedEventArgs e)
@@ -247,16 +200,14 @@ namespace FootBallCompasition_WPF.Pages.pgsParticipant
             }
             else
             {
-
-
                 Dialog.Show(new uscTeamComposition((ParticipantShort)GridPart.SelectedItem));
-
             }
-
-
-
-
         }
 
+        private void cbRole_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            _idRole = cbRole.SelectedValue == null ? null : (cbRole.SelectedItem as Role).Id;
+            loadPart();
+        }
     }
 }
