@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FootBallCompasition_WPF.Short
 {
-    class TeamShort
+    public class TeamShort
     {
         public int Id { get; set; }
         public string TeamName { get; set; }

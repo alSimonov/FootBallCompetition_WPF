@@ -62,12 +62,12 @@
             <DataGrid.Columns>
 
 
-                <DataGridTextColumn Width="*" Binding="{Binding Season}" Header="Сезон" CellStyle="{StaticResource DataGridCellStyle}"/>
-                <DataGridTextColumn Width="*" Binding="{Binding Team1Name}" Header="Команда 1"/>
-                <DataGridTextColumn Width="*" Binding="{Binding Team2Name}" Header="Команда 2"/>
-                <DataGridTextColumn Width="*" Binding="{Binding Date}" Header="Дата"/>
+                <DataGridTextColumn Width="auto" Binding="{Binding Season}" Header="Сезон" CellStyle="{StaticResource DataGridCellStyle}"/>
+                <DataGridTextColumn Width="auto" Binding="{Binding Team1Name}" Header="Команда 1"/>
+                <DataGridTextColumn Width="auto" Binding="{Binding Team2Name}" Header="Команда 2"/>
+                <DataGridTextColumn Width="auto" Binding="{Binding Date}" Header="Дата"/>
 
-                <DataGridTextColumn Width="*" Binding="{Binding StadiumAndCityName}" Header="Стадион (Город)"/>
+                <DataGridTextColumn Width="auto" Binding="{Binding StadiumAndCityName}" Header="Стадион (Город)"/>
                 <DataGridTextColumn Width="*" Binding="{Binding TypeOfMatch}" Header="Тип матча"/>
 
 

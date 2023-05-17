@@ -73,9 +73,11 @@ namespace FootBallCompasition_WPF.UserControls.ucsMatch
             {
                 _event = _db.Events.Find(idP);
 
-                cbTeam.SelectedItem = _event.TeamComposition.Team;
-                cbTeamComposition.SelectedItem = _event.TeamComposition.Participant;
-                cbTypeOfEvent.SelectedItem = _event.TypeOfEvent;
+                var teamCompositionnn = _db.TeamCompositions.Find(_event.IdTeamComposition);
+
+                cbTeam.SelectedValue = teamCompositionnn.IdTeam;
+                cbTeamComposition.SelectedValue = _event.IdTeamComposition;
+                cbTypeOfEvent.SelectedValue = _event.IdTypeOfEvent;
                 tbTime.Text = _event.Time;
 
 

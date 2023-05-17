@@ -87,6 +87,8 @@ namespace FootBallCompasition_WPF.Windows
             //System.Windows.MessageBox.Show(strnn);
             //tbLogin.Text = strnn;
 
+            //..........................................................
+
 
             if (_db.Accounts.Any(u => u.Login == Login))
             {

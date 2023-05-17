@@ -2,6 +2,8 @@
 using FootBallCompasition_WPF.FootballClass;
 using FootBallCompasition_WPF.Short;
 using FootBallCompasition_WPF.UserControls;
+using FootBallCompasition_WPF.UserControls.fUscTeamComposition;
+using FootBallCompasition_WPF.UserControls.ucsMatch;
 using HandyControl.Controls;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -161,6 +163,23 @@ namespace FootBallCompasition_WPF.Pages.pgsTeam
         private void btnTabBtnList_Click(object sender, RoutedEventArgs e)
         {
             loadTeam();
+        }
+
+        private void btnTabBtnTeamComposition_Click(object sender, RoutedEventArgs e)
+        {
+
+            if (GridTeam.SelectedItem == null)
+            {
+                Growl.Error("Команда не была выбрана!");
+            }
+            else
+            {
+
+                Dialog.Show(new uscTeamCompositionForTeam((TeamShort)GridTeam.SelectedItem));
+
+            }
+
+
         }
     }
 }

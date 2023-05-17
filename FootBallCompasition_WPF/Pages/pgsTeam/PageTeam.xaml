@@ -55,6 +55,17 @@
                    Foreground="{DynamicResource ForegroundColorPage}"/>
 
 
+        
+        <!--Tab Buttons-->
+        <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="0 10 0 0" HorizontalAlignment="Center">
+            <!--BorderBrush="#784ff2"-->
+            <Button x:Name="btnTabBtnTeamComposition" Click="btnTabBtnTeamComposition_Click"  Content="Состав" Style="{StaticResource tabButton}" />
+            <!--<Button x:Name="btnTabBtnEvent" Click="btnTabBtnEvent_Click" Content="События" Style="{StaticResource tabButton}" />-->
+        </StackPanel>
+
+
+
+
         <!--Filter textbox-->
 
         <Grid Width="200" HorizontalAlignment="Right" Grid.Row="3">

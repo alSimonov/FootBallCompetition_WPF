@@ -2,6 +2,8 @@
 using FootBallCompasition_WPF.FootballClass;
 using FootBallCompasition_WPF.Short;
 using FootBallCompasition_WPF.UserControls;
+using FootBallCompasition_WPF.UserControls.fUscTeamComposition;
+using FootBallCompasition_WPF.UserControls.ucsMatch;
 using HandyControl.Controls;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -68,7 +70,8 @@ namespace FootBallCompasition_WPF.Pages.pgsParticipant
                     //Patronymic = s.Patronymic,
                     FIO = $"{s.Surname} {s.Name} {s.Patronymic}",
                     DateOfBirth = s.DateOfBirth.ToString("D"),
-                    Telephone = s.Telephone
+                    Telephone = s.Telephone,
+                    RoleName = s.Role.Name,
                 }).ToList();
 
 
@@ -114,7 +117,8 @@ namespace FootBallCompasition_WPF.Pages.pgsParticipant
                     //Patronymic = s.Patronymic,
                     FIO = $"{s.Surname} {s.Name} {s.Patronymic}",
                     DateOfBirth = s.DateOfBirth.ToString("D"),
-                    Telephone = s.Telephone
+                    Telephone = s.Telephone,
+                    RoleName = s.Role.Name,
                 }).ToList();
 
 
@@ -232,5 +236,27 @@ namespace FootBallCompasition_WPF.Pages.pgsParticipant
         {
             loadPart("Игрок", tbFilter.Text.Trim());
         }
+
+        private void btnTabBtnTeamComposition_Click(object sender, RoutedEventArgs e)
+        {
+
+
+            if (GridPart.SelectedItem == null && (GridPart.SelectedItem as ParticipantShort).RoleName != "Игрок")
+            {
+                Growl.Error("Игрок не был выбран!");
+            }
+            else
+            {
+
+
+                Dialog.Show(new uscTeamComposition((ParticipantShort)GridPart.SelectedItem));
+
+            }
+
+
+
+
+        }
+
     }
 }

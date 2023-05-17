@@ -70,10 +70,10 @@
             <DataGrid.Columns>
 
 
-                <DataGridTextColumn Width="*" Binding="{Binding StadiumName}" Header="Стадион" CellStyle="{StaticResource DataGridCellStyle}"/>
-                <DataGridTextColumn Width="*" Binding="{Binding CityName}" Header="Город"/>
-                <DataGridTextColumn Width="*" Binding="{Binding Capacity}" Header="Вместимость"/>
-                <DataGridTextColumn Width="*" Binding="{Binding TypeOfСoverageName}" Header="Покрытие"/>
+                <DataGridTextColumn Width="auto" Binding="{Binding StadiumName}" Header="Стадион" CellStyle="{StaticResource DataGridCellStyle}"/>
+                <DataGridTextColumn Width="auto" Binding="{Binding CityName}" Header="Город"/>
+                <DataGridTextColumn Width="auto" Binding="{Binding Capacity}" Header="Вместимость"/>
+                <DataGridTextColumn Width="auto" Binding="{Binding TypeOfСoverageName}" Header="Покрытие"/>
                 <DataGridTextColumn Width="*" Binding="{Binding TypeOfStadiumName}" Header="ТипСтадиона"/>
 
 

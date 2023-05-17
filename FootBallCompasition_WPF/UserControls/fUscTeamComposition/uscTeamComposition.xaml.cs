@@ -18,55 +18,52 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace FootBallCompasition_WPF.UserControls.ucsMatch
+namespace FootBallCompasition_WPF.UserControls.fUscTeamComposition
 {
     /// <summary>
-    /// Логика взаимодействия для uscEvents.xaml
+    /// Логика взаимодействия для uscTeamComposition.xaml
     /// </summary>
-    public partial class uscEvents : UserControl
+    public partial class uscTeamComposition : UserControl
     {
-
-
         private MainDBContext? _db;
 
-        List<EventShort> dataGridList = new List<EventShort>();
+        List<TeamCompositionShort> dataGridList = new List<TeamCompositionShort>();
 
-        int _idM;
-
-
+        int _idP;
 
 
 
-        public uscEvents(MatchShort matchShort)
+        public uscTeamComposition(ParticipantShort partShort)
         {
             InitializeComponent();
-
-
 
             dbConfiguration.ConfigureServices();
             _db = dbConfiguration.Services.GetService<MainDBContext>();
 
-            _idM = matchShort.Id;
+            _idP = partShort.Id;
 
-            tblMatchInfo.Text = $"{matchShort.Team1Name} - {matchShort.Team2Name} | {matchShort.Date}";
+            tblPartInfo.Text = $"{partShort.FIO} | {partShort.Telephone}";
 
             loadDataGrid();
 
 
         }
 
+
+
         private void loadDataGrid()
         {
 
-            dataGridList = _db.Events.Where(x => x.IdMatch == _idM)
-            .Select(s => new EventShort()
+            dataGridList = _db.TeamCompositions.Where(x => x.IdParticipant == _idP)
+            .Select(s => new TeamCompositionShort()
             {
                 Id = s.Id,
-                TeamName = s.TeamComposition.Team.Name,
-                FIO = $"{s.TeamComposition.Participant.Surname} {s.TeamComposition.Participant.Name} {s.TeamComposition.Participant.Patronymic}",
-                PlayerNumber = s.TeamComposition.PlayerNumber,
-                TypeOfEventName = s.TypeOfEvent.Name,
-                Time = s.Time,
+                TeamName = s.Team.Name,
+                //FIO = $"{s.Participant.Surname} {s.Participant.Name} {s.Participant.Patronymic}",
+                ContractStart = s.ContractStart.ToString("D"),
+                ContractEnd = s.ContractEnd.ToString("D"),
+                PlayerNumber = s.PlayerNumber,
+                AmpluaRoleName = s.AmpluaRole.Name,
             }).ToList();
 
 
@@ -88,15 +85,17 @@ namespace FootBallCompasition_WPF.UserControls.ucsMatch
             }
             else
             {
-                dataGridList = _db.Events.Where(x => x.IdMatch == _idM)
-                    .Select(s => new EventShort()
+
+                _db.TeamCompositions.Where(x => x.IdParticipant == _idP && x.Team.Name.StartsWith(filtrby))
+                    .Select(s => new TeamCompositionShort()
                     {
                         Id = s.Id,
-                        TeamName = s.TeamComposition.Team.Name,
-                        FIO = $"{s.TeamComposition.Participant.Surname} {s.TeamComposition.Participant.Name} {s.TeamComposition.Participant.Patronymic}",
-                        PlayerNumber = s.TeamComposition.PlayerNumber,
-                        TypeOfEventName = s.TypeOfEvent.Name,
-                        Time = s.Time,
+                        TeamName = s.Team.Name,
+                        //FIO = $"{s.Participant.Surname} {s.Participant.Name} {s.Participant.Patronymic}",
+                        ContractStart = s.ContractStart.ToString("D"),
+                        ContractEnd = s.ContractEnd.ToString("D"),
+                        PlayerNumber = s.PlayerNumber,
+                        AmpluaRoleName = s.AmpluaRole.Name,
                     }).ToList();
 
 
@@ -109,37 +108,36 @@ namespace FootBallCompasition_WPF.UserControls.ucsMatch
 
             }
 
-
         }
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            Dialog.Show(new uscEventsDialogAdd(0, true, _idM));
+            Dialog.Show(new uscTeamCompositionDialogAdd(0, true, _idP));
 
             loadDataGrid();
         }
 
         private void btnModify_Click(object sender, RoutedEventArgs e)
         {
-            int id = (GridReferee.SelectedItem as EventShort).Id;
+            int id = (GridReferee.SelectedItem as TeamCompositionShort).Id;
 
-            Dialog.Show(new uscEventsDialogAdd(id, false, _idM));
+            Dialog.Show(new uscTeamCompositionDialogAdd(id, false, _idP));
 
             loadDataGrid();
         }
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
-            int id = (GridReferee.SelectedItem as EventShort).Id;
+            int id = (GridReferee.SelectedItem as TeamCompositionShort).Id;
 
-            Event eventtt = _db.Events.Find(id);
+            TeamComposition teamComposition = _db.TeamCompositions.Find(id);
 
-            _db.Events.Remove(eventtt);
+            _db.TeamCompositions.Remove(teamComposition);
             _db.SaveChanges();
 
             loadDataGrid();
 
-            Growl.Success("Событие успешно удалено!");
+            Growl.Success("Контракт успешно удален!");
 
         }
 
@@ -157,8 +155,6 @@ namespace FootBallCompasition_WPF.UserControls.ucsMatch
         {
             GridReferee.ItemsSource = dataGridList.Skip((e.Info - 1) * 6).Take(6).ToList();
         }
-
-
 
     }
 }
