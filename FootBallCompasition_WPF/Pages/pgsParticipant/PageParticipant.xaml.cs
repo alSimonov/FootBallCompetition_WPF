@@ -5,6 +5,7 @@ using FootBallCompasition_WPF.UserControls;
 using FootBallCompasition_WPF.UserControls.fUscTeamComposition;
 using FootBallCompasition_WPF.UserControls.ucsMatch;
 using HandyControl.Controls;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -47,7 +48,7 @@ namespace FootBallCompasition_WPF.Pages.pgsParticipant
 
             if(_idRole == null)
             {
-                partList = _db.Participants
+                partList = _db.Participants.Where(x => x.Active == tglbtnActive.IsChecked)
                     .Select(s => new ParticipantShort()
                     {
                         Id = s.Id,
@@ -55,12 +56,13 @@ namespace FootBallCompasition_WPF.Pages.pgsParticipant
                         DateOfBirth = s.DateOfBirth.ToString("D"),
                         Telephone = s.Telephone,
                         RoleName = s.Role.Name,
+                        Active = s.Active,
                     }).ToList();
 
             }
             else
             {
-                partList = _db.Participants.Where(s => s.IdRole == _idRole).
+                partList = _db.Participants.Where(s => s.Active == tglbtnActive.IsChecked && s.IdRole == _idRole).
                     Select(s =>
                     new ParticipantShort()
                     {
@@ -69,6 +71,7 @@ namespace FootBallCompasition_WPF.Pages.pgsParticipant
                         DateOfBirth = s.DateOfBirth.ToString("D"),
                         Telephone = s.Telephone,
                         RoleName = s.Role.Name,
+                        Active = s.Active,
                     }).ToList();
 
             }
@@ -105,7 +108,7 @@ namespace FootBallCompasition_WPF.Pages.pgsParticipant
                 if (_idRole == null)
                 {
 
-                    partList = _db.Participants.Where(x => x.Surname.StartsWith(filtrby)).
+                    partList = _db.Participants.Where(x => x.Active == tglbtnActive.IsChecked && x.Surname.StartsWith(filtrby)).
                     Select(s =>
                     new ParticipantShort()
                     {
@@ -114,6 +117,7 @@ namespace FootBallCompasition_WPF.Pages.pgsParticipant
                         DateOfBirth = s.DateOfBirth.ToString("D"),
                         Telephone = s.Telephone,
                         RoleName = s.Role.Name,
+                        Active = s.Active,
                     }).ToList();
 
 
@@ -122,7 +126,7 @@ namespace FootBallCompasition_WPF.Pages.pgsParticipant
                 {
 
 
-                    partList = _db.Participants.Where(x => x.IdRole == _idRole && x.Surname.StartsWith(filtrby)).
+                    partList = _db.Participants.Where(x => x.Active == tglbtnActive.IsChecked && x.IdRole == _idRole && x.Surname.StartsWith(filtrby)).
                     Select(s =>
                     new ParticipantShort()
                     {
@@ -131,6 +135,7 @@ namespace FootBallCompasition_WPF.Pages.pgsParticipant
                         DateOfBirth = s.DateOfBirth.ToString("D"),
                         Telephone = s.Telephone,
                         RoleName = s.Role.Name,
+                        Active = s.Active,
                     }).ToList();
 
 
@@ -167,15 +172,30 @@ namespace FootBallCompasition_WPF.Pages.pgsParticipant
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
+            //int id = (GridPart.SelectedItem as ParticipantShort).Id;
+
+            //Participant participant = _db.Participants.Find(id);
+            
+            //_db.Participants.Remove(participant);
+            //_db.SaveChanges();
+
+            //loadPart();
+            //Growl.Success("Участник успешно удален!");
+
             int id = (GridPart.SelectedItem as ParticipantShort).Id;
 
             Participant participant = _db.Participants.Find(id);
-            
-            _db.Participants.Remove(participant);
+
+            participant.Active = participant.Active ? false : true;
+
+           
+            _db.Entry(participant).State = EntityState.Modified;
             _db.SaveChanges();
 
             loadPart();
-            Growl.Success("Участник успешно удален!");
+            Growl.Warning("Состояние активности участника изменено!");
+
+
         }
 
         private void btnModify_Click(object sender, RoutedEventArgs e)
@@ -207,6 +227,11 @@ namespace FootBallCompasition_WPF.Pages.pgsParticipant
         private void cbRole_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             _idRole = cbRole.SelectedValue == null ? null : (cbRole.SelectedItem as Role).Id;
+            loadPart();
+        }
+
+        private void tglbtnActive_Click(object sender, RoutedEventArgs e)
+        {
             loadPart();
         }
     }

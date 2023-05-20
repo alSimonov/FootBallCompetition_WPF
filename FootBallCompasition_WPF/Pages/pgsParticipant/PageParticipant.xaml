@@ -55,6 +55,12 @@
         </StackPanel>
 
 
+        <!--Change Select-->
+
+        <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="0 10 300 0" HorizontalAlignment="Center">
+            <ToggleButton ToolTip="Показывать только активные данные." Style="{StaticResource ToggleButtonSwitch}" x:Name="tglbtnActive" Click="tglbtnActive_Click"  IsChecked="True"/>
+        </StackPanel>
+
 
         <!--ComboBox-->
 
@@ -77,6 +83,7 @@
         <DataGrid Grid.Row="4"  HeadersVisibility="All" SelectionMode="Single"  RowHeaderWidth="60" AutoGenerateColumns="False" x:Name="GridPart"  >
             <DataGrid.Columns >
 
+                <DataGridCheckBoxColumn Width="auto" CanUserResize="False" Binding="{Binding Active}" Header="Активно"/>
                 <DataGridTextColumn Width="auto" Binding="{Binding FIO}" Header="ФИО" Foreground="{DynamicResource ForegroundColorPage}" />
                 <DataGridTextColumn Width="auto" Binding="{Binding DateOfBirth}"  Header="Дата рождения" Foreground="{DynamicResource ForegroundColorPage}"/>
                 <DataGridTextColumn Width="auto" Binding="{Binding Telephone}" Header="Телефон" Foreground="{DynamicResource ForegroundColorPage}"/>
@@ -97,7 +104,7 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button BorderThickness="0" x:Name="btnDelete" Click="btnDelete_Click">
-                                <Icon:PackIconMaterial Kind="Delete" Style="{DynamicResource IconPackMaterial}" Foreground="Red" />
+                                <Icon:PackIconMaterial Kind="SyncAlert" Style="{DynamicResource IconPackMaterial}" Foreground="Red" />
                             </Button>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>

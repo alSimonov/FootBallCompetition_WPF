@@ -4,7 +4,9 @@ using HandyControl.Controls;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Intrinsics.Arm;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -37,9 +39,34 @@ namespace FootBallCompasition_WPF.UserControls.ucsMatch
             dbConfiguration.ConfigureServices();
             _db = dbConfiguration.Services.GetService<MainDBContext>();
 
+
+            _idP = idP;
+            _addOrModify = addOrModify;
+            _idM = idM;
             _ucsReferee = ucsReferee;
 
-            var ll = _db.Participants.Where(x => x.Role.Name == "Судья").ToList();
+
+            if (_addOrModify)
+                tglbtnActive.IsChecked = true;
+            else tglbtnActive.IsChecked = false;
+
+
+
+            loadComboboxData();
+
+
+        }
+
+        public void loadComboboxData()
+        {
+
+            List<Participant> ll;
+
+            if (tglbtnActive.IsChecked == true)
+                ll = _db.Participants.Where(x => x.Active == true && x.Role.Name == "Судья").ToList();
+            else
+                ll = _db.Participants.Where(x => x.Role.Name == "Судья").ToList();
+
 
             ll.ForEach(x => x.SetFullName());
 
@@ -48,22 +75,19 @@ namespace FootBallCompasition_WPF.UserControls.ucsMatch
             cbParticipant.DisplayMemberPath = "FullName";
 
 
-            cbAmpluaRole.ItemsSource = _db.AmpluaRoles.Where(x => x.Id == 5 || x.Id == 6 || x.Id == 7 || x.Id == 8 ).ToList();
+            cbAmpluaRole.ItemsSource = _db.AmpluaRoles.Where(x => x.Id == 5 || x.Id == 6 || x.Id == 7 || x.Id == 8).ToList();
             cbAmpluaRole.SelectedValuePath = "Id";
             cbAmpluaRole.DisplayMemberPath = "Name";
 
 
-            _idP = idP;
-            _addOrModify = addOrModify;
-            _idM = idM;
 
 
-            if (!addOrModify)
+            if (!_addOrModify)
             {
-                _judgingStaff = _db.JudgingStaffs.Find(idP);
+                _judgingStaff = _db.JudgingStaffs.Find(_idP);
 
                 cbParticipant.SelectedItem = _judgingStaff.Participant;
-                
+
                 cbAmpluaRole.SelectedItem = _judgingStaff.AmpluaRole;
 
 
@@ -122,5 +146,9 @@ namespace FootBallCompasition_WPF.UserControls.ucsMatch
 
         }
 
+        private void tglbtnActive_Click(object sender, RoutedEventArgs e)
+        {
+            loadComboboxData();
+        }
     }
 }

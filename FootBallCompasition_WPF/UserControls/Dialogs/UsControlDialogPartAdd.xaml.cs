@@ -107,6 +107,7 @@ namespace FootBallCompasition_WPF.UserControls
 
                 participant.Telephone = tbPartPhone.Text;
                 participant.Role = (Role)cbRole.SelectedItem;
+                participant.Active = true;
 
 
                 _db.Participants.Add(participant);

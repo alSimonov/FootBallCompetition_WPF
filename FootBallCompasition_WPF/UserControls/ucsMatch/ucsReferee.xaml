@@ -77,8 +77,8 @@
             <DataGrid.Columns>
 
 
-                    <DataGridTextColumn Width="*" Binding="{Binding FIO}" Header="ФИО" Foreground="{DynamicResource ForegroundColorPage}" />
-                    <DataGridTextColumn Width="*" Binding="{Binding Telephone}" Header="Телефон" Foreground="{DynamicResource ForegroundColorPage}"/>
+                    <DataGridTextColumn Width="auto" Binding="{Binding FIO}" Header="ФИО" Foreground="{DynamicResource ForegroundColorPage}" />
+                    <DataGridTextColumn Width="auto" Binding="{Binding Telephone}" Header="Телефон" Foreground="{DynamicResource ForegroundColorPage}"/>
                     <DataGridTextColumn Width="*" Binding="{Binding AmpluaRoleName}" Header="Роль" Foreground="{DynamicResource ForegroundColorPage}"/>
 
 

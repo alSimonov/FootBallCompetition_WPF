@@ -2,7 +2,9 @@
 using FootBallCompasition_WPF.FootballClass;
 using FootBallCompasition_WPF.Short;
 using FootBallCompasition_WPF.UserControls;
+using FootBallCompasition_WPF.UserControls.ucsMatch;
 using HandyControl.Controls;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -31,7 +33,8 @@ namespace FootBallCompasition_WPF.Pages.pgsMatch
 
         public MainDBContext? _db;
 
-        List<MatchShort> matchList = new List<MatchShort>();
+        List<GetMatchListModelShort> matchList = new List<GetMatchListModelShort>();
+
 
         public PageMatch()
         {
@@ -40,28 +43,167 @@ namespace FootBallCompasition_WPF.Pages.pgsMatch
             dbConfiguration.ConfigureServices();
             _db = dbConfiguration.Services.GetService<MainDBContext>();
 
-            frameMatch.Navigate(new PageMatchList());
+            loadMatch();
 
 
+        }
+
+        public void loadMatch()
+        {
+
+
+            var tempMatchList = _db.GetMatchListModels.FromSqlRaw("GetMatchList").ToList();
+
+            matchList = tempMatchList.Select(s =>
+                new GetMatchListModelShort()
+                {
+                    IdMatch0 = s.IdMatch0,
+                    SeasonName0 = s.SeasonName0,
+                    TeamName1 = s.TeamName1,
+                    TeamName2 = s.TeamName2,
+                    DateMatch0 = s.DateMatch0.ToString("D"),
+                    StadiumAndCity0 = s.StadiumAndCity0,
+                    TypeOfMatch0 = s.TypeOfMatch0,
+                     
+                    Score0 = ""+ (s.Score1 == null ? "0" : s.Score1.ToString()) + " | " + (s.Score2 == null ? "0" : s.Score2.ToString()),
+
+                }).ToList();
+
+
+            //matchList = _db.Matches.Select(s =>
+            //    new MatchShort()
+            //    {
+            //        Id = s.Id,
+            //        Season = s.Season.Name,
+            //        Team1Name = s.Team1.Name,
+            //        Team2Name = s.Team2.Name,
+            //        Date = s.Date.ToString("D"),
+            //        StadiumAndCityName = $"{s.Stadium.Name} ({s.Stadium.City.Name})",
+
+            //        TypeOfMatch = s.TypeOfMatch.Name
+            //    }).ToList();
+
+            //GridMatch.ItemsSource = matchList;
+
+            GridMatch.ItemsSource = matchList.Take(10).ToList();
+
+
+            pagGrid.MaxPageCount = (int)Math.Ceiling(matchList.Count / 10.0);
+
+
+            txtblListCount.Text = "Найдено записей: ";
+            txtblListCount.Text += matchList.Count().ToString();
+
+
+
+
+        }
+
+        private void loadMatch(string filtrby)
+        {
+
+            if (filtrby == "")
+            {
+                loadMatch();
+            }
+            else
+            {
+
+
+                var tempMatchList = _db.GetMatchListModels.FromSqlRaw("GetMatchList").ToList();
+
+                matchList = tempMatchList.Where(x => x.TeamName1.StartsWith(filtrby) || x.TeamName2.StartsWith(filtrby))
+                    .Select(s =>
+                    new GetMatchListModelShort()
+                    {
+                        IdMatch0 = s.IdMatch0,
+                        SeasonName0 = s.SeasonName0,
+                        TeamName1 = s.TeamName1,
+                        TeamName2 = s.TeamName2,
+                        DateMatch0 = s.DateMatch0.ToString("D"),
+                        StadiumAndCity0 = s.StadiumAndCity0,
+                        TypeOfMatch0 = s.TypeOfMatch0,
+                        Score0 = "" + (s.Score1 == null ? "0" : s.Score1.ToString()) + " | " + (s.Score2 == null ? "0" : s.Score2.ToString()),
+                    }).ToList();
+
+
+                GridMatch.ItemsSource = matchList.Take(10).ToList();
+
+                pagGrid.MaxPageCount = (int)Math.Ceiling(matchList.Count / 10.0);
+
+                txtblListCount.Text = "Найдено записей: ";
+                txtblListCount.Text += matchList.Count().ToString();
+            }
+        }
+
+
+        private void page_PageUpdated(object sender, HandyControl.Data.FunctionEventArgs<int> e)
+        {
+            GridMatch.ItemsSource = matchList.Skip((e.Info - 1) * 10).Take(10).ToList();
         }
 
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            //Dialog.Show(new uscDialogMatchAdd(0, true));
-
-            //TODO передалать Match в одну страницу
-
-
-
-
+            Dialog.Show(new uscDialogMatchAdd(0, true, this));
         }
 
 
-        private void btnTabBtnList_Click(object sender, RoutedEventArgs e)
+        private void btnModify_Click(object sender, RoutedEventArgs e)
         {
-            frameMatch.Navigate(new PageMatchList());
+            int id = (GridMatch.SelectedItem as GetMatchListModelShort).IdMatch0;
+
+            Dialog.Show(new uscDialogMatchAdd(id, false, this));
+        }
+
+        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            int id = (GridMatch.SelectedItem as GetMatchListModelShort).IdMatch0;
+            Match match = _db.Matches.Find(id);
+
+            _db.Matches.Remove(match);
+            _db.SaveChanges();
+
+            loadMatch();
+
+            Growl.Success("Матч успешно удален!");
+        }
+
+        private void tbFilter_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            loadMatch(tbFilter.Text.Trim());
+        }
+
+
+        private void btnTabBtnReferee_Click(object sender, RoutedEventArgs e)
+        {
+
+            if (GridMatch.SelectedItem == null)
+            {
+                Growl.Error("Матч не был выбран!");
+            }
+            else
+            {
+                Dialog.Show(new ucsReferee((GetMatchListModelShort)GridMatch.SelectedItem));
+            }
 
         }
+
+        private void btnTabBtnEvent_Click(object sender, RoutedEventArgs e)
+        {
+            if (GridMatch.SelectedItem == null)
+            {
+                Growl.Error("Матч не был выбран!");
+            }
+            else
+            {
+                Dialog.Show(new uscEvents((GetMatchListModelShort)GridMatch.SelectedItem, this));
+            }
+        }
+
+
+
+
+
     }
 }

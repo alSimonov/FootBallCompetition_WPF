@@ -77,7 +77,7 @@ namespace FootBallCompasition_WPF.UserControls
 
                 team.Name = tbTeamName.Text;
                 team.City = (City) cbCity.SelectedItem;
-
+                team.Active = true;
 
        
                 _db.Teams.Add(team);

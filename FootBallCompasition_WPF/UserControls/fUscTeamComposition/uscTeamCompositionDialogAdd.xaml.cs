@@ -53,15 +53,32 @@ namespace FootBallCompasition_WPF.UserControls.fUscTeamComposition
             dbConfiguration.ConfigureServices();
             _db = dbConfiguration.Services.GetService<MainDBContext>();
 
-            this._uscTeamComposition = uscTeamComposition;
-
+            _idT = idT;
+            _addOrModify = addOrModify;
             _idP = idP;
+            this._uscTeamComposition = uscTeamComposition;
 
             _participant = _db.Participants.Find(_idP);
 
 
+            if (_addOrModify)
+                tglbtnActive.IsChecked = true;
+            else tglbtnActive.IsChecked = false;
 
-            cbTeam.ItemsSource = _db.Teams.ToList();
+
+            loadComboboxData();
+
+
+        }
+
+        public void loadComboboxData()
+        {
+         
+            if (tglbtnActive.IsChecked == true)
+                cbTeam.ItemsSource = _db.Teams.Where(x => x.Active == true).ToList();
+            else
+                cbTeam.ItemsSource = _db.Teams.ToList();
+
             cbTeam.SelectedValuePath = "Id";
             cbTeam.DisplayMemberPath = "Name";
 
@@ -72,14 +89,9 @@ namespace FootBallCompasition_WPF.UserControls.fUscTeamComposition
 
 
 
-            _idT = idT;
-            _addOrModify = addOrModify;
-            _idP = idP;
-
-
-            if (!addOrModify)
+            if (!_addOrModify)
             {
-                _teamComposition = _db.TeamCompositions.Find(idT);
+                _teamComposition = _db.TeamCompositions.Find(_idT);
 
                 //var teamCompositionnn = _db.TeamCompositions.Find(_event.IdTeamComposition);
 
@@ -91,7 +103,11 @@ namespace FootBallCompasition_WPF.UserControls.fUscTeamComposition
 
             }
 
+
+
         }
+
+
 
         private void btnConfirm_Click(object sender, RoutedEventArgs e)
         {
@@ -177,6 +193,11 @@ namespace FootBallCompasition_WPF.UserControls.fUscTeamComposition
 
 
 
+        }
+
+        private void tglbtnActive_Click(object sender, RoutedEventArgs e)
+        {
+            loadComboboxData();
         }
     }
 }

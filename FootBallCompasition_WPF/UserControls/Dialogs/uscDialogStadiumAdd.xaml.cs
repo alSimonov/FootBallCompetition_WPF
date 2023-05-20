@@ -105,12 +105,16 @@ namespace FootBallCompasition_WPF.UserControls
 
                 stadium.TypeOfСoverage = (TypeOfСoverage)cbTypeOfCoverage.SelectedItem;
                 stadium.TypeOfStadium = (TypeOfStadium)cbTypeOfStadium.SelectedItem;
+                stadium.Active = true;
+
 
                 _db.Stadiums.Add(stadium);
                 _db.SaveChanges();
                 _pageStadium.loadStadium();
 
                 Growl.Success("Стадион успешно добавлен!");
+
+                //TODO доделать активно \ не активно: Stadium , team , participant
 
             }
             else if (!_addOrModify)

@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.Intrinsics.Arm;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -28,10 +29,10 @@ namespace FootBallCompasition_WPF.UserControls
     /// Логика взаимодействия для uscDialogMatchAdd.xaml
     /// </summary>
     public partial class uscDialogMatchAdd : UserControl
-    {       
+    {
         public MainDBContext? _db;
 
-        PageMatchList _pageMatchList;
+        PageMatch _pageMatch;
 
         FootballClass.Match _match;
 
@@ -39,7 +40,7 @@ namespace FootBallCompasition_WPF.UserControls
         bool _addOrModify;
 
 
-        public uscDialogMatchAdd(int idP, bool addOrModify, PageMatchList pageMatchList)
+        public uscDialogMatchAdd(int idP, bool addOrModify, PageMatch pageMatch)
         {
             InitializeComponent();
 
@@ -52,25 +53,50 @@ namespace FootBallCompasition_WPF.UserControls
             dbConfiguration.ConfigureServices();
             _db = dbConfiguration.Services.GetService<MainDBContext>();
 
-            _pageMatchList = pageMatchList;
+            _pageMatch = pageMatch;
+
+            _idP = idP;
+            _addOrModify = addOrModify;
+
+
+            if (_addOrModify)
+                tglbtnActive.IsChecked = true;
+            else tglbtnActive.IsChecked = false;
+
+            loadComboboxData();
+
+        }
+
+        public void loadComboboxData()
+        {
 
             cbSeason.ItemsSource = _db.Seasons.ToList();
             cbSeason.SelectedValuePath = "Id";
             cbSeason.DisplayMemberPath = "Name";
- 
 
-            cbTeam1.ItemsSource = _db.Teams.ToList();
+            if (tglbtnActive.IsChecked == true)
+                cbTeam1.ItemsSource = _db.Teams.Where(x => x.Active == true).ToList();
+            else
+                cbTeam1.ItemsSource = _db.Teams.ToList();
+
             cbTeam1.SelectedValuePath = "Id";
             cbTeam1.DisplayMemberPath = "Name";
+
             
-            cbTeam2.ItemsSource = _db.Teams.ToList();
+            if (tglbtnActive.IsChecked == true)
+                cbTeam2.ItemsSource = _db.Teams.Where(x => x.Active == true).ToList();
+            else
+                cbTeam2.ItemsSource = _db.Teams.ToList();
+
             cbTeam2.SelectedValuePath = "Id";
             cbTeam2.DisplayMemberPath = "Name";
 
+            List<Stadium> ll;
 
-
-            
-            var ll = _db.Stadiums.Include(x => x.City).ToList();
+            if (tglbtnActive.IsChecked == true)
+                ll = _db.Stadiums.Where(x => x.Active == true).Include(x => x.City).ToList();
+            else
+                ll = _db.Stadiums.Include(x => x.City).ToList();
 
             ll.ForEach(x => x.SetStadiumAndCityName());
 
@@ -78,22 +104,19 @@ namespace FootBallCompasition_WPF.UserControls
             cbStadium.SelectedValuePath = "Id";
             cbStadium.DisplayMemberPath = "StadiumAndCityName";
 
-            
+
             cbTypeOfMatch.ItemsSource = _db.TypeOfMatches.ToList();
             cbTypeOfMatch.SelectedValuePath = "Id";
             cbTypeOfMatch.DisplayMemberPath = "Name";
 
+
+
+
             
 
-
-            _idP = idP;
-            _addOrModify = addOrModify;
-
-
-
-            if (!addOrModify)
+            if (!_addOrModify)
             {
-                _match = _db.Matches.Find(idP);
+                _match = _db.Matches.Find(_idP);
 
                 cbSeason.SelectedItem = _match.Season;
                 cbTeam1.SelectedItem = _match.Team1;
@@ -101,7 +124,7 @@ namespace FootBallCompasition_WPF.UserControls
 
                 dpDateOfMatch.SelectedDate = _match.Date;
 
-                cbStadium.SelectedItem =  _match.Stadium;
+                cbStadium.SelectedItem = _match.Stadium;
                 cbTypeOfMatch.SelectedItem = _match.TypeOfMatch;
 
             }
@@ -141,7 +164,7 @@ namespace FootBallCompasition_WPF.UserControls
 
                 _db.SaveChanges();
 
-                _pageMatchList.loadMatch();
+                _pageMatch.loadMatch();
 
                 Growl.Success("Матч успешно добавлен!");
 
@@ -175,7 +198,7 @@ namespace FootBallCompasition_WPF.UserControls
 
                 _db.SaveChanges();
 
-                _pageMatchList.loadMatch();
+                _pageMatch.loadMatch();
 
                 Growl.Success("Матч успешно изменен!");
 
@@ -186,8 +209,9 @@ namespace FootBallCompasition_WPF.UserControls
 
         }
 
-
-
-
+        private void tglbtnActive_Click(object sender, RoutedEventArgs e)
+        {
+            loadComboboxData();
+        }
     }
 }

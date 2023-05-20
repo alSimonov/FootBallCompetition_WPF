@@ -52,16 +52,32 @@ namespace FootBallCompasition_WPF.UserControls.fUscTeamComposition
             dbConfiguration.ConfigureServices();
             _db = dbConfiguration.Services.GetService<MainDBContext>();
 
-            _uscTeamCompositionForTeam = uscTeamCompositionForTeam;
-
+            _idT = idT;
+            _addOrModify = addOrModify;
             _idP = idP;
+            _uscTeamCompositionForTeam = uscTeamCompositionForTeam;
 
             _team = _db.Teams.Find(_idP);
 
+            if (_addOrModify)
+                tglbtnActive.IsChecked = true;
+            else tglbtnActive.IsChecked = false;
 
 
+            loadComboboxData();
 
-            var ll = _db.Participants.Where(x => x.Role.Name == "Игрок").ToList();
+
+        }
+
+        public void loadComboboxData()
+        {
+
+            List<Participant> ll;
+
+            if (tglbtnActive.IsChecked == true)
+                ll = _db.Participants.Where(x => x.Active == true && x.Role.Name == "Игрок").ToList();
+            else
+                ll = _db.Participants.Where(x => x.Role.Name == "Игрок").ToList();
 
             ll.ForEach(x => x.SetFullName());
 
@@ -70,21 +86,14 @@ namespace FootBallCompasition_WPF.UserControls.fUscTeamComposition
             cbPart.DisplayMemberPath = "FullName";
 
 
-
             cbAmpluaRole.ItemsSource = _db.AmpluaRoles.Where(x => x.Id == 1 || x.Id == 2 || x.Id == 3 || x.Id == 4).ToList();
             cbAmpluaRole.SelectedValuePath = "Id";
             cbAmpluaRole.DisplayMemberPath = "Name";
 
 
-
-            _idT = idT;
-            _addOrModify = addOrModify;
-            _idP = idP;
-
-
-            if (!addOrModify)
+            if (!_addOrModify)
             {
-                _teamComposition = _db.TeamCompositions.Find(idT);
+                _teamComposition = _db.TeamCompositions.Find(_idT);
 
                 //var teamCompositionnn = _db.TeamCompositions.Find(_event.IdTeamComposition);
 
@@ -95,6 +104,7 @@ namespace FootBallCompasition_WPF.UserControls.fUscTeamComposition
                 cbAmpluaRole.SelectedValue = _teamComposition.IdAmpluaRole;
 
             }
+
 
         }
 
@@ -189,6 +199,10 @@ namespace FootBallCompasition_WPF.UserControls.fUscTeamComposition
 
 
         }
-       
+
+        private void tglbtnActive_Click(object sender, RoutedEventArgs e)
+        {
+            loadComboboxData();
+        }
     }
 }

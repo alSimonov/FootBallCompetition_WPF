@@ -9,8 +9,9 @@
         x:Class="FootBallCompasition_WPF.MainWindow"
         mc:Ignorable="d"
 
+    
         Title="MainWindow" Height="720" Width="1080" WindowStartupLocation="CenterScreen" WindowStyle="None" AllowsTransparency="True" Background="Transparent">
-
+    <!--Height="720" Width="1080"-->
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVis"/>
     </Window.Resources>
@@ -93,13 +94,6 @@
                                 </StackPanel>
                             </Button>
 
-                            <Button Style="{StaticResource menuButton}" x:Name="btnFrameStatistic" Click="btnFrameStatistic_Click">
-                                <StackPanel Orientation="Horizontal">
-                                    <Image Source="Images\profile.png" Width="32" Height="32" Margin="0 0 20 0"/>
-                                    <TextBlock Text="Статистика" VerticalAlignment="Center"/>
-                                </StackPanel>
-                            </Button>
-
                         </StackPanel>
 
                         <!--<hc:SideMenu x:Name="SideMenu"  BorderThickness="0" Width="170" Height="300" Margin="0"  Grid.Column="0" Grid.Row="1" 
@@ -162,7 +156,7 @@
                         </hc:SideMenu>-->
 
 
-                        <Button Style="{StaticResource menuButton}" VerticalAlignment="Bottom" DockPanel.Dock="Bottom" Margin="15 0 15 20">
+                        <Button x:Name="Logout" Style="{StaticResource menuButton}" VerticalAlignment="Bottom" DockPanel.Dock="Bottom" Margin="15 0 15 20" Click="Logout_Click" >
                             <StackPanel Orientation="Horizontal">
                                 <Icon:PackIconMaterial Kind="Logout" Style="{StaticResource menuButtonIcon}"/>
                                 <TextBlock Text="Logout"/>

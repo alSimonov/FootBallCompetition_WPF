@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Intrinsics.Arm;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -48,15 +49,36 @@ namespace FootBallCompasition_WPF.UserControls
             dbConfiguration.ConfigureServices();
             _db = dbConfiguration.Services.GetService<MainDBContext>();
 
+
+            _idP = idP;
+            _addOrModify = addOrModify;
             _pageAccount = pageAccount;
+
+
+            if (_addOrModify)
+                tglbtnActive.IsChecked = true;
+            else tglbtnActive.IsChecked = false;
+
+            loadComboboxData();
+
+
+        }
+
+        public void loadComboboxData()
+        {
 
             cbAccountRole.ItemsSource = _db.AccountRoles.ToList();
             cbAccountRole.SelectedValuePath = "Id";
             cbAccountRole.DisplayMemberPath = "Name";
 
 
+            List<Participant> ll;
 
-            var ll = _db.Participants.Where(x => x.Role.Name == "Пользователь").ToList();
+            if (tglbtnActive.IsChecked == true)
+                ll = _db.Participants.Where(x => x.Active == true && x.Role.Name == "Пользователь").ToList();
+            else
+                ll = _db.Participants.Where(x => x.Role.Name == "Пользователь").ToList();
+
 
             ll.ForEach(x => x.SetFullName());
 
@@ -65,16 +87,9 @@ namespace FootBallCompasition_WPF.UserControls
             cbParticipant.DisplayMemberPath = "FullName";
 
 
-
-
-            _idP = idP;
-            _addOrModify = addOrModify;
-
-
-
-            if (!addOrModify)
+            if (!_addOrModify)
             {
-                _account = _db.Accounts.Find(idP);
+                _account = _db.Accounts.Find(_idP);
 
                 tbLogin.Text = _account.Login;
                 tbEmail.Text = _account.Email;
@@ -85,7 +100,9 @@ namespace FootBallCompasition_WPF.UserControls
             }
 
 
+
         }
+
 
         private void btnConfirm_Click(object sender, RoutedEventArgs e)
         {
@@ -158,6 +175,11 @@ namespace FootBallCompasition_WPF.UserControls
                 Growl.Success("Аккаунт успешно изменен!");
 
             }
+        }
+
+        private void tglbtnActive_Click(object sender, RoutedEventArgs e)
+        {
+            loadComboboxData();
         }
     }
 }   

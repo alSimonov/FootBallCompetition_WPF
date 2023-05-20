@@ -35,18 +35,24 @@ namespace FootBallCompasition_WPF.UserControls.ucsMatch
         
 
 
-        public ucsReferee(MatchShort matchShort)
+        public ucsReferee(GetMatchListModelShort getMatchListModelShort)
         {
             InitializeComponent();
 
+            //TODO изменить ширину xaml
+
+
+
+
+            //TODO сделать жоскую проверку на даты контрактов 
 
 
             dbConfiguration.ConfigureServices();
             _db = dbConfiguration.Services.GetService<MainDBContext>();
 
-            _idM = matchShort.Id;
+            _idM = getMatchListModelShort.IdMatch0;
 
-            tblMatchInfo.Text = $"{matchShort.Team1Name} - {matchShort.Team2Name} | {matchShort.Date}";
+            tblMatchInfo.Text = $"{getMatchListModelShort.TeamName1} - {getMatchListModelShort.TeamName2} | {getMatchListModelShort.DateMatch0}";
 
             loadDataGrid();
 

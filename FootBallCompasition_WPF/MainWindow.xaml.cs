@@ -9,6 +9,7 @@ using FootBallCompasition_WPF.Windows;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -35,55 +36,49 @@ namespace FootBallCompasition_WPF
             //tglbtnWindowScreen.Click += tglbtnWindowScreen_Click;
 
 
+            Authorization();
+
+            dbConfiguration.ConfigureServices();
+            _db = dbConfiguration.Services.GetService<MainDBContext>();
+
+            //TODO убрать row с уведомлениями, настрокой и поиском  
+
+        }
+
+
+
+        private void Authorization()
+        {
+
+            this.Visibility = Visibility.Collapsed;
+
             var dialog = new WindowAuthorization();
-            if(dialog.ShowDialog() == false)
+            if (dialog.ShowDialog() == false)
             {
                 Close();
 
             }
-            else     
+            else
             {
-                dbConfiguration.ConfigureServices();
-                _db = dbConfiguration.Services.GetService<MainDBContext>();
+
+                if (dialog.TheAccountRole == "Админ")
+                {
+                    btnFrameAccount.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    btnFrameAccount.Visibility = Visibility.Collapsed;
+                }
+
+                this.Visibility = Visibility.Visible;
 
             }
-
-
-            //var menuExpenses = new List<SubItem>();
-            //menuExpenses.Add(new SubItem("Cash flow", new PageParticipant("Игрок")));
-            ////var item1 = new ItemMenu("Financial", menuExpenses, iconMaterial: MahApps.Metro.IconPacks.PackIconMaterialKind.Cog);
-            //var item1 = new ItemMenu("Financial", menuExpenses);
-
-
-
-            //stcSideMenu.Children.Add(new uscMenuItem(item1, this));
-
-
-
-
         }
 
-        //internal void SwitchScreen(object sender)
-        //{
-        //    //var screen = ((UserControl)sender);
-
-        //    var screen = ((Page)sender);
-        
-
-        //    if(screen != null)
-        //    {
-        //        //stcSideMenu.Children.Clear();
-        //        //stcSideMenu.Children.Add(screen);
-
-        //        frame.Navigate(screen);
-
-        //    }
-        
-        
-        
-        //}
-        
-
+        private void Logout_Click(object sender, RoutedEventArgs e)
+        {
+            Authorization();
+        }
 
 
         private void btnFrameTeam_Click(object sender, RoutedEventArgs e)
@@ -111,20 +106,6 @@ namespace FootBallCompasition_WPF
         {
             frame.Navigate(new PageAccount());
         }
-
-        private void btnFrameStatistic_Click(object sender, RoutedEventArgs e)
-        {
-            frame.Navigate(new PageStatistic());
-        }
-
-        //private void tglbtnWindowScreen_Click(object sender, RoutedEventArgs e)
-        //{
-        //    if()
-        //    WindowState = WindowState.Maximized;
-        //    WindowStyle = WindowStyle.None;
-        //}
-
-
 
         private void btnWindowClose_Click(object sender, RoutedEventArgs e)
         {
@@ -195,9 +176,6 @@ namespace FootBallCompasition_WPF
 
 
         }
-
-
-        //TODO сделать кнопку выхода из аккаунта
 
     }
 }

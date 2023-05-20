@@ -14,14 +14,16 @@ namespace FootBallCompasition_WPF.FootballClass
         public string Name { get; set; }
         public int IdCity { get; set; }
         public City City { get; set; }
+        public bool Active { get; set; }
+
 
         public Team() { }
-        public Team(int id, string name, int idCity)
-        {
-            this.Id = id;
-            this.Name = name;
-            this.IdCity = idCity;
-        }
+        //public Team(int id, string name, int idCity)
+        //{
+        //    this.Id = id;
+        //    this.Name = name;
+        //    this.IdCity = idCity;
+        //}
 
 
 

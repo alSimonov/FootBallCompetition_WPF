@@ -54,14 +54,16 @@ namespace FootBallCompasition_WPF.Pages.pgsStadium
         public void loadStadium()
         {
             
-            stadiumList = _db.Stadiums.Select(s => new StadiumShort()
-                {
-                    Id = s.Id,
-                    StadiumName = s.Name,
-                    CityName = s.City.Name,
-                    Capacity = s.Capacity,
+            stadiumList = _db.Stadiums.Where(x => x.Active == tglbtnActive.IsChecked)
+                .Select(s => new StadiumShort()
+            {
+                Id = s.Id,
+                StadiumName = s.Name,
+                CityName = s.City.Name,
+                Capacity = s.Capacity,
                 TypeOfСoverageName = s.TypeOfСoverage.Name,
-                TypeOfStadiumName = s.TypeOfStadium.Name
+                TypeOfStadiumName = s.TypeOfStadium.Name,
+                Active = s.Active,
             }).ToList();
 
 
@@ -76,7 +78,7 @@ namespace FootBallCompasition_WPF.Pages.pgsStadium
 
         }
 
-  private void loadStadium(string filtrby)
+        private void loadStadium(string filtrby)
         {
 
             if (filtrby == "")
@@ -86,7 +88,7 @@ namespace FootBallCompasition_WPF.Pages.pgsStadium
             }
             else
             {
-                stadiumList = _db.Stadiums.Where(x => x.Name.StartsWith(filtrby))
+                stadiumList = _db.Stadiums.Where(x => x.Active == tglbtnActive.IsChecked && x.Name.StartsWith(filtrby))
                 .Select(s => new StadiumShort()
                 {
                     Id = s.Id,
@@ -94,7 +96,8 @@ namespace FootBallCompasition_WPF.Pages.pgsStadium
                     CityName = s.City.Name,
                     Capacity = s.Capacity,
                     TypeOfСoverageName = s.TypeOfСoverage.Name,
-                    TypeOfStadiumName = s.TypeOfStadium.Name
+                    TypeOfStadiumName = s.TypeOfStadium.Name,
+                    Active = s.Active,
                 }).ToList();
 
                 GridStadium.ItemsSource = stadiumList.Take(10).ToList();
@@ -123,16 +126,30 @@ namespace FootBallCompasition_WPF.Pages.pgsStadium
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
-            int id = (GridStadium.SelectedItem as StadiumShort).Id;
+            //int id = (GridStadium.SelectedItem as StadiumShort).Id;
 
+            //Stadium stadium = _db.Stadiums.Find(id);
+
+            //_db.Stadiums.Remove(stadium);
+            //_db.SaveChanges();
+
+            //loadStadium();
+
+            //Growl.Success("Стадион успешно удален!");
+
+            int id = (GridStadium.SelectedItem as StadiumShort).Id;
             Stadium stadium = _db.Stadiums.Find(id);
 
-            _db.Stadiums.Remove(stadium);
+            stadium.Active = stadium.Active ? false : true;
+
+            _db.Entry(stadium).State = EntityState.Modified;
             _db.SaveChanges();
 
             loadStadium();
 
-            Growl.Success("Стадион успешно удален!");
+            Growl.Warning("Состояние активности стадиона изменено!");
+
+
 
         }
 
@@ -141,7 +158,8 @@ namespace FootBallCompasition_WPF.Pages.pgsStadium
             loadStadium(tbFilter.Text.Trim());
         }
 
-        private void btnTabBtnList_Click(object sender, RoutedEventArgs e)
+
+        private void tglbtnActive_Click(object sender, RoutedEventArgs e)
         {
             loadStadium();
         }

@@ -1,5 +1,6 @@
 ﻿using FootBallCompasition_WPF.context;
 using FootBallCompasition_WPF.FootballClass;
+using FootBallCompasition_WPF.Pages.pgsMatch;
 using FootBallCompasition_WPF.Short;
 using HandyControl.Controls;
 using Microsoft.Extensions.DependencyInjection;
@@ -29,6 +30,8 @@ namespace FootBallCompasition_WPF.UserControls.ucsMatch
 
         private MainDBContext? _db;
 
+        PageMatch _pageMatch;
+
         List<EventShort> dataGridList = new List<EventShort>();
 
         int _idM;
@@ -37,21 +40,22 @@ namespace FootBallCompasition_WPF.UserControls.ucsMatch
 
 
 
-        public uscEvents(MatchShort matchShort)
+        public uscEvents(GetMatchListModelShort getMatchListModelShort, PageMatch pageMatch)
         {
             InitializeComponent();
 
+            
 
 
             dbConfiguration.ConfigureServices();
             _db = dbConfiguration.Services.GetService<MainDBContext>();
 
-            _idM = matchShort.Id;
+            _pageMatch = pageMatch;
 
-            tblMatchInfo.Text = $"{matchShort.Team1Name} - {matchShort.Team2Name} | {matchShort.Date}";
+            _idM = getMatchListModelShort.IdMatch0;
+            tblMatchInfo.Text = $"{getMatchListModelShort.TeamName1} - {getMatchListModelShort.TeamName2} | {getMatchListModelShort.DateMatch0}";
 
             loadDataGrid();
-
 
         }
 
@@ -154,7 +158,9 @@ namespace FootBallCompasition_WPF.UserControls.ucsMatch
             GridReferee.ItemsSource = dataGridList.Skip((e.Info - 1) * 6).Take(6).ToList();
         }
 
-
-
+        private void btnClose_Click(object sender, RoutedEventArgs e)
+        {
+            _pageMatch.loadMatch();
+        }
     }
 }

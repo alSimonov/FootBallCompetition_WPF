@@ -18,20 +18,22 @@ namespace FootBallCompasition_WPF.FootballClass
         public string Telephone { get; set; }
         public byte IdRole { get; set; }
         public Role Role { get; set; }
+        public bool Active { get; set; }
 
-       
+
+
         public Participant() { }
         
-        public Participant(int id, string surname, string name, string patronymic, DateTime dateOfBirth, string telephone, byte idRole)
-        {
-            this.Id = id;
-            this.Surname = surname;
-            this.Name = name;
-            this.Patronymic = patronymic;
-            this.DateOfBirth = dateOfBirth;
-            this.Telephone = telephone;
-            this.IdRole = idRole;
-        }
+        //public Participant(int id, string surname, string name, string patronymic, DateTime dateOfBirth, string telephone, byte idRole)
+        //{
+        //    this.Id = id;
+        //    this.Surname = surname;
+        //    this.Name = name;
+        //    this.Patronymic = patronymic;
+        //    this.DateOfBirth = dateOfBirth;
+        //    this.Telephone = telephone;
+        //    this.IdRole = idRole;
+        //}
 
 
         public string FullName { get; set; } = string.Empty;

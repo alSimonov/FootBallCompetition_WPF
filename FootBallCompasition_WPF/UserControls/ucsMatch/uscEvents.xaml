@@ -29,7 +29,7 @@
             </Grid.RowDefinitions>
 
 
-            <Button Width="22" Height="22" Grid.Row="0" Command="hc:ControlCommands.Close" Style="{StaticResource ButtonIcon}" Foreground="{DynamicResource PrimaryBrush}" 
+            <Button x:Name="btnClose" Click="btnClose_Click" Width="22" Height="22" Grid.Row="0"  Command="hc:ControlCommands.Close" Style="{StaticResource ButtonIcon}" Foreground="{DynamicResource PrimaryBrush}" 
             hc:IconElement.Geometry="{StaticResource ErrorGeometry}" Padding="0" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,4,4,0"/>
 
 
@@ -76,10 +76,10 @@
                 <DataGrid.Columns>
 
 
-                    <DataGridTextColumn Width="*" Binding="{Binding TeamName}" Header="Команда" Foreground="{DynamicResource ForegroundColorPage}"/>
-                    <DataGridTextColumn Width="*" Binding="{Binding FIO}" Header="ФИО" Foreground="{DynamicResource ForegroundColorPage}" />
-                    <DataGridTextColumn Width="*" Binding="{Binding PlayerNumber}" Header="Номер" Foreground="{DynamicResource ForegroundColorPage}"/>
-                    <DataGridTextColumn Width="*" Binding="{Binding TypeOfEventName}" Header="Тип события" Foreground="{DynamicResource ForegroundColorPage}"/>
+                    <DataGridTextColumn Width="auto" Binding="{Binding TeamName}" Header="Команда" Foreground="{DynamicResource ForegroundColorPage}"/>
+                    <DataGridTextColumn Width="auto" Binding="{Binding FIO}" Header="ФИО" Foreground="{DynamicResource ForegroundColorPage}" />
+                    <DataGridTextColumn Width="auto" Binding="{Binding PlayerNumber}" Header="Номер" Foreground="{DynamicResource ForegroundColorPage}"/>
+                    <DataGridTextColumn Width="auto" Binding="{Binding TypeOfEventName}" Header="Тип события" Foreground="{DynamicResource ForegroundColorPage}"/>
                     <DataGridTextColumn Width="*" Binding="{Binding Time}" Header="Время" Foreground="{DynamicResource ForegroundColorPage}"/>
 
 

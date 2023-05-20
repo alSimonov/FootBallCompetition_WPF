@@ -1,6 +1,7 @@
 ﻿using FootBallCompasition_WPF.context;
 using FootBallCompasition_WPF.FootballClass;
 using HandyControl.Controls;
+using HandyControl.Data;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualBasic.Logging;
 using System;
@@ -33,6 +34,8 @@ namespace FootBallCompasition_WPF.Windows
 
         public MainDBContext? _db;
 
+        public string TheAccountRole;
+
         public WindowAuthorization()
         {
             InitializeComponent();
@@ -41,6 +44,9 @@ namespace FootBallCompasition_WPF.Windows
             
             btnWindowClose.Click += btnWindowClose_Click;
 
+            tblLoginErr.Visibility = Visibility.Collapsed;
+            tblPasswordErr.Visibility = Visibility.Collapsed;
+            //TODO исправить цвет ошибки при неверном вводе пароля на xaml
 
 
             dbConfiguration.ConfigureServices();
@@ -57,37 +63,20 @@ namespace FootBallCompasition_WPF.Windows
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
+            tblLoginErr.Visibility = Visibility.Collapsed;
+            tblPasswordErr.Visibility = Visibility.Collapsed;
+
+
 
             string Login = tbLogin.Text;
             string Password = pbPassword.Password;
 
+            //####################################################
+
             //DialogResult = true;
+            //TheAccountRole = "Админ";
 
-
-            //byte[] passwordAdmin = SHA512.Create().ComputeHash(Encoding.BigEndianUnicode.GetBytes("admin@gmail.comadminadminСкрипеевСофронЗосимович22 июля 1998 г."));
-
-            //_db.Participants.Where(x =>x.Id == 422).ToList();
-
-            //Account account = new Account(Id = 1, Login = "admin", Password = passwordAdmin, IdParticipant = 422, Email = "admin@gmail.com", IdAccountRole = 1);
-
-            //_db.Accounts.Add(account);
-            //_db.SaveChanges();
-
-
-
-
-
-
-
-            //1998-07-22
-            //admin @gmail.comadminadminСкрипеевСофронЗосимович22 июля 1998 г.
-
-            //var mydatetime = DateTime.ParseExact("1998-07-22", "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture).ToString("D");
-            //var strnn = $"admin@gmail.comadminadminСкрипеевСофронЗосимович{mydatetime}";
-            //System.Windows.MessageBox.Show(strnn);
-            //tbLogin.Text = strnn;
-
-            //..........................................................
+            //####################################################
 
 
             if (_db.Accounts.Any(u => u.Login == Login))
@@ -110,15 +99,15 @@ namespace FootBallCompasition_WPF.Windows
                     //HandyControl.Controls.MessageBox.Show( new HandyControl.Data.MessageBoxInfo { Message = "Вход подтвержден" });
                     DialogResult = true;
 
-                    //TheAccountRole = accountList[0].Name;
+                    TheAccountRole = accountList[0].AccountRoleName;
 
+                    
                 }
-                else //TODO Руссифицировать messageBox
-                    HandyControl.Controls.MessageBox.Show("Не верный пароль.");
+                else
+                    tblPasswordErr.Visibility = Visibility.Visible;
             }
             else
-                HandyControl.Controls.MessageBox.Show("Не верный логин.");
-
+                tblLoginErr.Visibility = Visibility.Visible;
 
         }
 

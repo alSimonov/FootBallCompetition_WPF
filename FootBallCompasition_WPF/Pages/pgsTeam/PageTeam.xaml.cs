@@ -6,6 +6,7 @@ using FootBallCompasition_WPF.UserControls.fUscTeamComposition;
 using FootBallCompasition_WPF.UserControls.ucsMatch;
 using HandyControl.Controls;
 using HandyControl.Tools.Extension;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -50,12 +51,14 @@ namespace FootBallCompasition_WPF.Pages.pgsTeam
         public void loadTeam()
         {
 
-            teamList = _db.Teams.Select(s =>
+            teamList = _db.Teams.Where(x => x.Active == tglbtnActive.IsChecked)
+                .Select(s =>
                 new TeamShort()
                 {
                     Id = s.Id,
                     TeamName = s.Name,
-                    CityName = s.City.Name
+                    CityName = s.City.Name,
+                    Active = s.Active,
                 }).ToList();
 
             //GridTeam.ItemsSource = teamList;
@@ -84,12 +87,13 @@ namespace FootBallCompasition_WPF.Pages.pgsTeam
             {
 
                
-                teamList = _db.Teams.Where(x => x.Name.StartsWith(filtrby)).
+                teamList = _db.Teams.Where(x => x.Active == tglbtnActive.IsChecked && x.Name.StartsWith(filtrby)).
                     Select(s => new TeamShort()
                     {
                         Id = s.Id,
                         TeamName = s.Name,
-                        CityName = s.City.Name
+                        CityName = s.City.Name,
+                        Active = s.Active,
                     }).ToList();
 
                 GridTeam.ItemsSource = teamList.Take(10).ToList();
@@ -121,17 +125,28 @@ namespace FootBallCompasition_WPF.Pages.pgsTeam
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
-            int id = (GridTeam.SelectedItem as TeamShort).Id;
+            //int id = (GridTeam.SelectedItem as TeamShort).Id;
 
+            //Team team = _db.Teams.Find(id);
+
+            //_db.Teams.Remove(team);
+            //_db.SaveChanges();
+
+            //loadTeam();
+
+            //Growl.Success("Команда успешно удалена!");
+
+
+            int id = (GridTeam.SelectedItem as TeamShort).Id;
             Team team = _db.Teams.Find(id);
 
-            _db.Teams.Remove(team);
+            team.Active = team.Active ? false : true;
+
+            _db.Entry(team).State = EntityState.Modified;
             _db.SaveChanges();
 
             loadTeam();
-
-            Growl.Success("Команда успешно удалена!");
-
+            Growl.Warning("Состояние активности команды изменено!");
 
         }
 
@@ -170,6 +185,11 @@ namespace FootBallCompasition_WPF.Pages.pgsTeam
             }
 
 
+        }
+
+        private void tglbtnActive_Click(object sender, RoutedEventArgs e)
+        {
+            loadTeam();
         }
     }
 }

@@ -15,6 +15,7 @@ namespace FootBallCompasition_WPF.Short
         public int Capacity { get; set; }
         public string TypeOfСoverageName { get; set; }
         public string TypeOfStadiumName { get; set; }
+        public bool Active { get; set; }
 
         public StadiumShort() { }
         

@@ -25,6 +25,7 @@ namespace FootBallCompasition_WPF.FootballClass
         public TypeOfСoverage TypeOfСoverage { get; set; }
         public byte IdTypeOfStadium { get; set; }
         public TypeOfStadium TypeOfStadium { get; set; }
+        public bool Active { get; set; }
 
         public Stadium() { }
 

@@ -29,6 +29,10 @@ namespace FootBallCompasition_WPF.context
         public DbSet<TypeOfStadium> TypeOfStadiums{ get; set; }
         public DbSet<TypeOfСoverage> TypeOfCoverages { get; set; }
 
+        //procedures
+        public DbSet<GetMatchListModel> GetMatchListModels { get; set; }
+
+
         public MainDBContext(DbContextOptions<MainDBContext> options) :base(options)
         {}
         
@@ -48,9 +52,16 @@ namespace FootBallCompasition_WPF.context
 
             modelBuilder.ApplyConfiguration(new TeamConfiguration());
 
-
-
-
+            OnModelCreatingStoredProcedure(modelBuilder);
         }
+
+        
+        protected void OnModelCreatingStoredProcedure(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<GetMatchListModel>().HasNoKey();
+        }
+
+
+
     }
 }

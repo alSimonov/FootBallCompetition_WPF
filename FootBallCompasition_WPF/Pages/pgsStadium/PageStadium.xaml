@@ -50,6 +50,13 @@
                    Foreground="{DynamicResource ForegroundColorPage}"/>
 
 
+        <!--Change Select-->
+
+        <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="0 10 300 0" HorizontalAlignment="Center">
+            <ToggleButton ToolTip="Показывать только активные данные." Style="{StaticResource ToggleButtonSwitch}" x:Name="tglbtnActive" Click="tglbtnActive_Click"  IsChecked="True"/>
+        </StackPanel>
+
+
         <!--Filter textbox-->
 
         <Grid Width="200" HorizontalAlignment="Right" Grid.Row="3">
@@ -63,6 +70,7 @@
             <DataGrid.Columns>
 
 
+                <DataGridCheckBoxColumn Width="auto" CanUserResize="False" Binding="{Binding Active}" Header="Активно"/>
                 <DataGridTextColumn Width="auto" Binding="{Binding StadiumName}" Header="Стадион" CellStyle="{StaticResource DataGridCellStyle}"/>
                 <DataGridTextColumn Width="auto" Binding="{Binding CityName}" Header="Город"/>
                 <DataGridTextColumn Width="auto" Binding="{Binding Capacity}" Header="Вместимость"/>
@@ -85,7 +93,7 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button BorderThickness="0" x:Name="btnDelete" Click="btnDelete_Click">
-                                <Icon:PackIconMaterial Kind="Delete" Style="{DynamicResource IconPackMaterial}" Foreground="Red" />
+                                <Icon:PackIconMaterial Kind="SyncAlert" Style="{DynamicResource IconPackMaterial}" Foreground="Red" />
                             </Button>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
