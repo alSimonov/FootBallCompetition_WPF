@@ -12,7 +12,7 @@
              
 
              mc:Ignorable="d" 
-             Width="300" Height="400"  Background="Transparent">
+             Width="300" Height="500"  Background="Transparent">
 
     <!--Background="{DynamicResource BackGroundColor}-->
     <Border CornerRadius="10"  Style="{DynamicResource BorderThemeBackgroundDialog}">
@@ -38,11 +38,10 @@
                     <TextBox x:Name="tbPartSurname"   Style="{StaticResource TextBoxExtend}" hc:InfoElement.Placeholder="Фамилия" FontWeight="Light" FontFamily="helvetica" 
                              FontSize="20" Foreground="{DynamicResource ForeGroundColorDialog}" BorderThickness="0"  Height="34" Background="Transparent"
                              Width="170" Margin="0 0 0 0" />
-
-
                     <Icon:PackIconMaterial Kind="Account" Style="{DynamicResource IconPackMaterial}" Foreground="{DynamicResource ForeGroundColorDialog}" />
                 </StackPanel>
                 <Border Style="{DynamicResource BorderSeparatorForTBDialog}" />
+                <TextBlock x:Name="tblSurnameErr" Text="*Укажите фамилию." Margin="70 0 0 0" Foreground="#e5215f" />
 
 
 
@@ -50,10 +49,10 @@
                     <TextBox x:Name="tbPartName"   Style="{StaticResource TextBoxExtend}" hc:InfoElement.Placeholder="Имя" FontWeight="Light" FontFamily="helvetica" 
                              FontSize="20" Foreground="{DynamicResource ForeGroundColorDialog}" BorderThickness="0"  Height="34" Background="Transparent"
                              Width="170" Margin="0 0 0 0" />
-
                     <Icon:PackIconMaterial Kind="Account" Style="{DynamicResource IconPackMaterial}" Foreground="{DynamicResource ForeGroundColorDialog}" />
                 </StackPanel>
                 <Border Style="{DynamicResource BorderSeparatorForTBDialog}" />
+                <TextBlock x:Name="tblNameErr" Text="*Укажите имя." Margin="70 0 0 0" Foreground="#e5215f" />
 
 
 
@@ -61,10 +60,10 @@
                     <TextBox x:Name="tbPartPatronymic"   Style="{StaticResource TextBoxExtend}" hc:InfoElement.Placeholder="Отчество" FontWeight="Light" FontFamily="helvetica" 
                              FontSize="20" Foreground="{DynamicResource ForeGroundColorDialog}" BorderThickness="0" Height="34"  Background="Transparent"
                              Width="170" Margin="0 0 0 0" />
-
                     <Icon:PackIconMaterial Kind="Account" Style="{DynamicResource IconPackMaterial}"  Foreground="{DynamicResource ForeGroundColorDialog}" />
                 </StackPanel>
                 <Border Style="{DynamicResource BorderSeparatorForTBDialog}" />
+                <TextBlock x:Name="tblPatronymicErr" Text="*Укажите отчество." Margin="70 0 0 0" Foreground="#e5215f" />
 
 
 
@@ -73,6 +72,7 @@
                             HorizontalAlignment="Center" Margin="0 15 0 0" Background="Transparent" Foreground="{DynamicResource ForeGroundColorDialog}" BorderThickness="0" 
                             FontSize="20" FontFamily="helvetica" FontWeight="Light" />
                 <Border Style="{DynamicResource BorderSeparatorForTBDialog}" />
+                <TextBlock x:Name="tblDateOfBirthErr" Text="*Укажите дату рождения." Margin="70 0 0 0" Foreground="#e5215f" />
 
 
                 <StackPanel Orientation="Horizontal" Margin="0 15 0 0" HorizontalAlignment="Center">
@@ -82,6 +82,7 @@
                     <Icon:PackIconMaterial Kind="Phone" Style="{DynamicResource IconPackMaterial}" Foreground="{DynamicResource ForeGroundColorDialog}"/>
                 </StackPanel>
                 <Border Style="{DynamicResource BorderSeparatorForTBDialog}" />
+                <TextBlock x:Name="tblPhoneErr" Text="*Укажите номер телефона." Margin="70 0 0 0" Foreground="#e5215f" />
 
 
 
@@ -93,12 +94,10 @@
                 <!--hc:InfoElement.Title="This is the title"-->
                 <ComboBox x:Name="cbRole"  ItemsSource="{Binding roleList}" hc:InfoElement.Placeholder="Роль" SelectedIndex="0" Style="{StaticResource ComboBoxExtend}" Text="Item 1"
                           Width="195" Height="35" HorizontalAlignment="Center" Margin="0 5 0 0" Background="Transparent" Foreground="{DynamicResource ForeGroundColorDialog}" 
-                          BorderThickness="0" FontSize="20" FontFamily="helvetica" FontWeight="Light" VerticalContentAlignment="Center"
-                           >
-
-
+                          BorderThickness="0" FontSize="20" FontFamily="helvetica" FontWeight="Light" VerticalContentAlignment="Center">
                 </ComboBox>
                 <Border Style="{DynamicResource BorderSeparatorForTBDialog}" />
+                <TextBlock x:Name="tblRoleErr" Text="*Укажите роль." Margin="70 0 0 0" Foreground="#e5215f" />
 
 
 

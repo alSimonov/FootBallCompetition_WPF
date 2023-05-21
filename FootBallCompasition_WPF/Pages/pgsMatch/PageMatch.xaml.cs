@@ -35,6 +35,9 @@ namespace FootBallCompasition_WPF.Pages.pgsMatch
 
         List<GetMatchListModelShort> matchList = new List<GetMatchListModelShort>();
 
+        //byte? _idSeason;
+
+        //TODO потом убрать закоменченный не нужный код
 
         public PageMatch()
         {
@@ -51,7 +54,6 @@ namespace FootBallCompasition_WPF.Pages.pgsMatch
         public void loadMatch()
         {
 
-
             var tempMatchList = _db.GetMatchListModels.FromSqlRaw("GetMatchList").ToList();
 
             matchList = tempMatchList.Select(s =>
@@ -59,8 +61,7 @@ namespace FootBallCompasition_WPF.Pages.pgsMatch
                 {
                     IdMatch0 = s.IdMatch0,
                     SeasonName0 = s.SeasonName0,
-                    TeamName1 = s.TeamName1,
-                    TeamName2 = s.TeamName2,
+                    Team1AndTeam2Name = s.TeamName1 +" - "+ s.TeamName2,
                     DateMatch0 = s.DateMatch0.ToString("D"),
                     StadiumAndCity0 = s.StadiumAndCity0,
                     TypeOfMatch0 = s.TypeOfMatch0,
@@ -118,8 +119,7 @@ namespace FootBallCompasition_WPF.Pages.pgsMatch
                     {
                         IdMatch0 = s.IdMatch0,
                         SeasonName0 = s.SeasonName0,
-                        TeamName1 = s.TeamName1,
-                        TeamName2 = s.TeamName2,
+                        Team1AndTeam2Name = s.TeamName1 + " - " + s.TeamName2,
                         DateMatch0 = s.DateMatch0.ToString("D"),
                         StadiumAndCity0 = s.StadiumAndCity0,
                         TypeOfMatch0 = s.TypeOfMatch0,
@@ -201,9 +201,10 @@ namespace FootBallCompasition_WPF.Pages.pgsMatch
             }
         }
 
-
-
-
-
+        //private void cbSeason_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        //{
+        //    _idSeason = cbSeason.SelectedValue == null ? null : (cbSeason.SelectedItem as Season).Id;
+        //    loadMatch();
+        //}
     }
 }

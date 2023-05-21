@@ -25,7 +25,8 @@
             </Grid.ColumnDefinitions>
 
             <!--Left Menu-->
-            <Grid Width="65" Style="{StaticResource GridMenuPanel}">
+            <!--65-->
+            <Grid Width="65" Style="{StaticResource GridMenuPanel}" >
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="*"/>
@@ -156,12 +157,29 @@
                         </hc:SideMenu>-->
 
 
-                        <Button x:Name="Logout" Style="{StaticResource menuButton}" VerticalAlignment="Bottom" DockPanel.Dock="Bottom" Margin="15 0 15 20" Click="Logout_Click" >
-                            <StackPanel Orientation="Horizontal">
-                                <Icon:PackIconMaterial Kind="Logout" Style="{StaticResource menuButtonIcon}"/>
-                                <TextBlock Text="Logout"/>
-                            </StackPanel>
-                        </Button>
+                        <StackPanel VerticalAlignment="Bottom" DockPanel.Dock="Bottom" >
+
+                            <Button Style="{StaticResource menuButton}" x:Name="btnUscPersonalAccount" Click="btnUscPersonalAccount_Click">
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="Images\profile.png" Width="32" Height="32" Margin="0 0 20 0"/>
+                                    <StackPanel>
+                                        <TextBlock x:Name="tblFIOAccount" Text="ФИО Аккаунта" VerticalAlignment="Center" FontSize="13"/>
+                                        <TextBlock x:Name="tblRoleAccount"  Text="Роль Аккаунта" VerticalAlignment="Center"  FontSize="13"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Button>
+
+
+                            <Button x:Name="Logout" Style="{StaticResource menuButton}" VerticalAlignment="Bottom" DockPanel.Dock="Bottom" Margin="15 20 15 20" Click="Logout_Click" >
+                                <StackPanel Orientation="Horizontal">
+                                    <Icon:PackIconMaterial Kind="Logout" Style="{StaticResource menuButtonIcon}"/>
+                                    <TextBlock Text="Logout"/>
+                                </StackPanel>
+                            </Button>
+
+
+
+                        </StackPanel>
 
 
                     </DockPanel>
@@ -263,8 +281,8 @@
                 </Frame>
 
 
-                <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Hidden" HorizontalAlignment="Right">
-                    <StackPanel hc:Growl.GrowlParent="True" VerticalAlignment="Bottom" Margin="0,10,10,10" />
+                <ScrollViewer  Grid.Row="2" VerticalScrollBarVisibility="Hidden" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                    <StackPanel  hc:Growl.GrowlParent="True" VerticalAlignment="Bottom" Margin="0,10,10,10" />
                 </ScrollViewer>
 
             </Grid>

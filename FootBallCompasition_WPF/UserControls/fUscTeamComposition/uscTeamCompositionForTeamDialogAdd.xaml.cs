@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -45,6 +46,14 @@ namespace FootBallCompasition_WPF.UserControls.fUscTeamComposition
         public uscTeamCompositionForTeamDialogAdd(int idT, bool addOrModify, int idP, uscTeamCompositionForTeam uscTeamCompositionForTeam)
         {
             InitializeComponent();
+
+            tblPartErr.Visibility = Visibility.Collapsed;
+            tblStartContractErr.Visibility = Visibility.Collapsed;
+            tblEndContractErr.Visibility = Visibility.Collapsed;
+            tblPlayerNumberErr.Visibility = Visibility.Collapsed;
+            tblAmpluaRoleErr.Visibility = Visibility.Collapsed;
+
+
 
             ConfigHelper.Instance.SetLang("ru");
 
@@ -113,43 +122,33 @@ namespace FootBallCompasition_WPF.UserControls.fUscTeamComposition
         private void btnConfirm_Click(object sender, RoutedEventArgs e)
         {
 
+            tblPartErr.Visibility = cbPart.SelectedIndex == -1 ? Visibility.Visible : Visibility.Collapsed;
+            tblStartContractErr.Visibility = !dpContractStart.SelectedDate.HasValue ? Visibility.Visible : Visibility.Collapsed;
+            tblEndContractErr.Visibility = !dpContractEnd.SelectedDate.HasValue ? Visibility.Visible : Visibility.Collapsed;
+            tblPlayerNumberErr.Visibility = !Byte.TryParse(tbPlayerNumber.Text, out byte playerNumInt) ? Visibility.Visible : Visibility.Collapsed;
+            tblAmpluaRoleErr.Visibility = cbAmpluaRole.SelectedIndex == -1 ? Visibility.Visible : Visibility.Collapsed;
+
+            if (tblPartErr.Visibility == 0 || tblStartContractErr.Visibility == 0 || tblEndContractErr.Visibility == 0 || tblPlayerNumberErr.Visibility == 0
+                || tblAmpluaRoleErr.Visibility == 0)
+                return;
+
+
+
+
             if (_addOrModify)
             {
                 FootballClass.TeamComposition teamComposition = new FootballClass.TeamComposition();
 
 
                 teamComposition.Team = _team;
-
                 teamComposition.Participant = (Participant)cbPart.SelectedItem;
-
-                DateTime? tempContractStart = dpContractStart.SelectedDate;
-                DateTime? tempContractEnd = dpContractEnd.SelectedDate;
-                if (tempContractStart.HasValue && tempContractEnd.HasValue && tempContractStart < tempContractEnd)
-                {
-                    teamComposition.ContractStart = (DateTime)tempContractStart;
-                    teamComposition.ContractEnd = (DateTime)tempContractEnd;
-                }
-                else
-                {
-                    Growl.Warning("Дата начала контракта должна быть раньше даты оконачания контракта!");
-                    return;
-                }
-
-                var tryParsePlayNum = Byte.TryParse(tbPlayerNumber.Text, out byte playerNumInt);
-
-                if (tryParsePlayNum)
-                {
-                    teamComposition.PlayerNumber = playerNumInt;
-                }
-
-
-
+                teamComposition.ContractStart = (DateTime)dpContractStart.SelectedDate;
+                teamComposition.ContractEnd = (DateTime)dpContractEnd.SelectedDate;
+                teamComposition.PlayerNumber = playerNumInt;
                 teamComposition.AmpluaRole = (AmpluaRole)cbAmpluaRole.SelectedItem;
-
 
                 _db.TeamCompositions.Add(teamComposition);
                 _db.SaveChanges();
-
                 _uscTeamCompositionForTeam.loadDataGrid();
 
                 Growl.Success("Контракт успешно добавлен!");
@@ -158,39 +157,16 @@ namespace FootBallCompasition_WPF.UserControls.fUscTeamComposition
             else if (!_addOrModify)
             {
                 _teamComposition.Participant = (Participant)cbPart.SelectedItem;
-
-                DateTime? tempContractStart = dpContractStart.SelectedDate;
-                DateTime? tempContractEnd = dpContractEnd.SelectedDate;
-                if (tempContractStart.HasValue && tempContractEnd.HasValue && tempContractStart < tempContractEnd)
-                {
-                    _teamComposition.ContractStart = (DateTime)tempContractStart;
-                    _teamComposition.ContractEnd = (DateTime)tempContractEnd;
-                }
-                else
-                {
-                    Growl.Warning("Дата начала контракта должна быть раньше даты оконачания контракта!");
-                    return;
-                }
-
-                var tryParsePlayNum = Byte.TryParse(tbPlayerNumber.Text, out byte playerNumInt);
-
-                if (tryParsePlayNum)
-                {
-                    _teamComposition.PlayerNumber = playerNumInt;
-
-                }
-
-
-
+                _teamComposition.ContractStart = (DateTime)dpContractStart.SelectedDate;
+                _teamComposition.ContractEnd = (DateTime)dpContractEnd.SelectedDate;
+                _teamComposition.PlayerNumber = playerNumInt;
                 _teamComposition.AmpluaRole = (AmpluaRole)cbAmpluaRole.SelectedItem;
 
 
                 _db.Entry(_teamComposition).State = EntityState.Modified;
                 _db.SaveChanges();
 
-
                 _uscTeamCompositionForTeam.loadDataGrid();
-
                 Growl.Success("Контракт успешно изменен!");
 
             }
@@ -203,6 +179,12 @@ namespace FootBallCompasition_WPF.UserControls.fUscTeamComposition
         private void tglbtnActive_Click(object sender, RoutedEventArgs e)
         {
             loadComboboxData();
+        }
+
+        private void tbPlayerNumber_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
         }
     }
 }

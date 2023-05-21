@@ -46,35 +46,28 @@ namespace FootBallCompasition_WPF.Pages.pgsParticipant
         public void loadPart()
         {
 
+            List<Participant> tempPart;
+
             if(_idRole == null)
             {
-                partList = _db.Participants.Where(x => x.Active == tglbtnActive.IsChecked)
-                    .Select(s => new ParticipantShort()
-                    {
-                        Id = s.Id,
-                        FIO = $"{s.Surname} {s.Name} {s.Patronymic}",
-                        DateOfBirth = s.DateOfBirth.ToString("D"),
-                        Telephone = s.Telephone,
-                        RoleName = s.Role.Name,
-                        Active = s.Active,
-                    }).ToList();
-
+                tempPart = _db.Participants.Where(x => x.Active == tglbtnActive.IsChecked).Include(x => x.Role).ToList();
             }
             else
             {
-                partList = _db.Participants.Where(s => s.Active == tglbtnActive.IsChecked && s.IdRole == _idRole).
-                    Select(s =>
-                    new ParticipantShort()
-                    {
-                        Id = s.Id,
-                        FIO = $"{s.Surname} {s.Name} {s.Patronymic}",
-                        DateOfBirth = s.DateOfBirth.ToString("D"),
-                        Telephone = s.Telephone,
-                        RoleName = s.Role.Name,
-                        Active = s.Active,
-                    }).ToList();
-
+                tempPart = _db.Participants.Where(s => s.Active == tglbtnActive.IsChecked && s.IdRole == _idRole).Include(x => x.Role).ToList();   
             }
+
+            partList = tempPart.Select(s => new ParticipantShort()
+             {
+                 Id = s.Id,
+                 FIO = $"{s.Surname} {s.Name} {s.Patronymic}",
+                 DateOfBirth = s.DateOfBirth.ToString("D"),
+                 Telephone = s.Telephone,
+                 RoleName = s.Role.Name,
+                 Active = s.Active,
+             }).ToList();
+
+
 
             //GridPart.ItemsSource = partList;
 
@@ -105,41 +98,28 @@ namespace FootBallCompasition_WPF.Pages.pgsParticipant
                 //string[] strings = filtrby.Split(" ", StringSplitOptions.RemoveEmptyEntries);
 
 
+
+                List<Participant> tempPart;
+
                 if (_idRole == null)
                 {
-
-                    partList = _db.Participants.Where(x => x.Active == tglbtnActive.IsChecked && x.Surname.StartsWith(filtrby)).
-                    Select(s =>
-                    new ParticipantShort()
-                    {
-                        Id = s.Id,
-                        FIO = $"{s.Surname} {s.Name} {s.Patronymic}",
-                        DateOfBirth = s.DateOfBirth.ToString("D"),
-                        Telephone = s.Telephone,
-                        RoleName = s.Role.Name,
-                        Active = s.Active,
-                    }).ToList();
-
-
+                    tempPart = _db.Participants.Where(x => x.Active == tglbtnActive.IsChecked && x.Surname.StartsWith(filtrby)).Include(x => x.Role).ToList();
                 }
                 else
                 {
-
-
-                    partList = _db.Participants.Where(x => x.Active == tglbtnActive.IsChecked && x.IdRole == _idRole && x.Surname.StartsWith(filtrby)).
-                    Select(s =>
-                    new ParticipantShort()
-                    {
-                        Id = s.Id,
-                        FIO = $"{s.Surname} {s.Name} {s.Patronymic}",
-                        DateOfBirth = s.DateOfBirth.ToString("D"),
-                        Telephone = s.Telephone,
-                        RoleName = s.Role.Name,
-                        Active = s.Active,
-                    }).ToList();
-
-
+                    tempPart = _db.Participants.Where(s => s.Active == tglbtnActive.IsChecked && s.IdRole == _idRole && s.Surname.StartsWith(filtrby)).Include(x => x.Role).ToList();
                 }
+
+                partList = tempPart.Select(s => new ParticipantShort()
+                {
+                    Id = s.Id,
+                    FIO = $"{s.Surname} {s.Name} {s.Patronymic}",
+                    DateOfBirth = s.DateOfBirth.ToString("D"),
+                    Telephone = s.Telephone,
+                    RoleName = s.Role.Name,
+                    Active = s.Active,
+                }).ToList();
+
 
               
                 pagPart.MaxPageCount = (int)Math.Ceiling(partList.Count / 10.0);

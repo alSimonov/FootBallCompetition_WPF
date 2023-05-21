@@ -39,10 +39,6 @@ namespace FootBallCompasition_WPF.UserControls.ucsMatch
         {
             InitializeComponent();
 
-            //TODO изменить ширину xaml
-
-
-
 
             //TODO сделать жоскую проверку на даты контрактов 
 
@@ -52,7 +48,7 @@ namespace FootBallCompasition_WPF.UserControls.ucsMatch
 
             _idM = getMatchListModelShort.IdMatch0;
 
-            tblMatchInfo.Text = $"{getMatchListModelShort.TeamName1} - {getMatchListModelShort.TeamName2} | {getMatchListModelShort.DateMatch0}";
+            tblMatchInfo.Text = $"{getMatchListModelShort.Team1AndTeam2Name} | {getMatchListModelShort.DateMatch0}";
 
             loadDataGrid();
 

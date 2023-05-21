@@ -43,6 +43,16 @@ namespace FootBallCompasition_WPF.UserControls
         {
             InitializeComponent();
 
+            tblSurnameErr.Visibility = Visibility.Collapsed;
+            tblNameErr.Visibility = Visibility.Collapsed;
+            tblPatronymicErr.Visibility = Visibility.Collapsed;
+            tblDateOfBirthErr.Visibility = Visibility.Collapsed;
+            tblPhoneErr.Visibility = Visibility.Collapsed;
+            tblRoleErr.Visibility = Visibility.Collapsed;
+
+
+
+
             //Установка языка для datePicker
 
             ConfigHelper.Instance.SetLang("ru");
@@ -85,6 +95,20 @@ namespace FootBallCompasition_WPF.UserControls
         private void btnConfirm_Click(object sender, RoutedEventArgs e)
         {
 
+            tblSurnameErr.Visibility = tbPartSurname.Text == string.Empty ? Visibility.Visible : Visibility.Collapsed;
+            tblNameErr.Visibility = tbPartName.Text == string.Empty ? Visibility.Visible : Visibility.Collapsed;
+            tblPatronymicErr.Visibility = tbPartPatronymic.Text == string.Empty ? Visibility.Visible : Visibility.Collapsed;
+            tblDateOfBirthErr.Visibility = !dpDateOfBirth.SelectedDate.HasValue  ? Visibility.Visible : Visibility.Collapsed;
+            tblPhoneErr.Visibility = tbPartPhone.Text == string.Empty? Visibility.Visible : Visibility.Collapsed;
+            tblRoleErr.Visibility = cbRole.SelectedIndex == -1 ? Visibility.Visible : Visibility.Collapsed;
+
+
+            if (tblSurnameErr.Visibility == 0 || tblNameErr.Visibility == 0 || tblPatronymicErr.Visibility == 0 || tblDateOfBirthErr.Visibility == 0
+                || tblPhoneErr.Visibility == 0 || tblRoleErr.Visibility == 0)
+                return;
+
+
+
             if (_addOrModify)
             {
 
@@ -93,27 +117,14 @@ namespace FootBallCompasition_WPF.UserControls
                 participant.Surname = tbPartSurname.Text;
                 participant.Name = tbPartName.Text;
                 participant.Patronymic = tbPartPatronymic.Text;
-
-                DateTime? dateTime = dpDateOfBirth.SelectedDate;
-                if (dateTime.HasValue)
-                {
-                    participant.DateOfBirth = (DateTime)dateTime;
-
-                }
-                else
-                {
-
-                }
-
+                participant.DateOfBirth = (DateTime) dpDateOfBirth.SelectedDate;
                 participant.Telephone = tbPartPhone.Text;
                 participant.Role = (Role)cbRole.SelectedItem;
                 participant.Active = true;
 
 
                 _db.Participants.Add(participant);
-
                 _db.SaveChanges();
-
                 _pageParticipant.loadPart();
 
                 Growl.Success("Участник успешно добавлен!");
@@ -127,26 +138,13 @@ namespace FootBallCompasition_WPF.UserControls
                 _participant.Surname = tbPartSurname.Text;
                 _participant.Name = tbPartName.Text;
                 _participant.Patronymic = tbPartPatronymic.Text;
-
-                DateTime? dateTime = dpDateOfBirth.SelectedDate;
-                if (dateTime.HasValue)
-                {
-                    _participant.DateOfBirth = (DateTime)dateTime;
-
-                }
-                else
-                {
-
-                }
-
+                _participant.DateOfBirth = (DateTime)dpDateOfBirth.SelectedDate;
                 _participant.Telephone = tbPartPhone.Text;
                 _participant.Role = (Role)cbRole.SelectedItem;
 
 
                 _db.Entry(_participant).State = EntityState.Modified;
-
                 _db.SaveChanges();
-
                 _pageParticipant.loadPart();
 
                 Growl.Success("Участник успешно изменен!");                

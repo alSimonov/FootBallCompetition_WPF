@@ -40,20 +40,27 @@ namespace FootBallCompasition_WPF.UserControls
         int _idP;
         bool _addOrModify;
 
+        bool _PersonalOrCommonDialog;
+
 
         public uscDialogAccountAdd(int idP, bool addOrModify, PageAccount pageAccount)
         {
             InitializeComponent();
 
+            tblLoginErr.Visibility = Visibility.Collapsed;
+            tblPasswordErr.Visibility = Visibility.Collapsed;
+            tblEmailErr.Visibility = Visibility.Collapsed;
+            tblParticipantErr.Visibility = Visibility.Collapsed;
+            tblRoleErr.Visibility = Visibility.Collapsed;
 
             dbConfiguration.ConfigureServices();
             _db = dbConfiguration.Services.GetService<MainDBContext>();
 
+            _PersonalOrCommonDialog = false;
 
             _idP = idP;
             _addOrModify = addOrModify;
             _pageAccount = pageAccount;
-
 
             if (_addOrModify)
                 tglbtnActive.IsChecked = true;
@@ -63,6 +70,39 @@ namespace FootBallCompasition_WPF.UserControls
 
 
         }
+
+        public uscDialogAccountAdd(int idP, bool addOrModify)
+        {
+            InitializeComponent();
+
+            tblLoginErr.Visibility = Visibility.Collapsed;
+            tblPasswordErr.Visibility = Visibility.Collapsed;
+            tblEmailErr.Visibility = Visibility.Collapsed;
+            tblParticipantErr.Visibility = Visibility.Collapsed;
+            tblRoleErr.Visibility = Visibility.Collapsed;
+
+            dbConfiguration.ConfigureServices();
+            _db = dbConfiguration.Services.GetService<MainDBContext>();
+
+            _PersonalOrCommonDialog = true;
+
+            _idP = idP;
+            _addOrModify = addOrModify;
+
+            tglbtnActive.IsChecked = false;
+
+            tglbtnActive.Visibility = Visibility.Collapsed;
+
+            cbParticipant.IsEditable = false;
+            cbParticipant.IsEnabled = false;
+            cbAccountRole.IsEditable = false;
+            cbAccountRole.IsEnabled = false;
+
+            loadComboboxData();
+
+        }
+
+
 
         public void loadComboboxData()
         {
@@ -107,7 +147,17 @@ namespace FootBallCompasition_WPF.UserControls
         private void btnConfirm_Click(object sender, RoutedEventArgs e)
         {
 
-            if (_addOrModify)
+            tblLoginErr.Visibility = tbLogin.Text == string.Empty ? Visibility.Visible : Visibility.Collapsed;
+            tblPasswordErr.Visibility = tbPassword.Text == string.Empty ? Visibility.Visible : Visibility.Collapsed;
+            tblEmailErr.Visibility = tbEmail.Text == string.Empty ? Visibility.Visible : Visibility.Collapsed;
+            tblParticipantErr.Visibility = cbParticipant.SelectedIndex == -1 ? Visibility.Visible : Visibility.Collapsed;
+            tblRoleErr.Visibility = cbAccountRole.SelectedIndex == -1 ? Visibility.Visible : Visibility.Collapsed;
+
+            if (tblLoginErr.Visibility == 0 || tblPasswordErr.Visibility == 0 || tblEmailErr.Visibility == 0 || tblParticipantErr.Visibility == 0 || tblRoleErr.Visibility == 0)
+                return;
+
+
+                if (_addOrModify)
             {
 
 
@@ -115,30 +165,20 @@ namespace FootBallCompasition_WPF.UserControls
                 FootballClass.Account account = new FootballClass.Account();
 
                 account.Login = tbLogin.Text;
-
-                //byte[] passwordAdmin = SHA512.Create().ComputeHash(Encoding.BigEndianUnicode.GetBytes("admin@gmail.comadminadminСкрипеевСофронЗосимович22 июля 1998 г."));
-
-                //Account account = new Account(Id = 1, Login = "admin", Password = passwordAdmin, IdParticipant = 422, Email = "admin@gmail.com", IdAccountRole = 1);
-
                 account.Email = tbEmail.Text;
                 account.Participant = (Participant)cbParticipant.SelectedItem;
                 account.AccountRole = (AccountRole)cbAccountRole.SelectedItem;
 
-                string dateStr = account.Participant.DateOfBirth.ToString("D");
-
-                string strPart = $"{account.Email}{account.Login}{tbPassword.Text}{account.Participant.Surname}{account.Participant.Name}{account.Participant.Patronymic}{dateStr}";
-
-                byte[] passwordHash = SHA512.Create().ComputeHash(Encoding.BigEndianUnicode.GetBytes(strPart));
+                string forHash = $"{account.Email}{account.Login}{tbPassword.Text}";
+                byte[] passwordHash = SHA512.Create().ComputeHash(Encoding.BigEndianUnicode.GetBytes(forHash));
 
                 account.Password = passwordHash;
 
 
                 _db.Accounts.Add(account);
-
                 _db.SaveChanges();
 
                 _pageAccount.loadAccount();
-
                 Growl.Success("Аккаунт успешно добавлен!");
 
 
@@ -146,35 +186,37 @@ namespace FootBallCompasition_WPF.UserControls
 
             else if (!_addOrModify)
             {
+
+
+
+
                 _account.Login = tbLogin.Text;
 
                 _account.Email = tbEmail.Text;
                 _account.Participant = (Participant)cbParticipant.SelectedItem;
                 _account.AccountRole = (AccountRole)cbAccountRole.SelectedItem;
 
-                if (tbPassword.Text != string.Empty)
-                {
+                string forHash = $"{_account.Email}{_account.Login}{tbPassword.Text.Trim()}";
+                byte[] passwordHash = SHA512.Create().ComputeHash(Encoding.BigEndianUnicode.GetBytes(forHash));
 
-                    string dateStr = _account.Participant.DateOfBirth.ToString("D");
-
-                    string strPart = $"{_account.Email}{_account.Login}{tbPassword.Text}{_account.Participant.Surname}{_account.Participant.Name}{_account.Participant.Patronymic}{dateStr}";
-
-                    byte[] passwordHash = SHA512.Create().ComputeHash(Encoding.BigEndianUnicode.GetBytes(strPart));
-
-                    _account.Password = passwordHash;
-
-
-                }
+                _account.Password = passwordHash;
 
                 _db.Entry(_account).State = EntityState.Modified;
-
                 _db.SaveChanges();
 
-                _pageAccount.loadAccount();
+                if(!_PersonalOrCommonDialog)
+                    _pageAccount.loadAccount();
 
                 Growl.Success("Аккаунт успешно изменен!");
 
             }
+        }
+
+        public void UpdateAccount()
+        {
+
+
+
         }
 
         private void tglbtnActive_Click(object sender, RoutedEventArgs e)

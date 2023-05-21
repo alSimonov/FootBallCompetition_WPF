@@ -10,7 +10,7 @@
              
              
              mc:Ignorable="d" 
-             Width="400" Height="400"  Background="Transparent">
+             Width="400" Height="450"  Background="Transparent">
 
 
 
@@ -45,8 +45,8 @@
                           BorderThickness="0" FontSize="20" FontFamily="helvetica" FontWeight="Light" VerticalContentAlignment="Center"
                           IsEditable="True" />
                 <!--AutoComplete="True"-->
-
                 <Border Style="{DynamicResource BorderSeparatorForTBDialog}" Width="287" />
+                <TextBlock x:Name="tblTeamErr" Text="*Укажите команду." Margin="70 0 0 0" Foreground="#e5215f" />
 
 
 
@@ -54,20 +54,24 @@
                             HorizontalAlignment="Center" Margin="0 15 0 0" Background="Transparent" Foreground="{DynamicResource ForeGroundColorDialog}" BorderThickness="0" 
                             FontSize="20" FontFamily="helvetica" FontWeight="Light" />
                 <Border Style="{DynamicResource BorderSeparatorForTBDialog}" Width="287"/>
+                <TextBlock x:Name="tblStartContractErr" Text="*Укажите начало контракта." Margin="70 0 0 0" Foreground="#e5215f" />
+
 
                 <DatePicker x:Name="dpContractEnd"  Style="{StaticResource DatePickerExtend}" hc:InfoElement.Placeholder="Окончание контракта" Width="300" Height="34" 
                             HorizontalAlignment="Center" Margin="0 15 0 0" Background="Transparent" Foreground="{DynamicResource ForeGroundColorDialog}" BorderThickness="0" 
                             FontSize="20" FontFamily="helvetica" FontWeight="Light" />
                 <Border Style="{DynamicResource BorderSeparatorForTBDialog}" Width="287"/>
+                <TextBlock x:Name="tblEndContractErr" Text="*Укажите окончание контракта." Margin="70 0 0 0" Foreground="#e5215f" />
 
 
                 <StackPanel Orientation="Horizontal" Margin="0 15 0 0" HorizontalAlignment="Center">
                     <TextBox x:Name="tbPlayerNumber"   Style="{StaticResource TextBoxExtend}" hc:InfoElement.Placeholder="00" FontWeight="Light" FontFamily="helvetica" 
                              FontSize="20" Foreground="{DynamicResource ForeGroundColorDialog}" BorderThickness="0" Height="40" Background="Transparent"
-                             Width="260" Margin="0 0 0 0"  />
+                             Width="260" Margin="0 0 0 0" PreviewTextInput="tbPlayerNumber_PreviewTextInput"  />
                     <Icon:PackIconMaterial Kind="Numeric" Style="{DynamicResource IconPackMaterial}" Foreground="{DynamicResource ForeGroundColorDialog}"/>
                 </StackPanel>
                 <Border Style="{DynamicResource BorderSeparatorForTBDialog}" Width="287" />
+                <TextBlock x:Name="tblPlayerNumberErr" Text="*Укажите номер игрока." Margin="70 0 0 0" Foreground="#e5215f" />
 
 
 
@@ -77,6 +81,7 @@
                           BorderThickness="0" FontSize="20" FontFamily="helvetica" FontWeight="Light" VerticalContentAlignment="Center"
                           IsEditable="True"/>
                 <Border Style="{DynamicResource BorderSeparatorForTBDialog}" Width="287" />
+                <TextBlock x:Name="tblAmpluaRoleErr" Text="*Укажите роль." Margin="70 0 0 0" Foreground="#e5215f" />
 
 
 

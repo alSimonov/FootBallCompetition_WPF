@@ -32,11 +32,10 @@
                     <TextBox x:Name="tbTeamName"   Style="{StaticResource TextBoxExtend}" hc:InfoElement.Placeholder="Команда" FontWeight="Light" FontFamily="helvetica" 
                              FontSize="20" Foreground="{DynamicResource ForeGroundColorDialog}" BorderThickness="0"  Height="34" Background="Transparent"
                              Width="170" Margin="0 0 0 0" />
-
-
                     <Icon:PackIconMaterial Kind="AccountGroup" Style="{DynamicResource IconPackMaterial}" Foreground="{DynamicResource ForeGroundColorDialog}" />
                 </StackPanel>
                 <Border Style="{DynamicResource BorderSeparatorForTBDialog}" />
+                <TextBlock x:Name="tblTeamNameErr" Text="*Укажите название команды." Margin="70 0 0 0" Foreground="#e5215f" />
 
 
 
@@ -44,8 +43,8 @@
                           HorizontalAlignment="Center" Margin="0 5 0 0" Background="Transparent" Foreground="{DynamicResource ForeGroundColorDialog}" 
                           BorderThickness="0" FontSize="20" FontFamily="helvetica" FontWeight="Light" VerticalContentAlignment="Center"
                            IsEditable="True"/>
-                
                 <Border Style="{DynamicResource BorderSeparatorForTBDialog}" />
+                <TextBlock x:Name="tblCityErr" Text="*Укажите город." Margin="70 0 0 0" Foreground="#e5215f" />
 
             </StackPanel>
 

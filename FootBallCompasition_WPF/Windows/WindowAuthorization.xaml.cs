@@ -30,11 +30,13 @@ namespace FootBallCompasition_WPF.Windows
     public partial class WindowAuthorization : System.Windows.Window
     {
 
-        public record class AccountR(string Email, string AccountRoleName, string PartSurname, string PartName, string PartPatronymic, DateTime PartDateOfBirth);
+        public record class AccountR(int IdAccount, string Email, string AccountRoleName, string PartSurname, string PartName);
 
         public MainDBContext? _db;
 
         public string TheAccountRole;
+        public string FIOAccount;
+        public int IdAccount;
 
         public WindowAuthorization()
         {
@@ -69,7 +71,7 @@ namespace FootBallCompasition_WPF.Windows
 
 
             string Login = tbLogin.Text;
-            string Password = pbPassword.Password;
+            string Password = pbPassword.Password.Trim();
 
             //####################################################
 
@@ -82,26 +84,22 @@ namespace FootBallCompasition_WPF.Windows
             if (_db.Accounts.Any(u => u.Login == Login))
             {
 
-
                 var accountList = _db.Accounts.Where(s => s.Login == Login).
-                    Select(u => new AccountR(u.Email, u.AccountRole.Name, u.Participant.Surname, u.Participant.Name, u.Participant.Patronymic, u.Participant.DateOfBirth)).ToList();
+                    Select(u => new AccountR(u.Id, u.Email, u.AccountRole.Name, u.Participant.Surname, u.Participant.Name)).ToList();
 
-                var dateOfBirth = accountList[0].PartDateOfBirth.ToString("D");
-                string forHash = $"{accountList[0].Email}{Login}{Password}{accountList[0].PartSurname}{accountList[0].PartName}{accountList[0].PartPatronymic}{dateOfBirth}";
-
+                string forHash = $"{accountList[0].Email}{Login}{Password}";
                 byte[] passwordByte = SHA512.Create().ComputeHash(Encoding.BigEndianUnicode.GetBytes(forHash));
-
 
 
                 if (_db.Accounts.Any(u => u.Login == Login && u.Password == passwordByte))
                 {
 
-                    //HandyControl.Controls.MessageBox.Show( new HandyControl.Data.MessageBoxInfo { Message = "Вход подтвержден" });
                     DialogResult = true;
 
                     TheAccountRole = accountList[0].AccountRoleName;
+                    FIOAccount = accountList[0].PartSurname + " " + accountList[0].PartName;
+                    IdAccount = accountList[0].IdAccount;
 
-                    
                 }
                 else
                     tblPasswordErr.Visibility = Visibility.Visible;

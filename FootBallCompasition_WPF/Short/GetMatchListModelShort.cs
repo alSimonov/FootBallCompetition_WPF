@@ -10,8 +10,7 @@ namespace FootBallCompasition_WPF.Short
     {
         public int IdMatch0 { get; set; }
         public string SeasonName0 { get; set; }
-        public string TeamName1 { get; set; }
-        public string TeamName2 { get; set; }
+        public string Team1AndTeam2Name { get; set; }
         public string DateMatch0 { get; set; }
         public string StadiumAndCity0 { get; set; }
         public string TypeOfMatch0 { get; set; }

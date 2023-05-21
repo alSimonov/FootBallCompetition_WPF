@@ -42,6 +42,10 @@ namespace FootBallCompasition_WPF.UserControls
         {
             InitializeComponent();
 
+            tblTeamNameErr.Visibility = Visibility.Collapsed;
+            tblCityErr.Visibility = Visibility.Collapsed;
+
+
             dbConfiguration.ConfigureServices();
             _db = dbConfiguration.Services.GetService<MainDBContext>();
 
@@ -71,6 +75,14 @@ namespace FootBallCompasition_WPF.UserControls
 
         private void btnConfirm_Click(object sender, RoutedEventArgs e)
         {
+
+            tblTeamNameErr.Visibility = tbTeamName.Text == string.Empty ? Visibility.Visible : Visibility.Collapsed;
+            tblCityErr.Visibility = cbCity.SelectedIndex == -1 ? Visibility.Visible : Visibility.Collapsed;
+
+            if (tblTeamNameErr.Visibility == 0 || tblCityErr.Visibility == 0)
+                return;
+
+
             if (_addOrModify)
             {
                 Team team = new Team();
@@ -82,12 +94,7 @@ namespace FootBallCompasition_WPF.UserControls
        
                 _db.Teams.Add(team);
                 _db.SaveChanges();
-
-                //(this.pageTeam as PageTeam).loadTeam();
-
                 _pageTeam.loadTeam();
-
-                //PageTeam.loadTeam();
 
                 Growl.Success("Команда успешно добавлена!");
 
@@ -98,10 +105,7 @@ namespace FootBallCompasition_WPF.UserControls
                 _team.City = (City)cbCity.SelectedItem;
 
                 _db.Entry(_team).State = EntityState.Modified;
-
                 _db.SaveChanges();
-
-
                 _pageTeam.loadTeam();
 
                 Growl.Success("Команда успешно изменена!");

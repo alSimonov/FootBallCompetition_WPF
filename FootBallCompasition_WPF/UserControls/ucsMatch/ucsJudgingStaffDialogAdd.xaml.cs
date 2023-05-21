@@ -34,7 +34,8 @@ namespace FootBallCompasition_WPF.UserControls.ucsMatch
         {
             InitializeComponent();
 
-
+            tblPartErr.Visibility = Visibility.Collapsed;
+            tblRoleErr.Visibility = Visibility.Collapsed;
 
             dbConfiguration.ConfigureServices();
             _db = dbConfiguration.Services.GetService<MainDBContext>();
@@ -81,15 +82,12 @@ namespace FootBallCompasition_WPF.UserControls.ucsMatch
 
 
 
-
             if (!_addOrModify)
             {
                 _judgingStaff = _db.JudgingStaffs.Find(_idP);
 
                 cbParticipant.SelectedItem = _judgingStaff.Participant;
-
                 cbAmpluaRole.SelectedItem = _judgingStaff.AmpluaRole;
-
 
             }
 
@@ -100,27 +98,27 @@ namespace FootBallCompasition_WPF.UserControls.ucsMatch
 
         private void btnConfirm_Click(object sender, RoutedEventArgs e)
         {
+            tblPartErr.Visibility = cbParticipant.SelectedIndex == -1 ? Visibility.Visible : Visibility.Collapsed;
+            tblRoleErr.Visibility = cbAmpluaRole.SelectedIndex == -1 ? Visibility.Visible : Visibility.Collapsed;
+
+            if (tblPartErr.Visibility == 0 || tblRoleErr.Visibility == 0)
+                return;
+
+
             if (_addOrModify)
             {
-
                 FootballClass.JudgingStaff judgingStaff = new FootballClass.JudgingStaff();
-
-
 
                 judgingStaff.Match = _db.Matches.Find(_idM);
 
                 judgingStaff.Participant = (Participant)cbParticipant.SelectedItem;
-
-
                 judgingStaff.AmpluaRole = (AmpluaRole)cbAmpluaRole.SelectedItem;
 
 
                 _db.JudgingStaffs.Add(judgingStaff);
-
                 _db.SaveChanges();
 
                 _ucsReferee.loadDataGrid();
-
                 Growl.Success("Судья успешно добавлен!");
 
 

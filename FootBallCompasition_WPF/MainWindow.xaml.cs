@@ -4,8 +4,11 @@ using FootBallCompasition_WPF.Pages.pgsMatch;
 using FootBallCompasition_WPF.Pages.pgsParticipant;
 using FootBallCompasition_WPF.Pages.pgsStadium;
 using FootBallCompasition_WPF.Pages.pgsTeam;
+using FootBallCompasition_WPF.Short;
+using FootBallCompasition_WPF.UserControls;
 using FootBallCompasition_WPF.UserControls.SideMenu;
 using FootBallCompasition_WPF.Windows;
+using HandyControl.Controls;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -21,11 +24,13 @@ namespace FootBallCompasition_WPF
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : System.Windows.Window
     {
 
 
         public MainDBContext? _db;
+
+        public int _idAccount;
 
 
         public MainWindow()
@@ -41,7 +46,10 @@ namespace FootBallCompasition_WPF
             dbConfiguration.ConfigureServices();
             _db = dbConfiguration.Services.GetService<MainDBContext>();
 
+
+
             //TODO убрать row с уведомлениями, настрокой и поиском  
+            //TODO мб сделать менюшку с уведомлениями
 
         }
 
@@ -69,6 +77,10 @@ namespace FootBallCompasition_WPF
                 {
                     btnFrameAccount.Visibility = Visibility.Collapsed;
                 }
+
+                tblFIOAccount.Text = dialog.FIOAccount;
+                tblRoleAccount.Text = dialog.TheAccountRole;
+                _idAccount = dialog.IdAccount;
 
                 this.Visibility = Visibility.Visible;
 
@@ -177,5 +189,9 @@ namespace FootBallCompasition_WPF
 
         }
 
+        private void btnUscPersonalAccount_Click(object sender, RoutedEventArgs e)
+        {
+            Dialog.Show(new uscDialogAccountAdd(_idAccount, false));
+        }
     }
 }

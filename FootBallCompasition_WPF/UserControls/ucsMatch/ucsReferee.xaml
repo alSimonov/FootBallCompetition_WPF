@@ -10,7 +10,7 @@
       
              
              mc:Ignorable="d" 
-             d:DesignHeight="400" d:DesignWidth="700">
+             Height="600" Width="800">
 
 
 

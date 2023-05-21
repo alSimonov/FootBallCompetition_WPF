@@ -45,22 +45,16 @@
                           BorderThickness="0" FontSize="20" FontFamily="helvetica" FontWeight="Light" VerticalContentAlignment="Center"
                           IsEditable="True"/>
                 <!--AutoComplete="True"-->
-
                 <Border Style="{DynamicResource BorderSeparatorForTBDialog}" Width="287" />
-
+                <TextBlock x:Name="tblPartErr" Text="*Укажите судью." Margin="70 0 0 0" Foreground="#e5215f" />
 
 
                 <hc:ComboBox x:Name="cbAmpluaRole" hc:InfoElement.Placeholder="Роль" SelectedIndex="0" Width="300" Height="35"
                           HorizontalAlignment="Center" Margin="0 5 0 0" Background="Transparent" Foreground="{DynamicResource ForeGroundColorDialog}" 
                           BorderThickness="0" FontSize="20" FontFamily="helvetica" FontWeight="Light" VerticalContentAlignment="Center"
                           IsEditable="True"/>
-                <!--AutoComplete="True"-->
-
                 <Border Style="{DynamicResource BorderSeparatorForTBDialog}" Width="287" />
-
-
-
-
+                <TextBlock x:Name="tblRoleErr" Text="*Укажите роль." Margin="70 0 0 0" Foreground="#e5215f" />
 
 
             </StackPanel>
@@ -70,10 +64,6 @@
                 <Button x:Name="btnConfirm" Click="btnConfirm_Click"  Style="{StaticResource btnConfirmDialog}"   Width="100" Height="40" Content="ПОДТВЕРДИТЬ" Margin="0 0 60 0"/>
                 <Button Command="hc:ControlCommands.Close" Style="{StaticResource btnConfirmDialog}" Width="100" Height="40" Content="ОТМЕНИТЬ" />
             </StackPanel>
-
-
-
-
 
 
         </Grid>

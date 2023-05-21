@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -42,6 +43,13 @@ namespace FootBallCompasition_WPF.UserControls
         public uscDialogStadiumAdd(int idP, bool addOrModify, PageStadium pageStadium)
         {
             InitializeComponent();
+
+            tblStadiumErr.Visibility = Visibility.Collapsed;
+            tblCityErr.Visibility = Visibility.Collapsed;
+            tblCapacityErr.Visibility = Visibility.Collapsed;
+            tblTypeOfCoverErr.Visibility = Visibility.Collapsed;
+            tblTypeOfStadiumErr.Visibility = Visibility.Collapsed;
+
 
 
             dbConfiguration.ConfigureServices();
@@ -86,23 +94,29 @@ namespace FootBallCompasition_WPF.UserControls
 
         private void btnConfirm_Click(object sender, RoutedEventArgs e)
         {
+
+            tblStadiumErr.Visibility = tbStadiumName.Text == string.Empty ? Visibility.Visible : Visibility.Collapsed;
+            tblCityErr.Visibility = cbCity.SelectedIndex == -1 ? Visibility.Visible : Visibility.Collapsed;
+            tblCapacityErr.Visibility = !int.TryParse(tbCapacity.Text, out int capacity) ? Visibility.Visible : Visibility.Collapsed;
+            tblTypeOfCoverErr.Visibility = cbTypeOfCoverage.SelectedIndex == -1 ? Visibility.Visible : Visibility.Collapsed;
+            tblTypeOfStadiumErr.Visibility = cbTypeOfStadium.SelectedIndex == -1 ? Visibility.Visible : Visibility.Collapsed;
+
+
+
+
+            if (tblStadiumErr.Visibility == 0 || tblCityErr.Visibility == 0 || tblCapacityErr.Visibility == 0 || tblTypeOfCoverErr.Visibility == 0 
+                || tblTypeOfStadiumErr.Visibility == 0)
+                return;
+
+
+
             if (_addOrModify)
             {
                 FootballClass.Stadium stadium = new FootballClass.Stadium();
 
                 stadium.Name = tbStadiumName.Text;
                 stadium.City = (City)cbCity.SelectedItem;
-                
-                
-                if (int.TryParse(tbCapacity.Text, out int capacity))
-                {
-                    stadium.Capacity =  capacity;
-                }
-                else
-                {
-                    Growl.Error("Вместимость ?????");
-                }
-
+                stadium.Capacity =  capacity;
                 stadium.TypeOfСoverage = (TypeOfСoverage)cbTypeOfCoverage.SelectedItem;
                 stadium.TypeOfStadium = (TypeOfStadium)cbTypeOfStadium.SelectedItem;
                 stadium.Active = true;
@@ -114,7 +128,6 @@ namespace FootBallCompasition_WPF.UserControls
 
                 Growl.Success("Стадион успешно добавлен!");
 
-                //TODO доделать активно \ не активно: Stadium , team , participant
 
             }
             else if (!_addOrModify)
@@ -122,25 +135,13 @@ namespace FootBallCompasition_WPF.UserControls
 
                 _stadium.Name = tbStadiumName.Text;
                 _stadium.City = (City)cbCity.SelectedItem;
-
-
-                if (int.TryParse(tbCapacity.Text, out int capacity))
-                {
-                    _stadium.Capacity = capacity;
-                }
-                else
-                {
-                    Growl.Error("Вместимость ?????");
-                }
-
+                _stadium.Capacity = capacity;
                 _stadium.TypeOfСoverage = (TypeOfСoverage)cbTypeOfCoverage.SelectedItem;
                 _stadium.TypeOfStadium = (TypeOfStadium)cbTypeOfStadium.SelectedItem;
 
 
                 _db.Entry(_stadium).State = EntityState.Modified;
-
                 _db.SaveChanges();
-
                 _pageStadium.loadStadium();
 
                 Growl.Success("Стадион успешно изменен!");
@@ -148,6 +149,12 @@ namespace FootBallCompasition_WPF.UserControls
             }
 
 
+        }
+
+        private void tbCapacity_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
         }
     }
 }

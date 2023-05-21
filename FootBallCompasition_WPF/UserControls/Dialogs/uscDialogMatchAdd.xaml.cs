@@ -44,6 +44,16 @@ namespace FootBallCompasition_WPF.UserControls
         {
             InitializeComponent();
 
+
+
+            tblSeasonErr.Visibility = Visibility.Collapsed;
+            tblTeam1Err.Visibility = Visibility.Collapsed;
+            tblTeam2Err.Visibility = Visibility.Collapsed;
+            tblDateOfMatchErr.Visibility = Visibility.Collapsed;
+            tblStadiumErr.Visibility = Visibility.Collapsed;
+            tblTypeOfMatchErr.Visibility = Visibility.Collapsed;
+
+
             //Установка языка для datePicker
 
             ConfigHelper.Instance.SetLang("ru");
@@ -82,14 +92,8 @@ namespace FootBallCompasition_WPF.UserControls
             cbTeam1.SelectedValuePath = "Id";
             cbTeam1.DisplayMemberPath = "Name";
 
-            
-            if (tglbtnActive.IsChecked == true)
-                cbTeam2.ItemsSource = _db.Teams.Where(x => x.Active == true).ToList();
-            else
-                cbTeam2.ItemsSource = _db.Teams.ToList();
 
-            cbTeam2.SelectedValuePath = "Id";
-            cbTeam2.DisplayMemberPath = "Name";
+            // cbTeam2 заполняется при изменении выбора cbTeam2, метод внизу
 
             List<Stadium> ll;
 
@@ -136,6 +140,23 @@ namespace FootBallCompasition_WPF.UserControls
         private void btnConfirm_Click(object sender, RoutedEventArgs e)
         {
 
+            tblSeasonErr.Visibility = cbSeason.SelectedIndex == -1 ? Visibility.Visible : Visibility.Collapsed;
+            tblTeam1Err.Visibility = cbTeam1.SelectedIndex == -1 ? Visibility.Visible : Visibility.Collapsed;
+            tblTeam2Err.Visibility = cbTeam2.SelectedIndex == -1 ? Visibility.Visible : Visibility.Collapsed;
+            tblDateOfMatchErr.Visibility = !dpDateOfMatch.SelectedDate.HasValue ? Visibility.Visible : Visibility.Collapsed; ;
+            tblStadiumErr.Visibility = cbStadium.SelectedIndex == -1 ? Visibility.Visible : Visibility.Collapsed;
+            tblTypeOfMatchErr.Visibility = cbTypeOfMatch.SelectedIndex == -1 ? Visibility.Visible : Visibility.Collapsed;
+
+
+
+            if (tblSeasonErr.Visibility == 0 || tblTeam1Err.Visibility == 0 || tblTeam2Err.Visibility == 0 || tblDateOfMatchErr.Visibility == 0 
+                || tblStadiumErr.Visibility == 0 || tblTypeOfMatchErr.Visibility == 0)
+                return;
+
+
+
+
+
             if (_addOrModify)
             {
 
@@ -144,18 +165,7 @@ namespace FootBallCompasition_WPF.UserControls
                 match.Season = (Season)cbSeason.SelectedItem;
                 match.Team1 = (Team)cbTeam1.SelectedItem;
                 match.Team2 = (Team)cbTeam2.SelectedItem;
-
-                DateTime? dateTime = dpDateOfMatch.SelectedDate;
-                if (dateTime.HasValue)
-                {
-                    match.Date = (DateTime)dateTime;
-
-                }
-                else
-                {
-
-                }
-
+                match.Date = (DateTime) dpDateOfMatch.SelectedDate;
                 match.Stadium = (Stadium)cbStadium.SelectedItem;
                 match.TypeOfMatch = (TypeOfMatch) cbTypeOfMatch.SelectedItem;
 
@@ -175,20 +185,7 @@ namespace FootBallCompasition_WPF.UserControls
                 _match.Season = (Season)cbSeason.SelectedItem;
                 _match.Team1 = (Team)cbTeam1.SelectedItem;
                 _match.Team2 = (Team)cbTeam2.SelectedItem;
-
-
-
-                DateTime? dateTime = dpDateOfMatch.SelectedDate;
-                if (dateTime.HasValue)
-                {
-                    _match.Date = (DateTime)dateTime;
-
-                }
-                else
-                {
-                }
-
-
+                _match.Date = (DateTime)dpDateOfMatch.SelectedDate;
                 _match.Stadium = (Stadium)cbStadium.SelectedItem;
                 _match.TypeOfMatch = (TypeOfMatch)cbTypeOfMatch.SelectedItem;
 
@@ -212,6 +209,20 @@ namespace FootBallCompasition_WPF.UserControls
         private void tglbtnActive_Click(object sender, RoutedEventArgs e)
         {
             loadComboboxData();
+        }
+
+        private void cbTeam1_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+            if (tglbtnActive.IsChecked == true)
+                cbTeam2.ItemsSource = _db.Teams.Where(x => x.Active == true && x != cbTeam1.SelectedItem).ToList();
+            else
+                cbTeam2.ItemsSource = _db.Teams.Where(x => x != cbTeam1.SelectedItem ).ToList();
+
+
+            cbTeam2.SelectedValuePath = "Id";
+            cbTeam2.DisplayMemberPath = "Name";
+
         }
     }
 }

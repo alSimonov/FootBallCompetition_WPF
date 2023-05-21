@@ -45,6 +45,11 @@ namespace FootBallCompasition_WPF.UserControls.ucsMatch
         {
             InitializeComponent();
 
+            tblTeamErr.Visibility = Visibility.Collapsed;
+            tblPartErr.Visibility = Visibility.Collapsed;
+            tblEventErr.Visibility = Visibility.Collapsed;
+            tblTimeErr.Visibility = Visibility.Collapsed;
+
 
             dbConfiguration.ConfigureServices();
             _db = dbConfiguration.Services.GetService<MainDBContext>();
@@ -114,6 +119,14 @@ namespace FootBallCompasition_WPF.UserControls.ucsMatch
         private void btnConfirm_Click(object sender, RoutedEventArgs e)
         {
 
+            tblTeamErr.Visibility = cbTeam.SelectedIndex == -1 ? Visibility.Visible : Visibility.Collapsed;
+            tblPartErr.Visibility = cbTeamComposition.SelectedIndex == -1 ? Visibility.Visible : Visibility.Collapsed;
+            tblEventErr.Visibility = cbTypeOfEvent.SelectedIndex == -1 ? Visibility.Visible : Visibility.Collapsed;
+            tblTimeErr.Visibility = tbTime.Text == string.Empty ? Visibility.Visible : Visibility.Collapsed;
+
+            if (tblTeamErr.Visibility == 0 || tblPartErr.Visibility == 0 || tblEventErr.Visibility == 0 || tblTimeErr.Visibility == 0)
+                return;
+
             if (_addOrModify)
             {
                 FootballClass.Event eventtt = new FootballClass.Event();
@@ -127,7 +140,6 @@ namespace FootBallCompasition_WPF.UserControls.ucsMatch
                 _db.SaveChanges();
 
                 _uscEvents.loadDataGrid();
-
                 Growl.Success("Событие успешно добавлено!");
 
             }
@@ -141,7 +153,6 @@ namespace FootBallCompasition_WPF.UserControls.ucsMatch
                 _db.SaveChanges();
 
                 _uscEvents.loadDataGrid();
-
                 Growl.Success("Событие успешно изменено!");
 
             }

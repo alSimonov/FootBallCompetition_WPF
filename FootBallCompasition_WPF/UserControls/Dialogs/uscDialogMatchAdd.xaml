@@ -9,7 +9,7 @@
              xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
              
              mc:Ignorable="d" 
-             Width="300" Height="400"  Background="Transparent">
+             Width="400" Height="470"  Background="Transparent">
 
 
     <Border CornerRadius="10"  Style="{DynamicResource BorderThemeBackgroundDialog}">
@@ -36,59 +36,59 @@
 
 
 
-                <hc:ComboBox x:Name="cbSeason" hc:InfoElement.Placeholder="Сезон" SelectedIndex="0" Width="195" Height="35"
+                <hc:ComboBox x:Name="cbSeason" hc:InfoElement.Placeholder="Сезон" SelectedIndex="0" Width="300" Height="35"
                           HorizontalAlignment="Center" Margin="0 5 0 0" Background="Transparent" Foreground="{DynamicResource ForeGroundColorDialog}" 
                           BorderThickness="0" FontSize="20" FontFamily="helvetica" FontWeight="Light" VerticalContentAlignment="Center"/>
+                <Border Style="{DynamicResource BorderSeparatorForTBDialog}" Width="287" />
+                <TextBlock x:Name="tblSeasonErr" Text="*Укажите сезон." Margin="70 0 0 0" Foreground="#e5215f" />
 
-                <Border Style="{DynamicResource BorderSeparatorForTBDialog}" />
 
-
-                <hc:ComboBox x:Name="cbTeam1" hc:InfoElement.Placeholder="Команда 1" SelectedIndex="0" Width="195" Height="35"
+                <hc:ComboBox x:Name="cbTeam1" hc:InfoElement.Placeholder="Команда 1" SelectedIndex="0" Width="300" Height="35"
                           HorizontalAlignment="Center" Margin="0 5 0 0" Background="Transparent" Foreground="{DynamicResource ForeGroundColorDialog}" 
                           BorderThickness="0" FontSize="20" FontFamily="helvetica" FontWeight="Light" VerticalContentAlignment="Center"
-                          IsEditable="True" />
+                          IsEditable="True" SelectionChanged="cbTeam1_SelectionChanged"/>
+                <Border Style="{DynamicResource BorderSeparatorForTBDialog}" Width="287"/>
+                <TextBlock x:Name="tblTeam1Err" Text="*Укажите команду." Margin="70 0 0 0" Foreground="#e5215f" />
 
-                
-                <Border Style="{DynamicResource BorderSeparatorForTBDialog}" />
 
-
-                <hc:ComboBox x:Name="cbTeam2" hc:InfoElement.Placeholder="Команда 2" SelectedIndex="0" Width="195" Height="35"
+                <hc:ComboBox x:Name="cbTeam2" hc:InfoElement.Placeholder="Команда 2" SelectedIndex="0" Width="300" Height="35"
                           HorizontalAlignment="Center" Margin="0 5 0 0" Background="Transparent" Foreground="{DynamicResource ForeGroundColorDialog}" 
                           BorderThickness="0" FontSize="20" FontFamily="helvetica" FontWeight="Light" VerticalContentAlignment="Center"
                            IsEditable="True"/>
+                <Border Style="{DynamicResource BorderSeparatorForTBDialog}" Width="287"/>
+                <TextBlock x:Name="tblTeam2Err" Text="*Укажите команду." Margin="70 0 0 0" Foreground="#e5215f" />
 
-                <Border Style="{DynamicResource BorderSeparatorForTBDialog}" />
 
-
-                <DatePicker x:Name="dpDateOfMatch"  Style="{StaticResource DatePickerExtend}" hc:InfoElement.Placeholder="Дата проведения" Width="195" Height="34" 
+                <DatePicker x:Name="dpDateOfMatch"  Style="{StaticResource DatePickerExtend}" hc:InfoElement.Placeholder="Дата проведения" Width="300" Height="34" 
                             HorizontalAlignment="Center" Margin="0 15 0 0" Background="Transparent" Foreground="{DynamicResource ForeGroundColorDialog}" BorderThickness="0" 
                             FontSize="20" FontFamily="helvetica" FontWeight="Light" />
-                <Border Style="{DynamicResource BorderSeparatorForTBDialog}" />
+                <Border Style="{DynamicResource BorderSeparatorForTBDialog}" Width="287"/>
+                <TextBlock x:Name="tblDateOfMatchErr" Text="*Укажите дату матча." Margin="70 0 0 0" Foreground="#e5215f" />
 
 
-                <hc:ComboBox x:Name="cbStadium" hc:InfoElement.Placeholder="Стадион" SelectedIndex="0" Width="195" Height="35"
+                <hc:ComboBox x:Name="cbStadium" hc:InfoElement.Placeholder="Стадион" SelectedIndex="0" Width="300" Height="35"
                           HorizontalAlignment="Center" Margin="0 5 0 0" Background="Transparent" Foreground="{DynamicResource ForeGroundColorDialog}" 
                           BorderThickness="0" FontSize="20" FontFamily="helvetica" FontWeight="Light" VerticalContentAlignment="Center"
                           IsEditable="True"/>
                 <!--AutoComplete="True"-->
-                
-                <Border Style="{DynamicResource BorderSeparatorForTBDialog}" />
+                <Border Style="{DynamicResource BorderSeparatorForTBDialog}" Width="287"/>
+                <TextBlock x:Name="tblStadiumErr" Text="*Укажите стадион." Margin="70 0 0 0" Foreground="#e5215f" />
 
 
 
 
-                <hc:ComboBox x:Name="cbTypeOfMatch" hc:InfoElement.Placeholder="Тип матча" SelectedIndex="0" Width="195" Height="35"
+                <hc:ComboBox x:Name="cbTypeOfMatch" hc:InfoElement.Placeholder="Тип матча" SelectedIndex="0" Width="300" Height="35"
                           HorizontalAlignment="Center" Margin="0 5 0 0" Background="Transparent" Foreground="{DynamicResource ForeGroundColorDialog}" 
                           BorderThickness="0" FontSize="20" FontFamily="helvetica" FontWeight="Light" VerticalContentAlignment="Center"/>
-
-                <Border Style="{DynamicResource BorderSeparatorForTBDialog}" />
-
-
+                <Border Style="{DynamicResource BorderSeparatorForTBDialog}" Width="287"/>
+                <TextBlock x:Name="tblTypeOfMatchErr" Text="*Укажите тип матча." Margin="70 0 0 0" Foreground="#e5215f" />
 
 
 
-                
-                
+
+
+
+
 
 
             </StackPanel>

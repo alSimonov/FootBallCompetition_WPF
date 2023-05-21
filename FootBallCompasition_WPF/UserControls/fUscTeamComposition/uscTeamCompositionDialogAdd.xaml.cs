@@ -47,6 +47,15 @@ namespace FootBallCompasition_WPF.UserControls.fUscTeamComposition
         {
             InitializeComponent();
 
+
+            tblTeamErr.Visibility = Visibility.Collapsed;
+            tblStartContractErr.Visibility = Visibility.Collapsed;
+            tblEndContractErr.Visibility = Visibility.Collapsed;
+            tblPlayerNumberErr.Visibility = Visibility.Collapsed;
+            tblAmpluaRoleErr.Visibility = Visibility.Collapsed;
+
+
+
             ConfigHelper.Instance.SetLang("ru");
 
 
@@ -112,36 +121,29 @@ namespace FootBallCompasition_WPF.UserControls.fUscTeamComposition
         private void btnConfirm_Click(object sender, RoutedEventArgs e)
         {
 
+            tblTeamErr.Visibility = cbTeam.SelectedIndex == -1 ? Visibility.Visible : Visibility.Collapsed;
+            tblStartContractErr.Visibility = !dpContractStart.SelectedDate.HasValue ? Visibility.Visible : Visibility.Collapsed;
+            tblEndContractErr.Visibility = !dpContractEnd.SelectedDate.HasValue ? Visibility.Visible : Visibility.Collapsed;
+            tblPlayerNumberErr.Visibility = !Byte.TryParse(tbPlayerNumber.Text, out byte playerNumInt) ? Visibility.Visible : Visibility.Collapsed;
+            tblAmpluaRoleErr.Visibility = cbAmpluaRole.SelectedIndex == -1 ? Visibility.Visible : Visibility.Collapsed;
+
+            if (tblTeamErr.Visibility == 0 || tblStartContractErr.Visibility == 0 || tblEndContractErr.Visibility == 0 || tblPlayerNumberErr.Visibility == 0
+                || tblAmpluaRoleErr.Visibility == 0)
+                return;
+
+
+
+
             if (_addOrModify)
             {
                 FootballClass.TeamComposition teamComposition = new FootballClass.TeamComposition();
 
 
                 teamComposition.Participant = _participant;
-
                 teamComposition.Team = (Team)cbTeam.SelectedItem;
-                
-                DateTime? tempContractStart = dpContractStart.SelectedDate;
-                DateTime? tempContractEnd = dpContractEnd.SelectedDate;
-                if (tempContractStart.HasValue && tempContractEnd.HasValue)
-                {
-                    teamComposition.ContractStart = (DateTime)tempContractStart;
-                    teamComposition.ContractEnd = (DateTime)tempContractEnd;
-                }
-                else
-                {
-
-                }
-
-                var tryParsePlayNum  = Byte.TryParse(tbPlayerNumber.Text, out byte playerNumInt);
-
-                if (tryParsePlayNum)
-                {
-                    teamComposition.PlayerNumber = playerNumInt;
-                }
-
-
-
+                teamComposition.ContractStart = (DateTime) dpContractStart.SelectedDate;
+                teamComposition.ContractEnd = (DateTime) dpContractEnd.SelectedDate;
+                teamComposition.PlayerNumber = playerNumInt;
                 teamComposition.AmpluaRole = (AmpluaRole)cbAmpluaRole.SelectedItem;
 
 
@@ -156,35 +158,14 @@ namespace FootBallCompasition_WPF.UserControls.fUscTeamComposition
             else if (!_addOrModify)
             {
                 _teamComposition.Team = (Team)cbTeam.SelectedItem;
-
-                DateTime? tempContractStart = dpContractStart.SelectedDate;
-                DateTime? tempContractEnd = dpContractEnd.SelectedDate;
-                if (tempContractStart.HasValue && tempContractEnd.HasValue)
-                {
-                    _teamComposition.ContractStart = (DateTime)tempContractStart;
-                    _teamComposition.ContractEnd = (DateTime)tempContractEnd;
-                }
-                else
-                {
-
-                }
-
-                var tryParsePlayNum = Byte.TryParse(tbPlayerNumber.Text, out byte playerNumInt);
-
-                if (tryParsePlayNum)
-                {
-                    _teamComposition.PlayerNumber = playerNumInt;
-
-                }
-
-
-
+                _teamComposition.ContractStart = (DateTime)dpContractStart.SelectedDate;
+                _teamComposition.ContractEnd = (DateTime)dpContractEnd.SelectedDate;
+                _teamComposition.PlayerNumber = playerNumInt;
                 _teamComposition.AmpluaRole = (AmpluaRole)cbAmpluaRole.SelectedItem;
 
 
                 _db.Entry(_teamComposition).State = EntityState.Modified;
                 _db.SaveChanges();
-
                 _uscTeamComposition.loadDataGrid();
 
                 Growl.Success("Контракт успешно изменен!");
@@ -198,6 +179,12 @@ namespace FootBallCompasition_WPF.UserControls.fUscTeamComposition
         private void tglbtnActive_Click(object sender, RoutedEventArgs e)
         {
             loadComboboxData();
+        }
+
+        private void tbPlayerNumber_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
         }
     }
 }

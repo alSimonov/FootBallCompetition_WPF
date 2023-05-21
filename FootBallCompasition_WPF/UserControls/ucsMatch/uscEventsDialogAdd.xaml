@@ -36,18 +36,16 @@
                           HorizontalAlignment="Center" Margin="0 5 0 0" Background="Transparent" Foreground="{DynamicResource ForeGroundColorDialog}" 
                           BorderThickness="0" FontSize="20" FontFamily="helvetica" FontWeight="Light" VerticalContentAlignment="Center"
                           IsEditable="True" SelectionChanged="cbTeam_SelectionChanged"/>
-                <!--AutoComplete="True"-->
-
                 <Border Style="{DynamicResource BorderSeparatorForTBDialog}" Width="287" />
+                <TextBlock x:Name="tblTeamErr" Text="*Укажите команду." Margin="70 0 0 0" Foreground="#e5215f" />
 
-                
+
                 <hc:ComboBox x:Name="cbTeamComposition" hc:InfoElement.Placeholder="Игрок" SelectedIndex="0" Width="300" Height="35"
                           HorizontalAlignment="Center" Margin="0 5 0 0" Background="Transparent" Foreground="{DynamicResource ForeGroundColorDialog}" 
                           BorderThickness="0" FontSize="20" FontFamily="helvetica" FontWeight="Light" VerticalContentAlignment="Center"
                           IsEditable="True"/>
-                <!--AutoComplete="True"-->
-
                 <Border Style="{DynamicResource BorderSeparatorForTBDialog}" Width="287" />
+                <TextBlock x:Name="tblPartErr" Text="*Укажите игрока." Margin="70 0 0 0" Foreground="#e5215f" />
 
 
 
@@ -55,9 +53,8 @@
                           HorizontalAlignment="Center" Margin="0 5 0 0" Background="Transparent" Foreground="{DynamicResource ForeGroundColorDialog}" 
                           BorderThickness="0" FontSize="20" FontFamily="helvetica" FontWeight="Light" VerticalContentAlignment="Center"
                           IsEditable="True"/>
-                <!--AutoComplete="True"-->
-
                 <Border Style="{DynamicResource BorderSeparatorForTBDialog}" Width="287" />
+                <TextBlock x:Name="tblEventErr" Text="*Укажите событие." Margin="70 0 0 0" Foreground="#e5215f" />
 
 
                 <StackPanel Orientation="Horizontal" Margin="0 15 0 0" HorizontalAlignment="Center">
@@ -67,8 +64,7 @@
                     <Icon:PackIconMaterial Kind="Clock" Style="{DynamicResource IconPackMaterial}" Foreground="{DynamicResource ForeGroundColorDialog}"/>
                 </StackPanel>
                 <Border Style="{DynamicResource BorderSeparatorForTBDialog}" Width="287" />
-
-
+                <TextBlock x:Name="tblTimeErr" Text="*Укажите время." Margin="70 0 0 0" Foreground="#e5215f" />
 
 
 
