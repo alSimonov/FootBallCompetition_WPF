@@ -4,6 +4,7 @@ using FootBallCompasition_WPF.Short;
 using FootBallCompasition_WPF.UserControls;
 using FootBallCompasition_WPF.UserControls.fUscTeamComposition;
 using FootBallCompasition_WPF.UserControls.ucsMatch;
+using FootBallCompasition_WPF.Windows;
 using HandyControl.Controls;
 using HandyControl.Tools.Extension;
 using Microsoft.EntityFrameworkCore;
@@ -136,17 +137,21 @@ namespace FootBallCompasition_WPF.Pages.pgsTeam
 
             //Growl.Success("Команда успешно удалена!");
 
+            var dialog = new windowConfirmation("Изменение активности");
+            if (dialog.ShowDialog() == true)
+            {
+                int id = (GridTeam.SelectedItem as TeamShort).Id;
+                Team team = _db.Teams.Find(id);
 
-            int id = (GridTeam.SelectedItem as TeamShort).Id;
-            Team team = _db.Teams.Find(id);
+                team.Active = team.Active ? false : true;
 
-            team.Active = team.Active ? false : true;
+                _db.Entry(team).State = EntityState.Modified;
+                _db.SaveChanges();
 
-            _db.Entry(team).State = EntityState.Modified;
-            _db.SaveChanges();
+                loadTeam();
+                Growl.Warning("Состояние активности команды изменено!");
 
-            loadTeam();
-            Growl.Warning("Состояние активности команды изменено!");
+            }
 
         }
 

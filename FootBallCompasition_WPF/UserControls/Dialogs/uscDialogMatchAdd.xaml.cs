@@ -153,8 +153,16 @@ namespace FootBallCompasition_WPF.UserControls
                 || tblStadiumErr.Visibility == 0 || tblTypeOfMatchErr.Visibility == 0)
                 return;
 
+            
 
-
+            if (_db.Matches.Any(u => u.Date == (DateTime)dpDateOfMatch.SelectedDate && ( u.Team1 == (Team)cbTeam1.SelectedItem  || u.Team1 == (Team)cbTeam2.SelectedItem  
+                 || u.Team2 == (Team)cbTeam1.SelectedItem || u.Team2 == (Team)cbTeam2.SelectedItem ) )
+                && (_addOrModify || _match.Date != dpDateOfMatch.SelectedDate || _match.Team1 != (Team)cbTeam1.SelectedItem ||
+                    _match.Team2 != (Team)cbTeam2.SelectedItem))
+            {
+                Growl.Warning("В этот одна из команд уже имеет матч!");
+                return;
+            }
 
 
             if (_addOrModify)

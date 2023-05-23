@@ -82,6 +82,7 @@ namespace FootBallCompasition_WPF.UserControls
             if (tblTeamNameErr.Visibility == 0 || tblCityErr.Visibility == 0)
                 return;
 
+            
 
             if (_addOrModify)
             {

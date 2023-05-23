@@ -1,6 +1,7 @@
 ﻿using FootBallCompasition_WPF.context;
 using FootBallCompasition_WPF.FootballClass;
 using FootBallCompasition_WPF.Short;
+using FootBallCompasition_WPF.Windows;
 using HandyControl.Controls;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -125,16 +126,21 @@ namespace FootBallCompasition_WPF.UserControls.fUscTeamComposition
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
-            int id = (GridReferee.SelectedItem as TeamCompositionShort).Id;
 
-            TeamComposition teamComposition = _db.TeamCompositions.Find(id);
+            var dialog = new windowConfirmation();
+            if (dialog.ShowDialog() == true)
+            {
+                int id = (GridReferee.SelectedItem as TeamCompositionShort).Id;
 
-            _db.TeamCompositions.Remove(teamComposition);
-            _db.SaveChanges();
+                TeamComposition teamComposition = _db.TeamCompositions.Find(id);
 
-            loadDataGrid();
+                _db.TeamCompositions.Remove(teamComposition);
+                _db.SaveChanges();
 
-            Growl.Success("Контракт успешно удален!");
+                loadDataGrid();
+                Growl.Success("Контракт успешно удален!");
+
+            }
 
         }
 

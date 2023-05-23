@@ -4,6 +4,7 @@ using FootBallCompasition_WPF.Pages;
 using HandyControl.Controls;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.VisualBasic.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -157,9 +158,24 @@ namespace FootBallCompasition_WPF.UserControls
                 return;
 
 
-                if (_addOrModify)
-            {
 
+
+            if (_db.Accounts.Any(u => u.Login == tbLogin.Text) && (_addOrModify ||  _account.Login != tbLogin.Text))
+            {
+                Growl.Warning("Такой логин уже существует!");
+                return;
+            }
+            if (_db.Accounts.Any(u => u.Email == tbEmail.Text) && (_addOrModify || _account.Email != tbEmail.Text))
+            {
+                Growl.Warning("Такая почта уже зарегестрирована!");
+                return;
+            }
+
+
+
+
+            if (_addOrModify)
+            {
 
 
                 FootballClass.Account account = new FootballClass.Account();
@@ -188,8 +204,6 @@ namespace FootBallCompasition_WPF.UserControls
             {
 
 
-
-
                 _account.Login = tbLogin.Text;
 
                 _account.Email = tbEmail.Text;
@@ -210,13 +224,6 @@ namespace FootBallCompasition_WPF.UserControls
                 Growl.Success("Аккаунт успешно изменен!");
 
             }
-        }
-
-        public void UpdateAccount()
-        {
-
-
-
         }
 
         private void tglbtnActive_Click(object sender, RoutedEventArgs e)

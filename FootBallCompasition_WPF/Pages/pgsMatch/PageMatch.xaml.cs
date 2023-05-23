@@ -1,27 +1,18 @@
-﻿ using FootBallCompasition_WPF.context;
+﻿using FootBallCompasition_WPF.context;
 using FootBallCompasition_WPF.FootballClass;
 using FootBallCompasition_WPF.Short;
 using FootBallCompasition_WPF.UserControls;
 using FootBallCompasition_WPF.UserControls.ucsMatch;
+using FootBallCompasition_WPF.Windows;
 using HandyControl.Controls;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Forms;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+
 
 namespace FootBallCompasition_WPF.Pages.pgsMatch
 {
@@ -46,6 +37,7 @@ namespace FootBallCompasition_WPF.Pages.pgsMatch
             dbConfiguration.ConfigureServices();
             _db = dbConfiguration.Services.GetService<MainDBContext>();
 
+            
             loadMatch();
 
 
@@ -158,15 +150,30 @@ namespace FootBallCompasition_WPF.Pages.pgsMatch
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
-            int id = (GridMatch.SelectedItem as GetMatchListModelShort).IdMatch0;
-            Match match = _db.Matches.Find(id);
 
-            _db.Matches.Remove(match);
-            _db.SaveChanges();
+            //System.Windows.Media.Effects.BlurEffect objBlur = new System.Windows.Media.Effects.BlurEffect();
+            //objBlur.Radius = 4;
+            //this.Effect = objBlur;
 
-            loadMatch();
 
-            Growl.Success("Матч успешно удален!");
+            var dialog = new windowConfirmation();
+            if (dialog.ShowDialog() == true)
+            {
+                int id = (GridMatch.SelectedItem as GetMatchListModelShort).IdMatch0;
+                Match match = _db.Matches.Find(id);
+
+                _db.Matches.Remove(match);
+                _db.SaveChanges();
+
+                loadMatch();
+
+                Growl.Success("Матч успешно удален!");
+
+            }
+
+            //this.Effect = null;
+
+
         }
 
         private void tbFilter_TextChanged(object sender, TextChangedEventArgs e)

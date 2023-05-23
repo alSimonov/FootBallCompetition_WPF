@@ -108,6 +108,13 @@ namespace FootBallCompasition_WPF.UserControls
                 return;
 
 
+            if (_db.Participants.Any(u => u.Telephone == tbPartPhone.Text) && (_addOrModify || _participant.Telephone != tbPartPhone.Text))
+            {
+                Growl.Warning("Этот телефон уже зарегестрирован!");
+                return;
+            }
+           
+
 
             if (_addOrModify)
             {

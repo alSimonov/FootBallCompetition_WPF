@@ -133,6 +133,12 @@ namespace FootBallCompasition_WPF.UserControls.fUscTeamComposition
                 return;
 
 
+            if (dpContractStart.SelectedDate > dpContractEnd.SelectedDate)
+            {
+                Growl.Warning("Дата окончания контракта не может быть, раньше его начала!");
+                return;
+            }
+
 
 
             if (_addOrModify)

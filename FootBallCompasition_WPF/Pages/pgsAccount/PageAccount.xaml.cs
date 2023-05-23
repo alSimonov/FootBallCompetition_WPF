@@ -2,6 +2,7 @@
 using FootBallCompasition_WPF.FootballClass;
 using FootBallCompasition_WPF.Short;
 using FootBallCompasition_WPF.UserControls;
+using FootBallCompasition_WPF.Windows;
 using HandyControl.Controls;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -114,16 +115,20 @@ namespace FootBallCompasition_WPF.Pages
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
-            int id = (GridAccount.SelectedItem as AccountShort).Id;
 
-            Account account = _db.Accounts.Find(id);
+            var dialog = new windowConfirmation();
+            if (dialog.ShowDialog() == true)
+            {
+                int id = (GridAccount.SelectedItem as AccountShort).Id;
 
-            _db.Accounts.Remove(account);
-            _db.SaveChanges();
+                Account account = _db.Accounts.Find(id);
+                _db.Accounts.Remove(account);
+                _db.SaveChanges();
 
-            loadAccount();
+                loadAccount();
+                Growl.Success("Аккаунт успешно удален!");
+            }
 
-            Growl.Success("Аккаунт успешно удален!");
         }
 
 

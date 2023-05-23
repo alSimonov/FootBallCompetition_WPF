@@ -40,7 +40,6 @@ namespace FootBallCompasition_WPF.UserControls.ucsMatch
             InitializeComponent();
 
 
-            //TODO сделать жоскую проверку на даты контрактов 
 
 
             dbConfiguration.ConfigureServices();

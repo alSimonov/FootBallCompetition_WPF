@@ -4,6 +4,7 @@ using FootBallCompasition_WPF.Short;
 using FootBallCompasition_WPF.UserControls;
 using FootBallCompasition_WPF.UserControls.fUscTeamComposition;
 using FootBallCompasition_WPF.UserControls.ucsMatch;
+using FootBallCompasition_WPF.Windows;
 using HandyControl.Controls;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -155,25 +156,31 @@ namespace FootBallCompasition_WPF.Pages.pgsParticipant
             //int id = (GridPart.SelectedItem as ParticipantShort).Id;
 
             //Participant participant = _db.Participants.Find(id);
-            
+
             //_db.Participants.Remove(participant);
             //_db.SaveChanges();
 
             //loadPart();
             //Growl.Success("Участник успешно удален!");
 
-            int id = (GridPart.SelectedItem as ParticipantShort).Id;
+            var dialog = new windowConfirmation("Изменение активности");
+            if (dialog.ShowDialog() == true)
+            {
 
-            Participant participant = _db.Participants.Find(id);
+                int id = (GridPart.SelectedItem as ParticipantShort).Id;
 
-            participant.Active = participant.Active ? false : true;
+                Participant participant = _db.Participants.Find(id);
+
+                participant.Active = participant.Active ? false : true;
 
            
-            _db.Entry(participant).State = EntityState.Modified;
-            _db.SaveChanges();
+                _db.Entry(participant).State = EntityState.Modified;
+                _db.SaveChanges();
 
-            loadPart();
-            Growl.Warning("Состояние активности участника изменено!");
+                loadPart();
+                Growl.Warning("Состояние активности участника изменено!");
+            
+            }
 
 
         }

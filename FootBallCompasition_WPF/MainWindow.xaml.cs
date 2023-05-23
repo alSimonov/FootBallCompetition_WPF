@@ -6,7 +6,6 @@ using FootBallCompasition_WPF.Pages.pgsStadium;
 using FootBallCompasition_WPF.Pages.pgsTeam;
 using FootBallCompasition_WPF.Short;
 using FootBallCompasition_WPF.UserControls;
-using FootBallCompasition_WPF.UserControls.SideMenu;
 using FootBallCompasition_WPF.Windows;
 using HandyControl.Controls;
 using Microsoft.Extensions.DependencyInjection;
@@ -50,6 +49,9 @@ namespace FootBallCompasition_WPF
 
             //TODO убрать row с уведомлениями, настрокой и поиском  
             //TODO мб сделать менюшку с уведомлениями
+
+
+            //TODO проверка на повторяющиеся данные
 
         }
 

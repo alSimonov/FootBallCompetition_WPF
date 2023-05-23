@@ -2,6 +2,7 @@
 using FootBallCompasition_WPF.FootballClass;
 using FootBallCompasition_WPF.Short;
 using FootBallCompasition_WPF.UserControls;
+using FootBallCompasition_WPF.Windows;
 using HandyControl.Controls;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -137,18 +138,23 @@ namespace FootBallCompasition_WPF.Pages.pgsStadium
 
             //Growl.Success("Стадион успешно удален!");
 
-            int id = (GridStadium.SelectedItem as StadiumShort).Id;
-            Stadium stadium = _db.Stadiums.Find(id);
+            var dialog = new windowConfirmation("Изменение активности");
+            if (dialog.ShowDialog() == true)
+            {
 
-            stadium.Active = stadium.Active ? false : true;
+                int id = (GridStadium.SelectedItem as StadiumShort).Id;
+                Stadium stadium = _db.Stadiums.Find(id);
 
-            _db.Entry(stadium).State = EntityState.Modified;
-            _db.SaveChanges();
+                stadium.Active = stadium.Active ? false : true;
 
-            loadStadium();
+                _db.Entry(stadium).State = EntityState.Modified;
+                _db.SaveChanges();
 
-            Growl.Warning("Состояние активности стадиона изменено!");
+                loadStadium();
 
+                Growl.Warning("Состояние активности стадиона изменено!");
+
+            }
 
 
         }
