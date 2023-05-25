@@ -5,11 +5,13 @@ using FootBallCompasition_WPF.UserControls;
 using FootBallCompasition_WPF.UserControls.ucsMatch;
 using FootBallCompasition_WPF.Windows;
 using HandyControl.Controls;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -26,7 +28,7 @@ namespace FootBallCompasition_WPF.Pages.pgsMatch
 
         List<GetMatchListModelShort> matchList = new List<GetMatchListModelShort>();
 
-        //byte? _idSeason;
+        byte? _idSeason;
 
         //TODO потом убрать закоменченный не нужный код
 
@@ -37,16 +39,46 @@ namespace FootBallCompasition_WPF.Pages.pgsMatch
             dbConfiguration.ConfigureServices();
             _db = dbConfiguration.Services.GetService<MainDBContext>();
 
-            
+
+
+            cbSeason.SelectedValuePath = "Id";
+            cbSeason.DisplayMemberPath = "Name";
+
+            loadComboBox();
+
             loadMatch();
 
 
         }
 
+        public void loadComboBox()
+        {
+            cbSeason.ItemsSource = _db.Seasons.Where(s => _db.Matches.Any(m => m.IdSeason == s.Id)).ToList();
+            
+        }
+
+
         public void loadMatch()
         {
 
-            var tempMatchList = _db.GetMatchListModels.FromSqlRaw("GetMatchList").ToList();
+            //loadComboBox();
+
+            List<GetMatchListModel> tempMatchList;
+
+            if (_idSeason == null)
+            {
+                tempMatchList = _db.GetMatchListModels.FromSqlRaw("GetMatchList").ToList();
+            }
+            else
+            {
+
+                SqlParameter[] param = new SqlParameter[1];
+                param[0] = new("@inpIdSeason", _idSeason);
+
+                tempMatchList = _db.GetMatchListModels.FromSqlRaw("GetMatchListForSeason @inpIdSeason", param).ToList();
+
+            }
+
 
             matchList = tempMatchList.Select(s =>
                 new GetMatchListModelShort()
@@ -63,21 +95,6 @@ namespace FootBallCompasition_WPF.Pages.pgsMatch
                 }).ToList();
 
 
-            //matchList = _db.Matches.Select(s =>
-            //    new MatchShort()
-            //    {
-            //        Id = s.Id,
-            //        Season = s.Season.Name,
-            //        Team1Name = s.Team1.Name,
-            //        Team2Name = s.Team2.Name,
-            //        Date = s.Date.ToString("D"),
-            //        StadiumAndCityName = $"{s.Stadium.Name} ({s.Stadium.City.Name})",
-
-            //        TypeOfMatch = s.TypeOfMatch.Name
-            //    }).ToList();
-
-            //GridMatch.ItemsSource = matchList;
-
             GridMatch.ItemsSource = matchList.Take(10).ToList();
 
 
@@ -86,8 +103,6 @@ namespace FootBallCompasition_WPF.Pages.pgsMatch
 
             txtblListCount.Text = "Найдено записей: ";
             txtblListCount.Text += matchList.Count().ToString();
-
-
 
 
         }
@@ -208,10 +223,11 @@ namespace FootBallCompasition_WPF.Pages.pgsMatch
             }
         }
 
-        //private void cbSeason_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        //{
-        //    _idSeason = cbSeason.SelectedValue == null ? null : (cbSeason.SelectedItem as Season).Id;
-        //    loadMatch();
-        //}
+        private void cbSeason_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            _idSeason = cbSeason.SelectedValue == null ? null : (cbSeason.SelectedItem as Season).Id;
+            loadMatch();
+        }
+
     }
 }

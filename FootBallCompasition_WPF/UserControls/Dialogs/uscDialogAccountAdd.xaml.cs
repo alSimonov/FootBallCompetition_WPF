@@ -162,12 +162,12 @@ namespace FootBallCompasition_WPF.UserControls
 
             if (_db.Accounts.Any(u => u.Login == tbLogin.Text) && (_addOrModify ||  _account.Login != tbLogin.Text))
             {
-                Growl.Warning("Такой логин уже существует!");
+                Growl.Warning("Этот логин уже существует!");
                 return;
             }
             if (_db.Accounts.Any(u => u.Email == tbEmail.Text) && (_addOrModify || _account.Email != tbEmail.Text))
             {
-                Growl.Warning("Такая почта уже зарегестрирована!");
+                Growl.Warning("Эта почта уже зарегестрирована!");
                 return;
             }
 

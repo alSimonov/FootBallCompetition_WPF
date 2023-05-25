@@ -2,6 +2,7 @@
 using FootBallCompasition_WPF.FootballClass;
 using FootBallCompasition_WPF.Pages.pgsMatch;
 using FootBallCompasition_WPF.Short;
+using FootBallCompasition_WPF.Windows;
 using HandyControl.Controls;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -130,18 +131,26 @@ namespace FootBallCompasition_WPF.UserControls.ucsMatch
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
-            int id = (GridReferee.SelectedItem as EventShort).Id;
 
-            Event eventtt = _db.Events.Find(id);
+            var dialog = new windowConfirmation();
+            if (dialog.ShowDialog() == true)
+            {
 
-            _db.Events.Remove(eventtt);
-            _db.SaveChanges();
+                int id = (GridReferee.SelectedItem as EventShort).Id;
 
-            loadDataGrid();
+                Event eventtt = _db.Events.Find(id);
 
-            Growl.Success("Событие успешно удалено!");
+                _db.Events.Remove(eventtt);
+                _db.SaveChanges();
 
+                loadDataGrid();
+
+                Growl.Success("Событие успешно удалено!");
+
+            }            
+        
         }
+
 
         private void tbFilter_TextChanged(object sender, TextChangedEventArgs e)
         {

@@ -1,6 +1,7 @@
 ﻿using FootBallCompasition_WPF.context;
 using FootBallCompasition_WPF.FootballClass;
 using FootBallCompasition_WPF.Short;
+using FootBallCompasition_WPF.Windows;
 using HandyControl.Controls;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -125,17 +126,24 @@ namespace FootBallCompasition_WPF.UserControls.ucsMatch
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
-            int id = (GridReferee.SelectedItem as JudgingStaffShort).Id;
 
-            JudgingStaff judgingStaff = _db.JudgingStaffs.Find(id);
+            var dialog = new windowConfirmation();
+            if (dialog.ShowDialog() == true)
+            {
 
-            _db.JudgingStaffs.Remove(judgingStaff);
-            _db.SaveChanges();
+                int id = (GridReferee.SelectedItem as JudgingStaffShort).Id;
 
-            loadDataGrid();
+                JudgingStaff judgingStaff = _db.JudgingStaffs.Find(id);
 
-            Growl.Success("Судья успешно удален!");
+                _db.JudgingStaffs.Remove(judgingStaff);
+                _db.SaveChanges();
 
+                loadDataGrid();
+
+                Growl.Success("Судья успешно удален!");
+
+            }
+            
         }
 
         private void tbFilter_TextChanged(object sender, TextChangedEventArgs e)

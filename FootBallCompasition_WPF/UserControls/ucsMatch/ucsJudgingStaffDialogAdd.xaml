@@ -11,7 +11,7 @@
 
              
              mc:Ignorable="d" 
-             Width="400" Height="400"  Background="Transparent">
+             Width="400" Height="250"  Background="Transparent">
 
 
     <!--Background="{DynamicResource BackGroundColor}-->

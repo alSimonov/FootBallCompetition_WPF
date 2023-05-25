@@ -46,12 +46,12 @@ namespace FootBallCompasition_WPF
             _db = dbConfiguration.Services.GetService<MainDBContext>();
 
 
+            frame.Navigate(new PageMatch());
 
-            //TODO убрать row с уведомлениями, настрокой и поиском  
+
             //TODO мб сделать менюшку с уведомлениями
 
 
-            //TODO проверка на повторяющиеся данные
 
         }
 
@@ -141,55 +141,55 @@ namespace FootBallCompasition_WPF
             }
         }
 
-        private void tglbtnTheme_Click(object sender, RoutedEventArgs e)
-        {
-            string NameTheme;
+        //private void tglbtnTheme_Click(object sender, RoutedEventArgs e)
+        //{
+        //    string NameTheme;
 
 
-            if (tglbtnTheme.IsChecked == true)
-            {
-                NameTheme = "DictionaryTheme2";
+        //    if (tglbtnTheme.IsChecked == true)
+        //    {
+        //        NameTheme = "DictionaryTheme2";
 
 
-            }
-            else
-            {
-                NameTheme = "DictionaryTheme1";
-            }
-
-
-
-            //Application.Current.Resources.Clear();
-
-
-            ////Подгрузка основного стиля
-
-            //string dict = $"Dictionaries/{NameTheme}";
-            //var uriDict = new Uri(dict + ".xaml", UriKind.Relative);
-
-
-            //ResourceDictionary resourceDictionary = Application.LoadComponent(uriDict) as ResourceDictionary;
-
-            //Application.Current.Resources.MergedDictionaries.Add(resourceDictionary);
+        //    }
+        //    else
+        //    {
+        //        NameTheme = "DictionaryTheme1";
+        //    }
 
 
 
-
-            //Подгрузка темы
-
-            string style = $"Dictionaries/{NameTheme}";
-            var uriStyle = new Uri(style + ".xaml", UriKind.Relative);
+        //    //Application.Current.Resources.Clear();
 
 
-            ResourceDictionary resourceTheme = System.Windows.Application.LoadComponent(uriStyle) as ResourceDictionary;
+        //    ////Подгрузка основного стиля
+
+        //    //string dict = $"Dictionaries/{NameTheme}";
+        //    //var uriDict = new Uri(dict + ".xaml", UriKind.Relative);
 
 
-            System.Windows.Application.Current.Resources.MergedDictionaries.Add(resourceTheme);
+        //    //ResourceDictionary resourceDictionary = Application.LoadComponent(uriDict) as ResourceDictionary;
+
+        //    //Application.Current.Resources.MergedDictionaries.Add(resourceDictionary);
 
 
 
 
-        }
+        //    //Подгрузка темы
+
+        //    string style = $"Dictionaries/{NameTheme}";
+        //    var uriStyle = new Uri(style + ".xaml", UriKind.Relative);
+
+
+        //    ResourceDictionary resourceTheme = System.Windows.Application.LoadComponent(uriStyle) as ResourceDictionary;
+
+
+        //    System.Windows.Application.Current.Resources.MergedDictionaries.Add(resourceTheme);
+
+
+
+
+        //}
 
         private void btnUscPersonalAccount_Click(object sender, RoutedEventArgs e)
         {

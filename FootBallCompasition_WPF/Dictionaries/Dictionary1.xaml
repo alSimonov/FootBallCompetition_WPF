@@ -397,7 +397,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border Background="{TemplateBinding Background}" CornerRadius="20" BorderThickness="2"  BorderBrush="{DynamicResource BorderBrushColorAuthorization}">
+                    <Border Background="{TemplateBinding Background}" CornerRadius="20" BorderThickness="2"  BorderBrush="#000000">
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Border>
                 </ControlTemplate>

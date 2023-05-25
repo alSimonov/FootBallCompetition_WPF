@@ -44,10 +44,10 @@
                              Width="235" Margin="63 0 0 0" Text="admin" />
 
 
-                    <Icon:PackIconMaterial Kind="Account" Style="{DynamicResource IconPackMaterial}"/>
+                    <Icon:PackIconMaterial Kind="Account" Foreground="#000000" Style="{DynamicResource IconPackMaterial}"/>
 
                 </StackPanel>
-                <Border Style="{DynamicResource BorderSeparatorForTB}"  />
+                <Border Background="#000000" Style="{DynamicResource BorderSeparatorForTB}"  />
 
                 <TextBlock x:Name="tblLoginErr" Text="*Не верный логин." Margin="70 0 0 0" Foreground="#e5215f"/>
 
@@ -58,7 +58,7 @@
 
                     <hc:PasswordBox Name="pbPassword"  ShowClearButton="True" ShowEyeButton="True" IsSafeEnabled="False" FontSize="20"  
                                  hc:InfoElement.Placeholder="Пароль" VerticalAlignment="Center" Width="257" Margin="63 0 0 0" Background="Transparent" BorderThickness="0"
-                                 Foreground="{DynamicResource ForeGroundColor}" CaretBrush="{DynamicResource ForeGroundColorAuthorization}" BorderBrush="{DynamicResource ForeGroundColorAuthorization}" 
+                                 Foreground="#000000" CaretBrush="{DynamicResource ForeGroundColorAuthorization}" BorderBrush="#000000" 
                                     SelectionBrush="{DynamicResource ForeGroundColorAuthorization}" SelectionTextBrush="{DynamicResource ForeGroundColorAuthorization}" 
                                 FontWeight="Light" FontFamily="helvetica" Password="admin" >
                   
@@ -72,14 +72,14 @@
                     <!--<Icon:PackIconMaterial Kind="FormTextboxPassword" Style="{DynamicResource IconPackMaterial}"/>-->
 
                 </StackPanel>
-                <Border Style="{DynamicResource BorderSeparatorForTB}"  />
+                <Border Background="#000000" Style="{DynamicResource BorderSeparatorForTB}"  />
                     
                 <TextBlock x:Name="tblPasswordErr" Text="*Не верный пароль." Margin="70 0 0 0" Foreground="#e5215f" />
 
 
                 <StackPanel Orientation="Horizontal" Margin="0 50 0 0">
                     <!--Margin="60 0 60 0"-->
-                    <Button x:Name="btnLogin" Style="{DynamicResource btnAuthorization}" Width="100" Height="40" Content="ВОЙТИ" Margin="140 0 60 0"  />
+                    <Button x:Name="btnLogin" Foreground="#000000" Style="{DynamicResource btnAuthorization}" Width="100" Height="40" FontWeight="SemiBold" Content="ВОЙТИ" Margin="140 0 60 0"  />
                     <!--<Button x:Name="btnRegister" Style="{DynamicResource btnAuthorization}" Width="100" Height="40" Content="REGISTER" />-->
                 </StackPanel>
 

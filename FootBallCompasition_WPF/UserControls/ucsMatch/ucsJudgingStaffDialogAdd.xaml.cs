@@ -105,6 +105,8 @@ namespace FootBallCompasition_WPF.UserControls.ucsMatch
                 return;
 
 
+
+
             if (_addOrModify)
             {
                 FootballClass.JudgingStaff judgingStaff = new FootballClass.JudgingStaff();

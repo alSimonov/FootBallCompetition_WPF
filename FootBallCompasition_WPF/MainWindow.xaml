@@ -243,7 +243,7 @@
 
 
 
-                <!--Search textbox-->
+                <!--Search textbox--><!--
 
                 <Grid Grid.Row="1"  Width="300" HorizontalAlignment="Left">
                     <TextBlock Margin="20 0" VerticalAlignment="Center" Foreground="#b0b9c6" IsHitTestVisible="False" Panel.ZIndex="1" Text="Search here ..."
@@ -255,7 +255,7 @@
                                            Margin="0 0 15 0" Foreground="#b0b9c6" HorizontalAlignment="Right" />
                 </Grid>
 
-                <!--Top Buttons-->
+                --><!--Top Buttons--><!--
 
                 <Button Grid.Row="1"  Style="{StaticResource  topButton}" Margin="0 0 20 0" Background="#dcdcdc" HorizontalAlignment="Right">
                     <Icon:PackIconMaterial Kind="Cog"/>
@@ -268,7 +268,7 @@
 
                 <StackPanel Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 0 100 0" >
                     <ToggleButton Style="{StaticResource ToggleButtonSwitch}" x:Name="tglbtnTheme" Click="tglbtnTheme_Click" />
-                </StackPanel>
+                </StackPanel>-->
 
 
 

@@ -9,10 +9,10 @@
     <Style x:Key="BorderThemeBackground" TargetType="Border">
         <Setter  Property="Background">
             <Setter.Value>
-                <LinearGradientBrush StartPoint="0.5,1" EndPoint="0.5,0">
+                <LinearGradientBrush StartPoint="0.3,0" EndPoint="0.5,0.98">
                     <GradientStop Color="#111111" Offset="0.5"/>
-                    <GradientStop Color="#DECBA4" Offset="0.4"/>
-                    <GradientStop Color="#111111" Offset="0.2"/>
+                    <GradientStop Color="#a99861" Offset="1"/>
+                    <GradientStop Color="#e2dc93" Offset="0.5"/>
                     <!--<gradientstop color="#111111" offset="0.3"/>
                     <gradientstop color="#ad931b" offset="1.9"/>-->
                 </LinearGradientBrush>
