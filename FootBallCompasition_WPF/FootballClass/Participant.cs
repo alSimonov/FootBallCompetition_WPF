@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FootBallCompasition_WPF.FootballClass
 {
@@ -23,7 +19,7 @@ namespace FootBallCompasition_WPF.FootballClass
 
 
         public Participant() { }
-        
+
         //public Participant(int id, string surname, string name, string patronymic, DateTime dateOfBirth, string telephone, byte idRole)
         //{
         //    this.Id = id;
@@ -66,7 +62,7 @@ namespace FootBallCompasition_WPF.FootballClass
         }
 
         public override string ToString()
-        {
+        { 
             return $"Id: {Id}; surname: {Surname}; name: {Name}; patronymic: {Patronymic}; dateOfBirth: {DateOfBirth}; telephone: {Telephone}; idRole: {IdRole}.";
         }
 

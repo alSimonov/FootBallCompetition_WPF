@@ -66,6 +66,13 @@
                                 </StackPanel>
                             </Button>
 
+                            <Button Style="{StaticResource menuButton}" x:Name="btnTotalResult" Click="btnTotalResult_Click">
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="Images\ranking.png" Width="32" Height="32" Margin="0 0 20 0"/>
+                                    <TextBlock Text="Рейтинг" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </Button>
+
 
                             <Button Style="{StaticResource menuButton}" x:Name="btnFrameMatch" Click="btnFrameMatch_Click">
                                 <StackPanel Orientation="Horizontal">
@@ -96,65 +103,6 @@
                             </Button>
 
                         </StackPanel>
-
-                        <!--<hc:SideMenu x:Name="SideMenu"  BorderThickness="0" Width="170" Height="300" Margin="0"  Grid.Column="0" Grid.Row="1" 
-                                          HorizontalAlignment="Left" VerticalAlignment="Top" Background="Transparent" >
-                            <hc:Interaction.Triggers>
-                                <hc:EventTrigger EventName="SelectionChanged">
-                                    <hc:EventToCommand Command="{Binding SwitchItemCmd}"   PassEventArgsToCommand="True" />
-                                </hc:EventTrigger>
-                            </hc:Interaction.Triggers>
-                            <hc:SideMenuItem x:Name="smTeam" Header="Команды" Background="Transparent" Foreground="#d0c0ff" FontSize="18"  Margin="15 0 0 0">
-                                <hc:SideMenuItem.Icon>
-                                    <Image Source="Images\group.png" Width="42" Height="42" Margin="0 0 0 0" />
-                                </hc:SideMenuItem.Icon>
-
-                                <hc:SideMenuItem Header="Summary" Command="{Binding SelectCmd}" CommandParameter="{Binding Header,RelativeSource={RelativeSource Self}}">
-                                    <hc:SideMenuItem.Icon>
-                                        <TextBlock Text="&#xf2cb;" />
-                                    </hc:SideMenuItem.Icon>
-                                </hc:SideMenuItem>
-
-
-                                <hc:SideMenuItem Header="Summaryeee" Command="{Binding SelectCmd}" CommandParameter="{Binding Header,RelativeSource={RelativeSource Self}}">
-                                    <hc:SideMenuItem.Icon>
-                                        <TextBlock Text="&#xf2cb;" />
-                                    </hc:SideMenuItem.Icon>
-                                </hc:SideMenuItem>
-
-                            </hc:SideMenuItem>
-                            <hc:SideMenuItem x:Name="smMatch" Header="Матчи" Background="Transparent" FontSize="18" Foreground="#d0c0ff" Margin="15 0 0 0">
-                                <hc:SideMenuItem.Icon>
-                                    <Image Source="Images\pitch.png" Width="42" Height="42"/>
-                                </hc:SideMenuItem.Icon>
-                            </hc:SideMenuItem>
-                            <hc:SideMenuItem x:Name="smStadium" Header="Стадионы" Background="Transparent" Foreground="#d0c0ff" FontSize="18"  Margin="15 0 0 0">
-                                <hc:SideMenuItem.Icon>
-                                    <Image Source="Images\stadium.png" Width="42" Height="42"/>
-                                </hc:SideMenuItem.Icon>
-                            </hc:SideMenuItem>
-                            <hc:SideMenuItem Header="Участники" Background="Transparent" Foreground="#d0c0ff" FontSize="18"  Margin="15 0 0 0">
-                                <hc:SideMenuItem.Icon>
-                                    <Image Source="Images\shoot.png" Width="42" Height="42" />
-                                </hc:SideMenuItem.Icon>
-
-                                <hc:SideMenuItem x:Name="smPlayers" Header="Игроки"  >
-                                    <hc:SideMenuItem.Icon>
-                                        <TextBlock Text="&#xf2cb;" />
-                                    </hc:SideMenuItem.Icon>
-                                </hc:SideMenuItem>
-
-
-                                <hc:SideMenuItem x:Name="smReferee" Header="Судьи" >
-                                    <hc:SideMenuItem.Icon>
-                                        <TextBlock Text="&#xf2cb;" />
-                                    </hc:SideMenuItem.Icon>
-                                </hc:SideMenuItem>
-
-
-                            </hc:SideMenuItem>
-            
-                        </hc:SideMenu>-->
 
 
                         <StackPanel VerticalAlignment="Bottom" DockPanel.Dock="Bottom" >
@@ -201,6 +149,7 @@
 
                 <!--buttons Hide/Show close-->
 
+                
                 <Button Grid.Row="0" Style="{StaticResource  topButton}" x:Name="btnWindowClose" Margin="0 0 0 0"  HorizontalAlignment="Right" Click="btnWindowClose_Click">
                     <Icon:PackIconMaterial Kind="Power"/>
                 </Button>
@@ -255,9 +204,12 @@
                                            Margin="0 0 15 0" Foreground="#b0b9c6" HorizontalAlignment="Right" />
                 </Grid>
 
-                --><!--Top Buttons--><!--
+                -->
+                
+                <!--Top Buttons-->
+                
 
-                <Button Grid.Row="1"  Style="{StaticResource  topButton}" Margin="0 0 20 0" Background="#dcdcdc" HorizontalAlignment="Right">
+                <!--<Button Grid.Row="1"  Style="{StaticResource  topButton}" Margin="0 0 20 0" Background="#dcdcdc" HorizontalAlignment="Right">
                     <Icon:PackIconMaterial Kind="Cog"/>
                 </Button>
 

@@ -4,6 +4,7 @@ using FootBallCompasition_WPF.Pages.pgsMatch;
 using FootBallCompasition_WPF.Pages.pgsParticipant;
 using FootBallCompasition_WPF.Pages.pgsStadium;
 using FootBallCompasition_WPF.Pages.pgsTeam;
+using FootBallCompasition_WPF.Pages.pgsTotalResult;
 using FootBallCompasition_WPF.Short;
 using FootBallCompasition_WPF.UserControls;
 using FootBallCompasition_WPF.Windows;
@@ -94,6 +95,10 @@ namespace FootBallCompasition_WPF
             Authorization();
         }
 
+        private void btnTotalResult_Click(object sender, RoutedEventArgs e)
+        {
+            frame.Navigate(new PPageTotalResult());
+        }
 
         private void btnFrameTeam_Click(object sender, RoutedEventArgs e)
         {
@@ -149,8 +154,6 @@ namespace FootBallCompasition_WPF
         //    if (tglbtnTheme.IsChecked == true)
         //    {
         //        NameTheme = "DictionaryTheme2";
-
-
         //    }
         //    else
         //    {
@@ -158,21 +161,16 @@ namespace FootBallCompasition_WPF
         //    }
 
 
-
         //    //Application.Current.Resources.Clear();
-
 
         //    ////Подгрузка основного стиля
 
         //    //string dict = $"Dictionaries/{NameTheme}";
         //    //var uriDict = new Uri(dict + ".xaml", UriKind.Relative);
 
-
         //    //ResourceDictionary resourceDictionary = Application.LoadComponent(uriDict) as ResourceDictionary;
 
         //    //Application.Current.Resources.MergedDictionaries.Add(resourceDictionary);
-
-
 
 
         //    //Подгрузка темы
@@ -180,20 +178,18 @@ namespace FootBallCompasition_WPF
         //    string style = $"Dictionaries/{NameTheme}";
         //    var uriStyle = new Uri(style + ".xaml", UriKind.Relative);
 
-
         //    ResourceDictionary resourceTheme = System.Windows.Application.LoadComponent(uriStyle) as ResourceDictionary;
-
 
         //    System.Windows.Application.Current.Resources.MergedDictionaries.Add(resourceTheme);
 
-
-
-
         //}
+
 
         private void btnUscPersonalAccount_Click(object sender, RoutedEventArgs e)
         {
             Dialog.Show(new uscDialogAccountAdd(_idAccount, false));
         }
+
+
     }
 }

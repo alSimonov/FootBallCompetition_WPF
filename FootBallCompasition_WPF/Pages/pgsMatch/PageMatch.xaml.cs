@@ -28,7 +28,10 @@ namespace FootBallCompasition_WPF.Pages.pgsMatch
 
         List<GetMatchListModelShort> matchList = new List<GetMatchListModelShort>();
 
+
+        public List<Season> tempSeasons;
         byte? _idSeason;
+
 
         //TODO потом убрать закоменченный не нужный код
 
@@ -46,6 +49,8 @@ namespace FootBallCompasition_WPF.Pages.pgsMatch
 
             loadComboBox();
 
+            cbSeason.SelectedIndex = -1;
+
             loadMatch();
 
 
@@ -53,7 +58,8 @@ namespace FootBallCompasition_WPF.Pages.pgsMatch
 
         public void loadComboBox()
         {
-            cbSeason.ItemsSource = _db.Seasons.Where(s => _db.Matches.Any(m => m.IdSeason == s.Id)).ToList();
+            tempSeasons = _db.Seasons.Where(s => _db.Matches.Any(m => m.IdSeason == s.Id)).ToList();
+            cbSeason.ItemsSource = tempSeasons;
             
         }
 

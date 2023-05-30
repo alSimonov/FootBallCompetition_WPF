@@ -72,7 +72,7 @@
         <!--Filter textbox-->
 
         <Grid Width="200" HorizontalAlignment="Right" Grid.Row="3">
-
+ 
             <TextBox x:Name="tbFilter"  hc:InfoElement.Placeholder="Поиск среди матчей" Style="{DynamicResource TextBoxExtend}" Padding="10 7" Margin="0 10"
                       TextChanged="tbFilter_TextChanged"/>
         </Grid>

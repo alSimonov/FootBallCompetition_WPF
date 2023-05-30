@@ -16,14 +16,19 @@
     <None Remove="Images\logoOnlyText.png" />
     <None Remove="Images\logoShort.png" />
     <None Remove="Images\match.png" />
+    <None Remove="Images\medal1.png" />
+    <None Remove="Images\medal2.png" />
+    <None Remove="Images\medal3.png" />
     <None Remove="Images\participant.png" />
     <None Remove="Images\pen %281%29.png" />
     <None Remove="Images\pitch.png" />
     <None Remove="Images\plus.png" />
     <None Remove="Images\profile.png" />
+    <None Remove="Images\ranking.png" />
     <None Remove="Images\shoot.png" />
     <None Remove="Images\stadium.png" />
     <None Remove="Images\team.png" />
+    <None Remove="Images\trophy.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -32,10 +37,15 @@
     <Resource Include="Images\logoOnlyText.png" />
     <Resource Include="Images\logoShort.png" />
     <Resource Include="Images\match.png" />
+    <Resource Include="Images\medal1.png" />
+    <Resource Include="Images\medal2.png" />
+    <Resource Include="Images\medal3.png" />
     <Resource Include="Images\participant.png" />
     <Resource Include="Images\profile.png" />
+    <Resource Include="Images\ranking.png" />
     <Resource Include="Images\stadium.png" />
     <Resource Include="Images\team.png" />
+    <Resource Include="Images\trophy.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -43,6 +53,10 @@
     <PackageReference Include="MahApps.Metro.IconPacks.Material" Version="4.11.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Tools\" />
   </ItemGroup>
 
 </Project>

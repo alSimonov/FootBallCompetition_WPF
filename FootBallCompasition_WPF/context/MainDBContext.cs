@@ -31,6 +31,7 @@ namespace FootBallCompasition_WPF.context
 
         //procedures
         public DbSet<GetMatchListModel> GetMatchListModels { get; set; }
+        public DbSet<TotalResult> TotalResults { get; set; }
 
 
         public MainDBContext(DbContextOptions<MainDBContext> options) :base(options)
@@ -59,6 +60,7 @@ namespace FootBallCompasition_WPF.context
         protected void OnModelCreatingStoredProcedure(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<GetMatchListModel>().HasNoKey();
+            modelBuilder.Entity<TotalResult>().HasNoKey();
         }
 
 

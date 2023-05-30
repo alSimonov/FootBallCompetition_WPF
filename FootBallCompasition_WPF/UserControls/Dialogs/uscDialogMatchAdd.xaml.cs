@@ -210,7 +210,8 @@ namespace FootBallCompasition_WPF.UserControls
             }
 
 
-
+            if (!_pageMatch.tempSeasons.Any(x => x == cbSeason.SelectedItem))
+                _pageMatch.loadComboBox();
 
         }
 

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FootBallCompasition_WPF.FootballClass
 {
@@ -20,20 +15,7 @@ namespace FootBallCompasition_WPF.FootballClass
             this.Id = id;
             this.Name = name;
         }
-/*
-        public int Id
-        {
-            get { return id; }
-            set { id = value; }
-        }
 
-        public string Name
-        {
-            get { return name; }
-            set { name = value; }
-        }
-
-*/
         public override string ToString()
         {
             return $"Id: {Id}; name: {Name}.";
