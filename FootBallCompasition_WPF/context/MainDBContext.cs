@@ -1,10 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using FootBallCompasition_WPF.FootballClass;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using FootBallCompasition_WPF.Configuration;
 
 namespace FootBallCompasition_WPF.context

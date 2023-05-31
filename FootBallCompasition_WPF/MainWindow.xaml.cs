@@ -1,22 +1,16 @@
-﻿ using FootBallCompasition_WPF.context;
+﻿using FootBallCompasition_WPF.context;
 using FootBallCompasition_WPF.Pages;
 using FootBallCompasition_WPF.Pages.pgsMatch;
 using FootBallCompasition_WPF.Pages.pgsParticipant;
 using FootBallCompasition_WPF.Pages.pgsStadium;
 using FootBallCompasition_WPF.Pages.pgsTeam;
 using FootBallCompasition_WPF.Pages.pgsTotalResult;
-using FootBallCompasition_WPF.Short;
 using FootBallCompasition_WPF.UserControls;
 using FootBallCompasition_WPF.Windows;
 using HandyControl.Controls;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
-using System.Net;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Forms;
 using System.Windows.Input;
 
 namespace FootBallCompasition_WPF

@@ -7,17 +7,8 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace FootBallCompasition_WPF.UserControls.ucsMatch
 {
@@ -89,16 +80,16 @@ namespace FootBallCompasition_WPF.UserControls.ucsMatch
             }
             else
             {
-                dataGridList = _db.JudgingStaffs.Where(x => x.IdMatch == _idM)
+                dataGridList = _db.JudgingStaffs.Where(x => x.IdMatch == _idM && x.Participant.Surname.StartsWith(filtrby))
                     .Select(s => new JudgingStaffShort()
                     {
                         Id = s.Id,
                         FIO = $"{s.Participant.Surname} {s.Participant.Name} {s.Participant.Patronymic}",
                         Telephone = s.Participant.Telephone,
                         AmpluaRoleName = s.AmpluaRole.Name,
-                    }).Where(x => x.FIO.StartsWith(filtrby))
+                    })
                     .ToList();
-
+                //.Where(x => )
 
                 GridReferee.ItemsSource = dataGridList.Take(10).ToList();
 

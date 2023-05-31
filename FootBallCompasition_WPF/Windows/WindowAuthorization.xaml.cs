@@ -1,26 +1,11 @@
 ﻿using FootBallCompasition_WPF.context;
-using FootBallCompasition_WPF.FootballClass;
-using HandyControl.Controls;
-using HandyControl.Data;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.VisualBasic.Logging;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Forms;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 namespace FootBallCompasition_WPF.Windows
 {
